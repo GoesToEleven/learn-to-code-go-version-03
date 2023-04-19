@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"mymodule/010-program-structure/dog"
+	"mymodule/010-pkg-main-func-main/dog"
 )
 
 func main() {

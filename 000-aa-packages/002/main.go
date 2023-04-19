@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"mymodule/000-packages/002/mypackage"
+	"mymodule/000-aa-packages/002/mypackage"
 )
 
 func main() {
