@@ -20,16 +20,16 @@ receiver *T or T.
 */
 
 func main() {
-	fmt.Print("\nJust methods\n")
+	fmt.Print("\n Just methods\n")
 	thisallworks.RunMe()
 
-	fmt.Print("\nTHIS WORKS \n TYPE T \n RECEIVER T\n")
+	fmt.Print("\n THIS WORKS \n TYPE T \n RECEIVER T\n")
 	interfaceimplementation.ThisWorks()
 
-	fmt.Print("\nTHIS DOES NOT WORK \n TYPE T \n RECEIVER *T\n")
+	fmt.Print("\n THIS DOES NOT WORK \n TYPE T \n RECEIVER *T\n")
 	fmt.Print("The interface is not implemented\n")
 	interfaceimplementation.ThisDoesNotWork()
 
-	fmt.Print("\nTHIS WORKS \n TYPE *T \n RECEIVER T and RECEIVE *T\n")
+	fmt.Print("\n THIS WORKS \n TYPE *T \n RECEIVER T and RECEIVER *T\n")
 	interfaceimplementation.ThisAlsoAllWorks()
 }

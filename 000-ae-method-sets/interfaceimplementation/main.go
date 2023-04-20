@@ -74,13 +74,19 @@ func ThisDoesNotWork() {
 	// receiver type *T
 
 	p2 := person{"Miss Moneypenny"}
+	// calling the method works
+	fmt.Println("Calling the method works")
 	p2.joke()
-	// this does not work
+	// using the interface does not work
+	fmt.Println("Using the interface does not work")
 	// tellajoke(p2)
-
+	
 	sa2 := secretagent{person{"James Bond"}, "007"}
+	// calling the method works
+	fmt.Println("Calling the method works")
 	sa2.joke()
-	// this does not work
+	// using the interface does not work
+	fmt.Println("Using the interface does not work")
 	// tellajoke(sa2)
 }
 
