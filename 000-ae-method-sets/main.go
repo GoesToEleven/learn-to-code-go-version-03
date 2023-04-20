@@ -22,13 +22,13 @@ receiver *T or T.
 func main() {
 	thisallworks.RunMe()
 
-	fmt.Printf("\nTHIS WORKS \n TYPE T \n RECEIVER T")
+	fmt.Print("\nTHIS WORKS \n TYPE T \n RECEIVER T\n")
 	interfaceimplementation.ThisWorks()
 
-	fmt.Printf("\nTHIS DOES NOT WORKS \n TYPE T \n RECEIVER *T")
-	fmt.Printf("\nThe interface is not implemented")
+	fmt.Print("\nTHIS DOES NOT WORK \n TYPE T \n RECEIVER *T\n")
+	fmt.Print("The interface is not implemented\n")
 	interfaceimplementation.ThisDoesNotWork()
 
-	fmt.Printf("\nTHIS WORKS \n TYPE *T \n RECEIVER T and RECEIVE *T")
+	fmt.Print("\nTHIS WORKS \n TYPE *T \n RECEIVER T and RECEIVE *T\n")
 	interfaceimplementation.ThisAllWorks()
 }

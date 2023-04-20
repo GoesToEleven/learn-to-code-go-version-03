@@ -54,11 +54,11 @@ func ThisWorks() {
 }
 
 func (p *person) joke() {
-	fmt.Println("I'm a civilian and my name is", p.Name)
+	fmt.Println("Here is a joke from a civilian", p.Name)
 }
 
 func (sa *secretagent) joke() {
-	fmt.Println("I work for the Majesty's secret service and my name is", sa.Name, "and my number is", sa.Number)
+	fmt.Println("Here is a joke from a secret agent", sa.Name, sa.Number)
 }
 
 type comedian interface {
