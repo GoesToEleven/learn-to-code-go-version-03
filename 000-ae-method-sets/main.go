@@ -20,6 +20,7 @@ receiver *T or T.
 */
 
 func main() {
+	fmt.Print("\nJust methods\n")
 	thisallworks.RunMe()
 
 	fmt.Print("\nTHIS WORKS \n TYPE T \n RECEIVER T\n")
