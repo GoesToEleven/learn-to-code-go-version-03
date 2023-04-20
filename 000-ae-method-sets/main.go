@@ -27,7 +27,6 @@ func main() {
 	interfaceimplementation.ThisWorks()
 
 	fmt.Print("\n THIS DOES NOT WORK \n TYPE T \n RECEIVER *T\n")
-	fmt.Print("The interface is not implemented\n")
 	interfaceimplementation.ThisDoesNotWork()
 
 	fmt.Print("\n THIS WORKS \n TYPE *T \n RECEIVER T and RECEIVER *T\n")

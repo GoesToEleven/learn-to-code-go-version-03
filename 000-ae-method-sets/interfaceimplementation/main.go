@@ -78,7 +78,7 @@ func ThisDoesNotWork() {
 	fmt.Println("Calling the method works")
 	p2.joke()
 	// using the interface does not work
-	fmt.Println("Using the interface does not work")
+	fmt.Println("USING THE INTERFACE DOES NOT WORK")
 	// tellajoke(p2)
 	
 	sa2 := secretagent{person{"James Bond"}, "007"}
@@ -86,7 +86,7 @@ func ThisDoesNotWork() {
 	fmt.Println("Calling the method works")
 	sa2.joke()
 	// using the interface does not work
-	fmt.Println("Using the interface does not work")
+	fmt.Println("USING THE INTERFACE DOES NOT WORK")
 	// tellajoke(sa2)
 }
 
