@@ -30,5 +30,5 @@ func main() {
 	interfaceimplementation.ThisDoesNotWork()
 
 	fmt.Print("\nTHIS WORKS \n TYPE *T \n RECEIVER T and RECEIVE *T\n")
-	interfaceimplementation.ThisAllWorks()
+	interfaceimplementation.ThisAlsoAllWorks()
 }

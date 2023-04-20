@@ -84,7 +84,7 @@ func ThisDoesNotWork() {
 	// tellajoke(sa2)
 }
 
-func ThisAllWorks() {
+func ThisAlsoAllWorks() {
 	// defined type T
 	// receiver type T
 
