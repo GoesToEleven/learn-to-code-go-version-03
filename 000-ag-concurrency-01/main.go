@@ -1,6 +1,6 @@
 package main
 
-import "mymodule/000-ag-concurrency/concurrencyexamples"
+import "mymodule/000-ag-concurrency-01/concurrencyexamples"
 
 func main() {
 	concurrencyexamples.One()
