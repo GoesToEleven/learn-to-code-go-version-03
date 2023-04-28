@@ -10,4 +10,3 @@ func Fascinating() {
 	planetRotationSpeed := 1000
 	fmt.Println("Planet spinning speed:", planetRotationSpeed)
 }
-

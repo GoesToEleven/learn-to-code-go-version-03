@@ -5,8 +5,9 @@ package main
 // of this file
 import (
 	"fmt"
-	"mymodule/030-scope/furtherexplored"
+	"mymodule/031-scope/furtherexplored"
 )
+
 // x is in "package block" scope
 var x = 42
 
@@ -38,6 +39,18 @@ func main() {
 	printMe()
 
 	furtherexplored.Fascinating()
+
+	//also good to know
+
+	if z := 82; z > 50 {
+		fmt.Println(z)
+	}
+	// you can't access z here
+	// fmt.Println(z)
+	/*
+		take a look at the "comma ok idiom"
+		https://go.dev/doc/effective_go#maps
+	*/
 }
 
 func printMe() {
