@@ -1,0 +1,213 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main() {
+	//SEQUENCE
+	fmt.Println("this is the first statement to run")
+	fmt.Println("this is the second statement to run")
+	x := 40 // this is the third statement to run
+	y := 5  // this is the fourth statement to run
+	fmt.Printf(" x=%v \n y=%v\n", x, y)
+
+	// CONDITIONAL
+	// if statements
+	// switch statements
+
+	if x < 42 {
+		fmt.Println("Less than the meaning of life")
+	}
+
+	if x < 42 {
+		fmt.Println("Less than the meaning of life")
+	} else {
+		fmt.Println("equal to, or greater than, the meaning of life")
+	}
+
+	if x < 42 {
+		fmt.Println("Less than the meaning of life")
+	} else if x == 42 {
+		fmt.Println("equal to the meaning of life")
+	} else {
+		fmt.Println("greater than the meaning of life")
+	}
+
+	/*
+		"If" statements specify the conditional execution of two branches
+		according to the value of a boolean expression. If the expression evaluates
+		to true, the "if" branch is executed, otherwise, if present, the "else" branch is executed.
+	*/
+	// https://go.dev/ref/spec#If_statements
+
+	/*
+		Comparison operators
+		Comparison operators compare two operands and yield an untyped boolean value.
+
+		==    equal
+		!=    not equal
+		<     less
+		<=    less or equal
+		>     greater
+		>=    greater or equal
+	*/
+	// https://go.dev/ref/spec#Comparison_operators
+
+	if x < 42 && y < 42 {
+		fmt.Println("both are less than the meaning of life")
+	}
+
+	if x > 30 || x < 42 {
+		fmt.Println("x is getting close to the meaning of life")
+	}
+
+	if x != 42 {
+		fmt.Println("x is not 42")
+	}
+
+	/*
+		Logical operators
+		Logical operators apply to boolean values
+		and yield a result of the same type as the operands.
+		The right operand is evaluated conditionally.
+
+		&&    conditional AND    p && q  is  "if p then q else false"
+		||    conditional OR     p || q  is  "if p then true else q"
+		!     NOT                !p      is  "not p"
+	*/
+	// https://go.dev/ref/spec#Logical_operators
+
+
+	/*
+		The expression [evaluated in an if statement ]may be preceded by a simple statement,
+		which executes before the expression is evaluated.
+	*/
+	// https://go.dev/ref/spec#If_statements
+	/*
+	The comma ok idiom is also like this
+	*/
+	// https://go.dev/play/p/OXGzjxVkag0
+
+	if z := 2 * rand.Intn(x); z >= x {
+		fmt.Printf("z is %v and that is GREATER THAN OR EQUAL x which is %v\n", z, x)
+	} else {
+		fmt.Printf("z is %v and that is LESS THAN x which is %v\n", z, x)
+	}
+
+
+	switch {
+	case x < 42:
+		fmt.Println("x is LESS THAN 42")
+	case x == 42:
+		fmt.Println("x is EQUAL TO 42")
+	case x > 42:
+		fmt.Println("x is GREATER THAN 42")
+	default:
+		fmt.Println("this is the default case for x")
+	}
+
+	switch x {
+	case 40:
+		fmt.Println("x is 40")
+	case 41:
+		fmt.Println("x is 41")
+	case 42:
+		fmt.Println("x is 42")
+	case 43:
+		fmt.Println("x is 43")
+	default:
+		fmt.Println("this is the default case for x")
+	}
+
+	// no default fallthrough
+	switch x {
+	case 40:
+		fmt.Println("x is 40")
+		fallthrough
+	case 41:
+		fmt.Println("printed because of fallthrough: x is 41")
+	case 42:
+		fmt.Println("printed because of fallthrough: x is 42")
+	case 43:
+		fmt.Println("printed because of fallthrough: x is 43")
+	default:
+		fmt.Println("printed because of fallthrough: this is the default case for x")
+	}
+
+	// no default fallthrough
+	switch x {
+	case 40:
+		fmt.Println("x is 40")
+		fallthrough
+	case 41:
+		fmt.Println("printed because of ALL OF THE fallthrough statements: x is 41")
+		fallthrough
+	case 42:
+		fmt.Println("printed because of ALL OF THE fallthrough statements: x is 42")
+		fallthrough
+	case 43:
+		fmt.Println("printed because of ALL OF THE fallthrough statements: x is 43")
+		fallthrough
+	default:
+		fmt.Println("printed because of ALL OF THE fallthrough statements: this is the default case for x")
+	}
+
+	// LOOPS / INTERATIVE
+	// for statements
+
+	/*
+		The Go for loop is similar to—but not the same as—C's.
+		It unifies for and while and there is no do-while.
+		There are three forms, only one of which has semicolons.
+
+		// Like a C for
+		for init; condition; post { }
+
+		// Like a C while
+		for condition { }
+
+		// Like a C for(;;)
+		for { }
+
+	*/
+	// https://go.dev/doc/effective_go#for
+
+	for i := 0; i < 5; i++ {
+		fmt.Printf("counting to five: %v \t first  for loop\n", i)
+	}
+
+	for y < 10 {
+		fmt.Printf("y is %v \t\t\t second for loop\n", y)
+		y++
+	}
+
+	// break
+	// takes you out of the loop
+	for {
+		fmt.Printf("y is %v \t\t third  for loop\n", y)
+		if y > 20 {
+			break
+		}
+		y++
+	}
+
+	// continue
+	// takes to next iteration
+	for i := 0; i < 20; i++ {
+		if i%2 != 0 {
+			continue
+		}
+		fmt.Println("counting even numbers: ", i)
+	}
+
+	// nested loops
+	for i := 0; i < 5; i++ {
+		fmt.Println("--")
+		for j := 0; j < 5; j++ {
+			fmt.Printf("outer loop %v \t inner loop %v\n", i, j)
+		}
+	}
+
+}
