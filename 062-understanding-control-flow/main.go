@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+func init(){
+	fmt.Println("Begin initialization")
+}
+
 func main() {
 	//SEQUENCE
 	fmt.Println("this is the first statement to run")
@@ -264,5 +268,4 @@ func main() {
 	for k, v := range m {
 		fmt.Println("ranging over a map", k, v)
 	}
-
 }
