@@ -5,7 +5,7 @@
 - There are video lectures associated with this codebase
 - **You can take the course at [mcleods.com](https://www.mcleods.com)**
   
-#🌞🌴😃
+🌞🌴😃
 
 
 
