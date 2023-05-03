@@ -17,3 +17,13 @@ func main() {
 	fmt.Printf("%v a palindrome? \t %t\n", s4, isPali(s4))
 }
 
+func isPali(s string) bool {
+	r := utf8.RuneCountInString(s)
+	mid := r / 2
+	for i := 0; i < mid; i++ {
+		if s[i] != s[r-i-1] {
+			return false
+		}
+	}
+	return true
+}
