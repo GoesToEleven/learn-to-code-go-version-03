@@ -30,6 +30,7 @@ func main() {
 			log.Fatalf("error: %s", err)
 		}
 		xb2 = bytes.Trim(xb2,"\xef\xbb\xbf") // remove BOM
+		xb2 = append(xb2, []byte("\n"+path)...)
 		xb2 = append(xb2, []byte("\n\n\n\n\n\n")...)
 		xb = append(xb, xb2...)
 		counter++

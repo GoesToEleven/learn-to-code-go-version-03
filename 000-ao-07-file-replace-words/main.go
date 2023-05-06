@@ -49,7 +49,7 @@ func replace(path string) {
 	// backslash must be escaped
 	// https://go.dev/ref/spec#Rune_literals
 	xs := strings.Split(path, "\\")
-	nfn := "new - " + xs[len(xs)-1]
+	nfn := xs[len(xs)-1]
 
 	//write to new file
 	if err = os.WriteFile(nfn, xb2, 0666); err != nil {
