@@ -3,16 +3,12 @@ package interfaceimplementation
 import "fmt"
 
 /*
-The method set
-of a defined type T
-methods declared with
-receiver type T.
+The method set of a defined TYPE T
+methods declared with receiver type T.
 
-The method set
-of a pointer to a defined type T
+The method set of a POINTER to a defined TYPE T
 (where T is neither a pointer nor an interface)
-methods declared with
-receiver *T or T.
+methods declared with receiver *T or T.
 */
 
 type person struct {
@@ -48,7 +44,7 @@ func ThisWorks() {
 	p1.speak()
 	saysomething(p1)
 
-	sa1 := secretagent{person{"James Bond"}, "007"}
+	sa1 := secretagent{person{"James "}, "007"}
 	sa1.speak()
 	saysomething(sa1)
 }
@@ -80,7 +76,7 @@ func ThisDoesNotWork() {
 	// using the interface does not work
 	fmt.Println("USING THE INTERFACE DOES NOT WORK")
 	// tellajoke(p2)
-	
+
 	sa2 := secretagent{person{"James Bond"}, "007"}
 	// calling the method works
 	fmt.Println("Calling the method works")
