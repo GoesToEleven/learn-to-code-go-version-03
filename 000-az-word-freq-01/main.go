@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("error: %s", err)
 	}
-clea
+	
 	// The frequency of words in the file
 	words, err := freq(f)
 	if err != nil {
