@@ -17,7 +17,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("error: %s", err)
 	}
-	
+
 	// The frequency of words in the file
 	words, err := freq(f)
 	if err != nil {
@@ -36,6 +36,14 @@ func main() {
 	for _, pair := range pairs {
 		fmt.Printf("%s \t\t %d\n", pair.Key, pair.Value)
 	}
+
+	// word with greatest frequency, and it's frequency
+	w, n, err := maxWord(words)
+	if err != nil {
+		log.Fatalf("error with maxWord: %s\n", err)
+	}
+	fmt.Printf("%#v has a frequency %d",w, n)
+
 }
 
 func freq(r io.Reader) (map[string]int, error) {
@@ -105,3 +113,20 @@ func sortWordFrequency(m map[string]int) PairList {
 // get a slice of those structs
 // implement the sort.Interface interface
 // https://chat.openai.com/share/03a44e91-fc0d-4cdb-884a-c8acd8f440d8
+
+func maxWord(m map[string]int) (string, int, error) {
+	if len(m) == 0 {
+		return "", 0, fmt.Errorf("empty map")
+	}
+
+	maxW := ""  // word with max frequency 
+	maxF := 0	// max frequency of that word
+
+	for k, v := range m {
+		if v > maxF {
+			maxW = k
+			maxF = v
+		}
+	}
+	return maxW, maxF, nil
+}
