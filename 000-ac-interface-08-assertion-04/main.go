@@ -31,6 +31,6 @@ func main() {
 	case string:
 		fmt.Println("a string")
 	default:
-		fmt.Println("some other type")
+		fmt.Printf("some other type: %T\n", i)
 	}
 }
