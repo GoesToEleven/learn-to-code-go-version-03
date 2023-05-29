@@ -1,0 +1,31 @@
+# concurrency
+- design pattern
+- we don't know the order in which things will occur
+- "undefined, out of order, execution"
+
+# parallelism
+- running concurrent code on multiple cores
+
+# SCHEDULERS
+
+## OS SCHEDULER
+An operating system (OS) scheduler is responsible for managing the allocation of system resources, primarily CPU time, to different processes or threads running on a computer system. The goal of the scheduler is to maximize system throughput, minimize response time, and ensure fair resource allocation.
+
+The scheduler operates by determining which process or thread should run on each CPU core at any given time. It considers various factors such as priority, CPU utilization, waiting time, and scheduling policies to make these decisions. Scheduling policies can vary across different OS implementations, but the most common ones include round-robin, priority-based, and shortest job first.
+
+Now, let's discuss the relationship between the OS scheduler and NUMA (Non-Uniform Memory Access).
+
+NUMA is a computer architecture design where multiple processors (or CPU cores) are connected to a shared memory system. In NUMA systems, each processor has its own local memory, and there is also a global memory accessible by all processors. The main idea behind NUMA is to reduce memory access latency by allowing each processor to access its local memory faster than the global memory.
+
+The OS scheduler needs to take into account the NUMA architecture when making scheduling decisions. Since each processor has its own local memory, it is more efficient to schedule a process or thread on a CPU core that has its data in the local memory. This reduces memory access latency and improves overall system performance.
+
+To facilitate NUMA-aware scheduling, modern operating systems maintain information about the NUMA topology, including the number of processors, their memory locations, and interconnectivity. The scheduler can then use this information to make intelligent decisions about which CPU core to assign a process or thread based on its memory access patterns and the location of its data.
+
+In summary, the OS scheduler is responsible for allocating system resources, including CPU time, to different processes or threads. In NUMA systems, the scheduler takes into account the architecture's memory hierarchy and locality to minimize memory access latency and improve system performance. By intelligently assigning processes or threads to CPU cores with their data in local memory, the scheduler optimizes NUMA-aware scheduling.
+
+- https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html
+
+## GO SCHEDULER
+
+- https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html
+
