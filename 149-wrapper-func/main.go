@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 }
 
 func readFile(fileName string) ([]byte, error) {
-	xb, err := ioutil.ReadFile(fileName)
+	xb, err := os.ReadFile(fileName)
 	if err != nil {
 		return nil, fmt.Errorf("there was an error in readfile: %s", err)
 	}
