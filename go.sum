@@ -1,12 +1,8 @@
 github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9 h1:WtQjqEAV0EwbFVvp4ETs4XvRmdE0+r578aLTAnay80Y=
 github.com/GoesToEleven/dog v0.0.0-20230428023317-90bef1c76cb9/go.mod h1:bSJZIYrINAWfFsUPONiX6V8GGsCFquPtn5yE6DFvIkE=
-github.com/GoesToEleven/puppy v0.0.0-20230428023817-501e211ca7a0 h1:pOfdw+4ewK29TyeApLbeIws3OX2LiUjiS971HWnpjNc=
-github.com/GoesToEleven/puppy v0.0.0-20230428023817-501e211ca7a0/go.mod h1:WobEgPdFB6u5c9xLvtp3KOhVIdHaYYpH6pZVOcLq0+w=
-github.com/GoesToEleven/puppy v1.1.0 h1:5cQ5osl/8GAXkLrFXUHdbcqkWFEl7Rz6ytYMz7s0rCo=
-github.com/GoesToEleven/puppy v1.1.0/go.mod h1:WobEgPdFB6u5c9xLvtp3KOhVIdHaYYpH6pZVOcLq0+w=
-github.com/GoesToEleven/puppy v1.2.0 h1:oH8CmnGauWjv0RmtYu2saAwRaB6MOfx6L+SPZnWmBfk=
-github.com/GoesToEleven/puppy v1.2.0/go.mod h1:WobEgPdFB6u5c9xLvtp3KOhVIdHaYYpH6pZVOcLq0+w=
 github.com/GoesToEleven/puppy v1.3.0 h1:6kvL9k6x8STNArAn3VVdQAye+5AOM3SbxV0uPdq5xn0=
 github.com/GoesToEleven/puppy v1.3.0/go.mod h1:WobEgPdFB6u5c9xLvtp3KOhVIdHaYYpH6pZVOcLq0+w=
-golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53 h1:5llv2sWeaMSnA3w2kS57ouQQ4pudlXrR0dCgw51QK9o=
-golang.org/x/exp v0.0.0-20230425010034-47ecfdc1ba53/go.mod h1:V1LtkGg67GoY2N1AnLN78QLrzxkLyJw7RJb1gzOOz9w=
+golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 h1:k/i9J1pBpvlfR+9QsetwPyERsqu1GIbi967PQMq3Ivc=
+golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1/go.mod h1:V1LtkGg67GoY2N1AnLN78QLrzxkLyJw7RJb1gzOOz9w=
+golang.org/x/sync v0.2.0 h1:PUR+T4wwASmuSTYdKjYHI5TD22Wy5ogLU5qZCOLxBrI=
+golang.org/x/sync v0.2.0/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=

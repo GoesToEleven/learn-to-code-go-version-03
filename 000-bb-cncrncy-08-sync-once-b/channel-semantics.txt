@@ -1,0 +1,13 @@
+| ch        | operation | result                        |
+|-----------|-----------|-------------------------------|
+| open      | send      | block until a receive         |
+| open      | receive   | block until a send            |
+| open      | close     | closes channel                |
+
+| closed    | send      | panic                         |
+| closed    | receive   | zero value without blocking   |
+| closed    | close     | panic                         |
+
+| nil       | send      | deadlock                      |
+| nil       | receive   | deadlock                      |
+| nil       | close     | panic                         |

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"mymodule/000-ae-method-sets/interfaceimp"
 	"mymodule/000-ae-method-sets/interfaceimplementation"
 	"mymodule/000-ae-method-sets/thisallworks"
 )
@@ -31,4 +32,7 @@ func main() {
 
 	fmt.Print("\n THIS WORKS \n TYPE *T \n RECEIVER T and RECEIVER *T\n")
 	interfaceimplementation.ThisAlsoAllWorks()
+
+	fmt.Println("interface imp")
+	interfaceimp.Runnit()
 }

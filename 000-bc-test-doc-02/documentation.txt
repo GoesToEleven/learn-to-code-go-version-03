@@ -1,0 +1,10 @@
+https://tip.golang.org/doc/comment
+
+
+FILES
+----------
+doc.go              // package level documentation 
+example_test.go     // examples for documentation
+go.mod              
+LICENSE.txt 
+README.md
