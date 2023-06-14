@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+// uncomment this code to run it
+
+/*
 
 type dog struct {
 	first string
@@ -24,10 +26,12 @@ func main() {
 	d1.walk()
 	d1.run()
 	// youngRun(d1) // doesn't run
-	
+
 	d2 := &dog{"Padget"}
 	d2.walk()
 	d2.run()
 	youngRun(d2)
 
 }
+
+*/

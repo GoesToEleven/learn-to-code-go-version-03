@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"mymodule/000-bc-regexp-01-example-doc/tokenizer"
+	"mymodule/000-be-table-tests/tokenizer"
 )
 
 func main() {
@@ -15,7 +15,7 @@ to run
 
 go test ./...
 
-or 
+or
 
 go test -v ./...
 
