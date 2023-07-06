@@ -21,6 +21,8 @@ func merge(a, b <-chan int) <-chan int {
 	ch := make(chan int)
 	go func() {
 		defer close(ch)
+		// do that which was once impossible
+		// but is now just hard
 		for a != nil || b != nil {
 			select {
 			case v, ok := <-a:
