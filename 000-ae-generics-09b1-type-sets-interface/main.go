@@ -14,21 +14,42 @@ type cat struct {
 	age   int
 }
 
+type animal interface {
+	Info() string
+}
+
+func (c cat) Info() string {
+	return fmt.Sprintf("%s %v", animalInfo, c)
+}
+
+func (d dog) Info() string {
+	return fmt.Sprintf("%s %v", animalInfo, d)
+}
+
+func prtInfoInterface(aa []animal) {
+	for i, a := range aa {
+		fmt.Printf("%d - %s \n", i, a.Info())
+	}
+}
+
 func main() {
 	d1 := dog{"Rover", 7}
 	d2 := dog{"Rufus", 8}
 	c1 := cat{"Fluffy", 42}
 	c2 := cat{"Buffy", 43}
 
-	// we can use a function that is more GENERIC using generics
-	xd := []dog{d1, d2}
-	prtInfo[dog](xd)
+	// using interface
+	xa := []animal{d1, d2, c1, c2}
+	prtInfoInterface(xa)
 
+	// using generics
+	xd := []dog{d1, d2}
 	xc := []cat{c1, c2}
+	prtInfo[dog](xd)
 	prtInfo(xc) // type inference here
 }
 
-// we can use a function that is more GENERIC using generics
+// generics
 
 func info[T dog | cat](t T) string {
 	return fmt.Sprintf("%s %v", animalInfo, t)

@@ -24,7 +24,7 @@ func main() {
 	// we can use a function that is more GENERIC using generics
 
 	fmt.Println(info[cat](c))
-	fmt.Println(info[dog](d))
+	fmt.Println(info(d)) // type inference here
 }
 
 func (c cat) cInfo() string {

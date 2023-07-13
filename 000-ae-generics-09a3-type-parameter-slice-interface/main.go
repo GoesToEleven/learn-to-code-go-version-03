@@ -46,16 +46,21 @@ func main() {
 	xd := []dog{d1, d2}
 	xc := []cat{c1, c2}
 	prtInfo[dog](xd)
-	prtInfo[cat](xc)
+	prtInfo(xc) // type inference here
 }
 
 // generics
 
-func info[T dog | cat](t T) string {
+// type sets
+type creature interface {
+	dog | cat
+}
+
+func info[T creature](t T) string {
 	return fmt.Sprintf("%s %v", animalInfo, t)
 }
 
-func prtInfo[T dog | cat](tt []T) {
+func prtInfo[T creature](tt []T) {
 	for i, t := range tt {
 		fmt.Printf("%d - %s \n", i, info[T](t))
 	}
