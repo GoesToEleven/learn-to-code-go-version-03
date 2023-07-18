@@ -1,0 +1,5 @@
+A linked list is a fundamental data structure in computer science. It's a sequence of data elements, where each element, called a node, holds a reference to the next node in the sequence. 
+
+Linked lists are useful because they offer dynamic size (meaning the list's size can change while the program is running) and efficient insertion or deletion of elements at any position in the list.
+
+Please note that Go is a language with automatic garbage collection, so we don't have to worry about manually freeing up memory after removing elements from a linked list like you would in languages like C or C++.

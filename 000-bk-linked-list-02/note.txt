@@ -1,0 +1,5 @@
+If you want to insert a new node at a specific position in the linked list (not just at the end), you need to traverse the list until you find the position where you want to insert the new node. 
+
+In this script, the `insertAtPosition` function is added. It takes the position and the data as parameters. A new node is created with the given data. Then the function checks if the position is less than 1, if so it prints an error message and returns. If the position is 1, it inserts the node at the beginning of the list.
+
+If the position is greater than 1, it loops through the list until it reaches the position where the new node should be inserted (keeping track of the previous node). If the previous node is not nil (meaning the position was within the range of the list), it inserts the new node after the previous node. If the previous node is nil (meaning the position was out of range), it prints an error message.
