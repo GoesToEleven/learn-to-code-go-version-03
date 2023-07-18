@@ -12,66 +12,73 @@ const (
 // columns per row.
 var matrix [rows][cols]byte
 
-// data represents a data node for our linked list.
-// v 	value stored
+// node represents a data node for our linked list.
+// b 	byte stored
 // p 	pointer to next data in linked list
-type data struct {
-	v byte
-	p *data
+type node struct {
+	b byte
+	p *node
 }
 
-// list points to the HEAD of the list.
-var list *data
+var list *node
 
 func init() {
-	// last points to the TAIL of the list
-	var last *data
+	// 'ln' is the last node before 'nn' added
+	var ln *node
 
-	// Create a link list with the same number of elements.
 	for row := 0; row < rows; row++ {
 		for col := 0; col < cols; col++ {
-
-			// Create a new node and link it in.
-			var d data
-			if list == nil { // sets the head of the linked list
-				list = &d
+			// 'nn' is a new node
+			var nn node
+			// first node in the list
+			if list == nil {
+				list = &nn
 			}
-			if last != nil {
-				last.p = &d
+			// if there's a last node in the linked list,
+			// have that last node point to the nn just added
+			if ln != nil {
+				ln.p = &nn
 			}
-			last = &d
-
+			// make the nn the ln
+			ln = &nn
 			// Add a value to all even elements.
 			if row%2 == 0 {
 				matrix[row][col] = 0xFF
-				d.v = 0xFF
+				nn.b = 0xFF
 			}
 		}
 	}
 
 	// Count the number of elements in the link list.
 	var ctr int
-	d := list
-	for d != nil {
+	n := list
+	for n != nil {
 		ctr++
-		d = d.p
+		n = n.p
 	}
 
 	fmt.Println("Elements in the link list", ctr)
 	fmt.Println("Elements in the matrix", rows*cols)
 }
 
+func main() {
+	fmt.Println(LinkedListTraverse())
+	fmt.Println(ColumnTraverse())
+	fmt.Println(RowTraverse())
+
+}
+
 // LinkedListTraverse traverses the linked list linearly.
 func LinkedListTraverse() int {
 	var ctr int
 
-	d := list
-	for d != nil {
-		if d.v == 0xFF {
+	n := list
+	for n != nil {
+		if n.b == 0xFF {
 			ctr++
 		}
 
-		d = d.p
+		n = n.p
 	}
 
 	return ctr
