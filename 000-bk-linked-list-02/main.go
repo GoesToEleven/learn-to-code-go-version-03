@@ -23,6 +23,28 @@ func main() {
 	list.printList()
 }
 
+func (list *LinkedList) insertAtEnd(data int) {
+	// nn is a new node
+	nn := &Node{
+		data: data,
+		next: nil,
+	}
+
+	// if our linked list has no nodes, the nn is the linked list head
+	if list.head == nil {
+		list.head = nn
+	} else {
+		// 'in' represents the ITERATION NODE in our list
+		in := list.head
+		for in.next != nil {
+			in = in.next
+		}
+		// when in.next == nil
+		// the loop above will exit
+		in.next = nn
+	}
+}
+
 func (list *LinkedList) insertAtPosition(position int, d int) {
 	// nn is a new node
 	nn := &Node{
@@ -84,28 +106,6 @@ func (list *LinkedList) insertAtPosition(position int, d int) {
 
 	} else {
 		fmt.Println("Position out of range")
-	}
-}
-
-func (list *LinkedList) insertAtEnd(data int) {
-	// nn is a new node
-	nn := &Node{
-		data: data,
-		next: nil,
-	}
-
-	// if our linked list has no nodes, the nn is the linked list head
-	if list.head == nil {
-		list.head = nn
-	} else {
-		// 'in' represents the ITERATION NODE in our list
-		in := list.head
-		for in.next != nil {
-			in = in.next
-		}
-		// when in.next == nil
-		// the loop above will exit
-		in.next = nn
 	}
 }
 
