@@ -71,6 +71,12 @@ func main() {
 	questions = append(questions, "Tell me about containers and container orchestration.")
 	questions = append(questions, "What made Docker innovative?")
 	questions = append(questions, "Tell us about your soft-skills.")
+	questions = append(questions, "Tell us about a time you failed, and what you learned from it.")
+	questions = append(questions, "Tell us about a time you succeeded, and why you succeeded.")
+	questions = append(questions, "What makes you a valuable member of a team?")
+	questions = append(questions, "Explain latencies in relation to Go.")
+	questions = append(questions, "What is the mascot of the Go programming language?")
+	questions = append(questions, "")
 
 	// Print out each question
 	for i, question := range questions {
@@ -95,3 +101,25 @@ func sliceDiff() {
 	fmt.Println(xi3)
 
 }
+
+/*
+The term "latency" in the context of programming generally refers to the time delay between an action and the response to that action. It's a measure of how long it takes for a system to respond to a given input or request. Latency can be influenced by many different factors, including network speed, server load, the complexity of a given task, and more. This concept applies to all programming languages, including Go.
+
+In the context of the Go programming language, there are several different types of latencies that you might need to be concerned with:
+
+1. **Network Latency**: This is the delay caused by the network infrastructure between where the Go application is running and the system it is communicating with. This type of latency is usually outside the control of the application itself but can have a significant impact on application performance.
+
+2. **Garbage Collection (GC) Latency**: Go is a garbage-collected language, which means it automatically handles memory deallocation. When the garbage collector runs, it can introduce a delay or latency in the application, particularly if it leads to a "stop the world" pause where all other processing is temporarily halted. The Go team has put a lot of effort into minimizing GC latency, and it's usually quite small, but it can still be a concern in performance-critical applications.
+
+3. **Concurrency Latency**: Go is well-known for its powerful concurrency primitives, including goroutines and channels. However, if not used properly, these can introduce latency. For example, if a goroutine is blocked waiting for data on a channel, this can delay the execution of that goroutine. Similarly, the overhead of creating and managing many small goroutines can also introduce latency.
+
+4. **IO Latency**: This refers to the latency involved in reading and writing data, whether to a disk, a network connection, or another system. Go's standard library provides many tools for managing IO latency, such as buffered IO and asynchronous IO.
+
+5. **Scheduling Latency**: This refers to the time taken by the Go scheduler to assign a goroutine to an available thread for execution. If the system is overloaded with many goroutines, the scheduling latency can increase.
+
+6. **Serialization/Deserialization Latency**: When you are sending/receiving data to/from another system, you often need to convert the data to/from a format that can be sent over the network (a process often called serialization and deserialization). This process can introduce latency, particularly if the data structures involved are complex.
+
+These are some of the main types of latency that might be encountered in a Go program, though the specifics can depend on the details of the particular program or system.
+
+
+*/
