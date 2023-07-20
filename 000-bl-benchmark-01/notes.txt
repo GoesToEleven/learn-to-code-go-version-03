@@ -1,0 +1,66 @@
+In Go, benchmark tests are used to measure the performance of specific code fragments. They give an understanding of how fast a function runs. This can be really useful when optimizing code and when you want to understand the impact of any changes on performance.
+
+Benchmarking in Go is integrated into the testing package, `testing`. It follows a specific set of rules:
+
+1. The function must be in a file that ends with `_test.go`.
+2. The function name must start with `Benchmark`.
+3. The benchmarking function must take one argument of type `*testing.B`.
+
+Here's a simple example. Let's say we have a function that adds two numbers and we want to measure how long it takes to run this function:
+
+```go
+package main
+
+import "fmt"
+
+func Add(x, y int) int {
+    return x + y
+}
+
+func main() {
+    sum := Add(42, 13)
+    fmt.Println(sum)  // Output: 55
+}
+```
+
+We can benchmark the `Add` function by creating a new file named `main_test.go` with the following content:
+
+```go
+package main
+
+import "testing"
+
+func BenchmarkAdd(b *testing.B) {
+    for i := 0; i < b.N; i++ {
+        Add(42, 13)
+    }
+}
+```
+
+In the `BenchmarkAdd` function, the `b *testing.B` argument provides methods and properties for benchmarking. One of these properties is `N`, which represents the number of times the benchmark should be run. The `for` loop in the `BenchmarkAdd` function will run `Add(42, 13)` `N` times.
+
+After you've written the benchmark, you can run it using the `go test` command with the `-bench` flag:
+
+```bash
+go test -bench=.
+```
+
+This command will run all benchmarks in the current package. The `.` after the `=` is a regular expression that matches all benchmarks in the package. If you wanted to run only the `BenchmarkAdd` function, you could use the following command:
+
+```bash
+go test -bench=BenchmarkAdd
+```
+
+This will output something like this:
+
+```bash
+goos: darwin
+goarch: amd64
+BenchmarkAdd-8   	 1000000000	         0.283 ns/op
+PASS
+ok  	_/Users/username/path/to/your/package	1.484s
+```
+
+The output tells you the number of iterations the benchmark was able to run in its allotted time period, and the time taken per operation. In the example above, the `BenchmarkAdd` function was able to run `1000000000` times in the benchmarking time period, and each operation took `0.283` nanoseconds on average. The `8` after `BenchmarkAdd-` indicates the GOMAXPROCS value, which is the maximum number of CPUs that can be executing simultaneously.
+
+Please note that microbenchmarks like these often do not reflect the performance characteristics of real-world applications. They can still be useful for comparing the performance characteristics of different implementations of a function.
