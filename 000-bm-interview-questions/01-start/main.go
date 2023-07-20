@@ -76,7 +76,7 @@ func main() {
 	questions = append(questions, "What makes you a valuable member of a team?")
 	questions = append(questions, "Explain latencies in relation to Go.")
 	questions = append(questions, "What is the mascot of the Go programming language?")
-	questions = append(questions, "")
+	questions = append(questions, "How do we do benchmarking in Go?")
 
 	// Print out each question
 	for i, question := range questions {
