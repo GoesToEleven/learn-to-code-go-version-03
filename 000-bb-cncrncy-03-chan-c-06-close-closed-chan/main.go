@@ -27,14 +27,13 @@ func main() {
 }
 
 // CHANNEL SEMANTICS
-// send & receive will block until opposite operation (*except buffered channels)
+// send & receive will block until opposite operation (except buffered channels)
 // you can range over a channel and the range will exit when the channel is closed
 // receive from a closed channel will return the zero value without blocking
 // you can check whether a channel is open with the 'comma ok' idiom
 // send to a closed channel will panic
 // closing a closed channel will panic
 // send/receive to a nil channel will block forever
-
 
 // https://medium.com/justforfunc/why-are-there-nil-channels-in-go-9877cc0b2308
 
