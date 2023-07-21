@@ -9,6 +9,7 @@ func main() {
 	// Add questions to the slice
 	questions = append(questions, "Put these in the correct order: centisecond, second, nanosecond, millisecond, decisecond, microsecond")
 	questions = append(questions, "What is the difference between make([]int, 10), make([]int, 0, 10), make([]int, 10, 10)")
+
 	questions = append(questions, "Explain these types in Go: builtin, reference, user defined")
 	questions = append(questions, "Explain value semantics and pointer semantics. What are rules-of-thumb for using one versus the other?")
 	questions = append(questions, "What types can a map use as a key in the Go programming language?")
