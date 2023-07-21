@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	var sports [5]string
+	sports := make([]string, 5)
 	sports[0] = "ski"
 	sports[1] = "surf"
 	sports[2] = "swim"

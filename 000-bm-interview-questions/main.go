@@ -6,24 +6,189 @@ func main() {
 	// Create a slice to store the questions
 	var questions []string
 
-	// Add questions to the slice
-	questions = append(questions, "Put these in the correct order: centisecond, second, nanosecond, millisecond, decisecond, microsecond")
-	questions = append(questions, "What is the difference between make([]int, 10), make([]int, 0, 10), make([]int, 10, 10)")
+	// ------------------------------------------------
+	// BEGINNER QUESTIONS
+	// ------------------------------------------------
 
-	questions = append(questions, "Explain these types in Go: builtin, reference, user defined")
+	questions = append(questions, "What is the difference between make([]int, 10), make([]int, 0, 10), make([]int, 10, 10)")
+	/*
+		VALUE semantics & POINTER semantics
+		categories: builtin, reference, user defined type structs
+		general rules of thumb for value semantics vs pointer semantics
+		mechanical sympathy - cache lines, prefetcher, performance
+		stack vs heap - polluting the heap
+		slice: three word data structure - pointer, len, cap
+		slice is one of the most significant data structures the go language
+		append vs copy
+		declare, assign, initialize, allocate
+	*/
+
+	questions = append(questions, "Explain these types in Go: builtin, reference, structs")
+	/*
+		BUILTIN: bool, string, numeric
+		REFERENCE: slice, map, channel, pointer, interface, function
+		STRUCTS: structs
+	*/
+
+	questions = append(questions, "What is the short-declaration operator and when do you use it?")
+	/*
+		differentiate between := and var
+		var should be used to declare zero value
+	*/
+
+	// ------------------------------------------------
+	// INTERMEDIATE QUESTIONS
+	// ------------------------------------------------
+
+	questions = append(questions, "Put these in the correct order: centisecond, second, nanosecond, millisecond, decisecond, microsecond")
+	/*
+		second
+		decisecond 1/10
+		centisecond 1/100
+		millisecond 1/1_000
+		microsecond 1/1_000_000
+		nanosecond 1/1_000_000_000
+		----
+		3GHZ 3_000_000_000 ops/sec
+		in nanosecond 3 operations
+		----
+
+	*/
+
 	questions = append(questions, "Explain value semantics and pointer semantics. What are rules-of-thumb for using one versus the other?")
+
 	questions = append(questions, "What types can a map use as a key in the Go programming language?")
-	questions = append(questions, "Explain how a linked list works.")
+	/*
+		MAP TYPES
+		A map is an unordered group of elements of one type, called the ELEMENT type, indexed by a set of unique keys of another type, called the KEY type. The value of an uninitialized map is nil.
+
+		MapType     = "map" "[" KeyType "]" ElementType .
+		KeyType     = Type .
+
+		THE COMPARISON OPERATORS == AND != MUST BE FULLY DEFINED FOR OPERANDS OF THE KEY TYPE; THUS THE KEY TYPE MUST NOT BE A FUNCTION, MAP, OR SLICE. IF THE KEY TYPE IS AN INTERFACE TYPE, THESE COMPARISON OPERATORS MUST BE DEFINED FOR THE DYNAMIC KEY VALUES; FAILURE WILL CAUSE A RUN-TIME PANIC.
+		(golang spec)
+
+		MAPS
+		Maps are a convenient and powerful built-in data structure that associate values of one type (the KEY) with values of another type (the ELEMENT or VALUE). THE KEY CAN BE OF ANY TYPE FOR WHICH THE EQUALITY OPERATOR IS DEFINED, SUCH AS INTEGERS, FLOATING POINT AND COMPLEX NUMBERS, STRINGS, POINTERS, INTERFACES (AS LONG AS THE DYNAMIC TYPE SUPPORTS EQUALITY), STRUCTS AND ARRAYS. SLICES CANNOT BE USED AS MAP KEYS, BECAUSE EQUALITY IS NOT DEFINED ON THEM.
+		(effective go)
+	*/
+
 	questions = append(questions, "What does it mean to write idiomatic Go code?")
+	/*
+		"Idiomatic" Go code refers to the way of writing code that adheres to the accepted standards, conventions, and stylistic choices of the Go programming language community. It is the kind of code that experienced Go programmers would write, and it is typically simple, clear, and efficient.
+
+		Here are some principles of idiomatic Go:
+
+		1. Simplicity Over Cleverness: Go is a language that values simplicity and clarity over cleverness and brevity. Idiomatic Go code is not necessarily the shortest or most ingenious solution; instead, it prioritizes readability and maintainability.
+
+		2. Error Handling: Go prefers explicit error handling. Functions often return an error as the last return value. It's considered good practice to always check for errors and handle them immediately.
+
+		3. Naming Conventions: Go uses CamelCase for identifier names. Public names start with a capital letter and private names with a lowercase letter. Short, descriptive names are preferred.
+
+		4. Formatting: Go includes a tool called `gofmt` that automatically formats Go source code, and this tool is widely used. Idiomatic Go code is `gofmt`-formatted code.
+
+		5. Package Design: Go encourages grouping related code into packages. Good package design is important in idiomatic Go. Packages should be designed with a clear purpose and API, and should have cohesive responsibilities.
+
+		6. Concurrency: Go has built-in support for concurrent programming with goroutines and channels. Using these features correctly is a part of writing idiomatic Go code.
+
+		7. Avoid Global State and Side Effects: Idiomatic Go code prefers pure functions that don't alter global state or have unexpected side effects.
+
+		8. Documentation: Go has built-in support for package documentation. Idiomatic Go code includes helpful comments and package documentation.
+
+		9. Test-Driven Development: Go has a robust built-in testing framework, and the Go community values test-driven development. Writing tests for your code is considered part of writing idiomatic Go.
+
+		Remember, though, that while idioms can help in writing clear and efficient code, they are not rules. They can be broken if the situation warrants it.
+
+	*/
 	questions = append(questions, "Who is Rob Pike?")
 	questions = append(questions, "Who is Ken Thompson?")
 	questions = append(questions, "Who is Robert Griesemer")
-	questions = append(questions, "What is the short-declaration operator and when do you use it?")
+
 	questions = append(questions, "What is the var keyword used for and when do you use it?")
+
 	questions = append(questions, "How are arrays and slices different in Go? What are rules-of-thumb around arrays and slices in Go?")
-	questions = append(questions, "What are pointers?")
+
+	questions = append(questions, "What are pointers? Show us pointers at work in code.")
+
+	// ------------------------------------------------
+	// ADVANCED QUESTIONS
+	// ------------------------------------------------
+	questions = append(questions, "Explain how a linked list works.")
+
+	questions = append(questions, `Explain what this code will print:
+	
+	// var sports [5]string
+	sports := make([]string, 5)
+	sports[0] = "ski"
+	sports[1] = "surf"
+	sports[2] = "swim"
+	sports[3] = "sail"
+	sports[4] = "sumo wrestling"
+
+	for i, v := range sports {
+		sports[i] = "biking"
+		fmt.Println(v)
+	}
+
+	fmt.Println(sports)
+	
+	`)
+	// https://go.dev/play/p/ifhWmIY5I-H
+
+	questions = append(questions, `What will this code print:
+	
+	func main() {
+		sports := make([]string, 5)
+		sports[0] = "ski"
+		sports[1] = "surf"
+		sports[2] = "swim"
+		sports[3] = "sail"
+		sports[4] = "sumo wrestling"
+	
+		xs := sports[1:3:3]
+		xs[0] = "CHANGED"
+
+		inspectSlice(sports)
+		inspectSlice(xs)
+	}
+	
+	func inspectSlice(xs []string) {
+		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
+		for i := range xs {
+			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
+		}
+	}
+	`)
+	// https://go.dev/play/p/-ozMYP1qL4l
+
+	questions = append(questions, `Fix this code so that when xs[0] is changed this doesn't change 'sports':
+	
+	func main() {
+		sports := make([]string, 5)
+		sports[0] = "ski"
+		sports[1] = "surf"
+		sports[2] = "swim"
+		sports[3] = "sail"
+		sports[4] = "sumo wrestling"
+	
+		xs := sports[1:3:3]
+		xs[0] = "CHANGED"
+		inspectSlice(sports)
+		inspectSlice(xs)
+	}
+	
+	func inspectSlice(xs []string) {
+		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
+		for i := range xs {
+			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
+		}
+	}
+	`)
+	// not fixed: https://go.dev/play/p/-ozMYP1qL4l
+	// fixed: https://go.dev/play/p/GG3GGfD7ux2
+
 	questions = append(questions, "How does a computer work?")
-	questions = append(questions, "What is iota?")
+	questions = append(questions, "What is iota? Can you show us how to use iota with bitshifting?")
 	questions = append(questions, "What is a Goroutine?")
 	questions = append(questions, "What is the difference between concurrency and parallelism?")
 	questions = append(questions, "What is a compiler?")
@@ -80,6 +245,7 @@ func main() {
 	questions = append(questions, "How do we do benchmarking in Go?")
 	questions = append(questions, "What are method sets, and how do you use them?")
 	questions = append(questions, "What is an interface?")
+	questions = append(questions, "What is a concrete data type?")
 	questions = append(questions, "What is a type set?")
 	questions = append(questions, "What is a concrete type?")
 	questions = append(questions, "Explain generics.")
@@ -106,21 +272,7 @@ func main() {
 	questions = append(questions, `Somebody says that 'a string is a two word data structure' - what does this mean?`)
 	questions = append(questions, `Somebody says that 'a slice is a three word data structure' - what does this mean?`)
 	questions = append(questions, `When dealing with computer architecture, what does the 'word size' mean?`)
-	questions = append(questions, `Why does this code not print 'biking'
-	
-	var sports [5]string
-	sports[0] = "ski"
-	sports[1] = "surf"
-	sports[2] = "swim"
-	sports[3] = "sail"
-	sports[4] = "sumo wrestling"
 
-	for i, v := range sports {
-		sports[i] = "biking"
-		fmt.Println(v)
-	}
-	
-	`)
 	questions = append(questions, `What is the difference between make and new?`)
 	questions = append(questions, `What is the blank identifier?`)
 	questions = append(questions, `Fix this code, then benchmark the two functions:
@@ -153,53 +305,6 @@ func main() {
 
 	
 	
-	`)
-	questions = append(questions, `What will this code print:
-	
-	func main() {
-		sports := make([]string, 5)
-		sports[0] = "ski"
-		sports[1] = "surf"
-		sports[2] = "swim"
-		sports[3] = "sail"
-		sports[4] = "sumo wrestling"
-	
-		xs := sports[1:3:3]
-		xs[0] = "CHANGED"
-		inspectSlice(sports)
-		inspectSlice(xs)
-	}
-	
-	func inspectSlice(xs []string) {
-		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
-		for i := range xs {
-			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
-		}
-	}
-	
-	`)
-	questions = append(questions, `Fix this code so that when xs[0] is changed this doesn't change 'sports':
-	
-	func main() {
-		sports := make([]string, 5)
-		sports[0] = "ski"
-		sports[1] = "surf"
-		sports[2] = "swim"
-		sports[3] = "sail"
-		sports[4] = "sumo wrestling"
-	
-		xs := sports[1:3:3]
-		xs[0] = "CHANGED"
-		inspectSlice(sports)
-		inspectSlice(xs)
-	}
-	
-	func inspectSlice(xs []string) {
-		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
-		for i := range xs {
-			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
-		}
-	}
 	`)
 
 	questions = append(questions, `Will this print the same for both print statements:
@@ -518,4 +623,303 @@ func BenchmarkPtrSemantics(b *testing.B) {
 
 }
 
+*/
+
+/*
+
+	declare, assign, initialize, and allocate refer to different aspects of working with variables and memory.
+
+	- Declare: Create a variable without assigning it a value.
+	- Assign: Set a value to a previously declared variable.
+	- Initialize: Declare a variable and assign it a value at the same time.
+	- Allocate: Reserve memory for more complex types or for dynamic memory needs.
+
+	1. Declare: Declaring a variable in Go means stating its type and name, but not necessarily giving it a value. This merely reserves a memory spot for the variable. A variable can be declared using the `var` keyword. For example, `var x int` declares an integer variable named `x`.
+
+	2. Assign: Assigning a variable means giving a declared variable a value. This is typically done using the `=` operator. For instance, if you have declared `var x int` earlier, you could assign it a value with `x = 10`.
+
+	3. Initialize: Initialization refers to the process of declaring a variable and assigning it a value at the same time. For instance, `var x int = 10` or `x := 10` (using short declaration) both declare and assign a value to `x`, thus initializing it. This is the typical way variables are created in Go.
+
+	4. Allocate: Allocation refers to reserving a specific amount of memory during the execution of a program, usually for more complex types such as slices or structs, or when you need to create a variable dynamically at runtime. In Go, you typically use built-in functions like `make()` or `new()` to allocate memory. For example, `x := make([]int, 10)` allocates a slice of integers with a length of 10. `new()` is used to allocate memory and returns a pointer to it, but unlike `make()`, it doesn't initialize the memory.
+*/
+
+/*
+In Go, semantics refers to how types behave during assignments and function calls. In particular, the semantics of a type is about whether its values are directly manipulated or whether they are indirectly manipulated. The distinction between value semantics and pointer semantics is crucial in Go, and understanding it can help you write more efficient and correct programs.
+
+1. Value Semantics: When you pass a value with value semantics, you're creating a copy of that value. Any changes you make to the copy won't affect the original value. All the basic types in Go (like int, float64, bool, etc.) use value semantics. This is also true for composite types like structs and arrays.
+
+    Here's an example of value semantics:
+
+    ```go
+    type S struct {
+        a int
+    }
+
+    func change(s S) {
+        s.a = 5
+    }
+
+    func main() {
+        var s S
+        change(s)
+        fmt.Println(s.a)  // Will print 0, not 5
+    }
+    ```
+    In the code above, `change` function receives a copy of `s`. When `s.a` is modified inside `change`, it only changes the copy, not the original `s` in the main function.
+
+2. Pointer Semantics: On the other hand, when you pass a pointer, you're passing a reference to the value, not the value itself. So any changes you make to the value the pointer references will affect the original value.
+
+    Here's an example of pointer semantics:
+
+    ```go
+    type S struct {
+        a int
+    }
+
+    func change(s *S) {
+        s.a = 5
+    }
+
+    func main() {
+        var s S
+        change(&s)
+        fmt.Println(s.a)  // Will print 5
+    }
+    ```
+    In this code, the `change` function receives a pointer to `s`. When `s.a` is modified inside `change`, it changes the original `s` in the main function, because `s` is a pointer to the original struct.
+
+To summarize, if you want to modify the original value or if the data being passed is large (like a big struct or array), it might be better to use pointer semantics. However, if you want to ensure the function doesn't modify the original value or if you're working with simple small types (like int or bool), you might want to use value semantics.
+
+*/
+
+/*
+BUILTIN TYPES
+Built-in types are those that are built into the language itself, and they don't require any additional libraries to be imported. They are ready to use straight out of the box. The built-in types in Go are:
+
+Boolean types:
+- `bool`: A boolean type that can have the values `true` or `false`.
+
+Numeric types:
+- `uint8`, `uint16`, `uint32`, `uint64`: Unsigned (non-negative) integers that can be 8, 16, 32, or 64 bits long, respectively.
+- `int8`, `int16`, `int32`, `int64`: Signed integers that can be 8, 16, 32, or 64 bits long.
+- `uint`, `int`, `uintptr`: An unsigned integer, an integer, and a pointer-sized unsigned integer whose size depends on the type of architecture you're compiling for (32 or 64 bits).
+- `float32`, `float64`: A floating point number that can be 32 or 64 bits long.
+- `complex64`, `complex128`: A complex number with float32 or float64 real and imaginary parts.
+- `byte`: An alias for `uint8`.
+- `rune`: An alias for `int32`. It represents a Unicode code point.
+
+String types:
+- `string`: A sequence of bytes. It's often used to hold text.
+
+Error type:
+- `error`: A built-in interface type used for representing and manipulating errors.
+
+REFERENCE TYPES
+
+- Slices: A slice is a descriptor of an array segment. It consists of a pointer to the array, the length of the segment, and its capacity (the maximum length of the segment). If you pass a slice to a function, it will be able to modify the underlying array.
+
+- Maps: A map is an unordered collection of key-value pairs. Maps in Go are implemented as hash tables and they are references to the underlying data structure. If you pass a map to a function, the function can change the map's elements.
+
+- Channels: Channels are the pipes that connect concurrent goroutines. You can send values into channels from one goroutine and receive those values into another goroutine. Like slices and maps, channels are reference types.
+
+- Pointers: A pointer holds the memory address of a value. Pointers in Go support the "reference semantics" behavior.
+
+- Interfaces: An interface type is defined by a set of methods. A value of interface type can hold any value that implements those methods. Interface values are a combination of a value and a concrete type. They have reference semantics.
+
+- Functions: Functions in Go are first-class citizens and can be assigned to variables or passed around just like any other types. Functions have reference semantics as well.
+
+While these types have reference-like behavior, it's worth noting that Go does not have "classes" or "objects" in the traditional sense, and therefore does not have reference types in the way that languages with a class-based object-oriented model do. Instead, Go has user-defined types and supports composition and interfaces to provide flexible ways of structuring your code.
+
+STRUCTS
+Structs: Structs are a way to group together variables of different types.
+
+------------------------
+other ways we can categorize types
+------------------------
+
+COMPOSITE TYPES / AGGREGATE TYPES:
+array: A numbered sequence of elements of a specific length.
+
+slice: A dynamically-sized, flexible view into the elements of an array.
+
+struct: A composite data type that groups together zero or more values of different types.
+
+pointer: Holds the memory address of a value.
+
+function: A sub-routine which is a group of statements that together perform a task.
+
+interface: Defines a contract for certain behavior (like methods) that the types should have.
+
+map: An unordered group of elements of one type, called the element type, indexed by a set of unique keys of another type, called the key type.
+
+channel: A conduit through which you can send and receive values with the channel operator, <-.
+
+
+USER DEFINED TYPES:
+User-defined types are types that are defined by the programmer, not the language. They allow you to create complex data structures by COMPOSING together existing types, be they built-in or other user-defined types.
+
+Here are some examples of user-defined types in Go:
+
+- STRUCTS: Structs are a way to group together variables of different types. You could define a struct to represent a person, for example, with a name and an age:
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+- INTERFACES: Interfaces define a contract of methods that a type should implement. They are central to Go's type system and enable polymorphic behavior.
+
+type Shape interface {
+    Area() float64
+}
+
+- ALIASES: You can also define a new type as an alias of an existing one, which can be useful for improving code readability or for encapsulating functionality. For example:
+
+type Age int
+
+In this case, `Age` is a new type, but it has the same underlying type as `int`. You can define methods on these user-defined types.
+
+- FUNCTIONS: In Go, functions are first-class citizens, meaning they can be defined as types and then used as arguments or return values in other functions. For example:
+
+type BinaryOperation func(a int, b int) int
+
+In this case, `BinaryOperation` is a function type that takes two `int` parameters and returns an `int`.
+
+Note that while Go does allow you to define new types in these ways, it does not support classes or inheritance in the way that some other languages do. Instead, it encourages composition and the use of interfaces to define behavior.
+
+*/
+
+/*
+
+Below are common metric units of time listed from largest to smallest, along with their definitions:
+
+1. Kilosecond (ks): 1 kilosecond = 1,000 seconds = ~16.67 minutes.
+
+2. Second (s): The second is the base unit of time in the International System of Units (SI).
+
+3. Decisecond (ds): 1 decisecond = 0.1 seconds.
+
+4. Centisecond (cs): 1 centisecond = 0.01 seconds.
+
+5. Millisecond (ms): 1 millisecond = 0.001 seconds. This unit of time is often used in computing to measure response time.
+
+6. Microsecond (μs): 1 microsecond = 0.000001 seconds = 1×10^-6 seconds. This unit of time is often used in scientific research and in telecommunications.
+
+7. Nanosecond (ns): 1 nanosecond = 0.000000001 seconds = 1×10^-9 seconds. This unit of time is frequently used in computing and in the timing of electronic circuits.
+
+8. Picosecond (ps): 1 picosecond = 0.000000000001 seconds = 1×10^-12 seconds. This unit of time is used in ultrafast science, like in laser physics and in the measurement of molecular dynamics.
+
+9. Femtosecond (fs): 1 femtosecond = 0.000000000000001 seconds = 1×10^-15 seconds. This is a unit often used in research, like in ultrafast laser studies, where events can occur in these small intervals of time.
+
+10. Attosecond (as): 1 attosecond = 0.000000000000000001 seconds = 1×10^-18 seconds. This is among the smallest units of time currently measurable, and has applications in research involving ultrafast processes like electron dynamics inside atoms.
+
+11. Zeptosecond (zs): 1 zeptosecond = 1×10^-21 seconds.
+
+12. Yoctosecond (ys): 1 yoctosecond = 1×10^-24 seconds. This is one of the smallest theoretically measurable units of time.
+
+These measurements are part of the International System of Units (SI), and they all relate to the base unit, which is the second.
+
+*/
+
+/*
+	GHz stands for gigahertz. It is a unit of frequency equal to one billion (1,000,000,000) cycles per second. In computing, it's most commonly used to measure the speed (clock rate) of a computer's central processing unit (CPU). A CPU with a clock speed of 2.5 GHz, for instance, performs 2.5 billion cycles per second. However, it's important to note that a higher clock rate doesn't always mean better performance, as it also depends on other factors such as the processor's architecture and the efficiency of the software being used.
+
+	In the world of computer processors, a cycle is a single tick of a computer's clock, which helps synchronize the operations of the different parts of the computer. Theoretically, one might think that in one cycle, one instruction is completed. But, the reality is more complex.
+
+	The relationship between clock cycles and instructions is defined by two metrics: IPC (Instructions Per Cycle) and CPI (Cycles Per Instruction).
+
+	1. IPC (Instructions Per Cycle): This is the average number of instructions that can be executed for each clock cycle. For some modern CPUs with advanced features like superscalar architecture, pipelining, or simultaneous multithreading, IPC can be greater than one. That means they can complete more than one instruction per clock cycle.
+
+	2. CPI (Cycles Per Instruction): This is the inverse of IPC. It is the average number of clock cycles needed to execute one instruction. For simple processors, this might be just one. For more complex CPUs, this could be a fraction (when IPC > 1) or greater than one (when multiple cycles are needed to execute one instruction due to complex instructions or CPU architectures).
+
+	So, to answer your question: does one operation occur for every cycle? It depends on the CPU's architecture and the type of instructions it's executing. With advanced modern processors, more than one operation can occur per cycle, but there can also be cases where an operation requires more than one cycle to complete.
+*/
+
+/*
+In Go, arrays and slices are both sequence types, but they have important differences that relate to their size, flexibility, and use in Go's idiomatic coding patterns.
+
+Here's a basic comparison:
+
+1. Arrays
+
+    - In Go, an array is a sequence of elements of a specific length. The length of an array is part of its type, so `[5]int` and `[10]int` are different types.
+
+    - Arrays in Go are values. When you assign one array to another, the entire array is copied. If you pass an array to a function, it will receive a copy of the array, not a pointer to it.
+
+    - Arrays have a fixed size. Once an array is declared, its size cannot be changed.
+
+2. Slices
+
+    - A slice is a flexible, dynamically-sized sequence of array elements. It's a reference type, which means when you assign a slice to another, both refer to the same underlying array.
+
+    - Unlike arrays, slices are dynamically sized. A slice can grow or shrink as needed, up to the length of the underlying array.
+
+    - Slices are much more commonly used in Go than arrays. The built-in `make` function can be used to create a slice of a particular length and capacity.
+
+    - When you pass a slice to a function, it will receive a reference to the slice. If the function changes the elements of the slice, the changes are visible outside the function.
+
+A key element to understand is the internal representation of slices in Go: a slice header, which is a descriptor of an array segment. It consists of a pointer to the array, the length of the segment, and its capacity (the maximum length of the segment). So a slice can be thought of as a struct type with three fields:
+
+```go
+type slice struct {
+    array unsafe.Pointer
+    len   int
+    cap   int
+}
+```
+This internal representation allows a slice to dynamically resize within the capacity of the underlying array.
+
+RULES OF THUMB
+
+Here are some general guidelines about using arrays and slices in Go:
+
+1. Prefer slices over arrays: Slices are more common and flexible than arrays. Slices can grow and shrink as needed, which makes them ideal for many scenarios. If you don't know the size of your data set beforehand or if it is likely to change, you should use a slice, not an array.
+
+2. Use arrays when size is known and constant: If the number of elements is known and will not change, arrays could be a better choice. For example, you may use an array to represent a chessboard, which has a fixed size of 8x8.
+
+3. Use slices for function arguments and returns: When passing a collection to a function or returning a collection from a function, use slices, not arrays. This gives you more flexibility and also can be more efficient, because only a slice header (a small amount of data) is being copied, not potentially large amounts of data.
+
+4. Preallocate slice capacity when possible: If you know a slice is going to grow, it's often a good idea to preallocate the capacity using the `make` function. This can be more efficient because it saves the Go runtime from having to repeatedly resize the underlying array.
+
+5. Be aware of the 'gotcha' with slice references: Because slices are references to an underlying array, changes made to one slice can appear in another slice if they share the same array. This can be a source of bugs. One way to prevent this is to use the `copy` function to make sure that your slices don't overlap.
+
+6. Use `range` to iterate over slices and arrays: The `range` keyword in Go allows you to easily iterate over arrays and slices. It's idiomatic and avoids off-by-one errors that can occur with traditional for loops.
+
+7. Consider the implications for garbage collection: When you're holding onto a slice, the entire underlying array cannot be garbage collected, even if elements outside the slice are no longer needed. If you're done with a large slice, consider setting it to nil so that the garbage collector can reclaim the memory.
+
+8. Use arrays when the size is fixed and known in advance. Since arrays have a fixed length that is part of their type, they can be useful when you know that a sequence of elements will always have a certain size. For example, you might use an array to hold the days of the week, or the months of the year.
+
+9. Use slices for dynamically-sized collections. If you don't know how many elements there will be, or if the number of elements can change, then you should use a slice. Most of the time, you'll be using slices.
+
+10. When performance matters, consider using arrays. Since arrays in Go are values, using them can avoid the heap allocation that typically comes with a slice. If you're writing performance-critical code, it might be more efficient to use an array. However, remember that passing large arrays as function parameters can be costly because the entire array will be copied.
+
+11. When using slices, be aware of capacity and the underlying array. Since a slice is just a view into an array, you can sometimes end up with unexpected behavior if you're not careful. For example, if you create a new slice by slicing an existing one, you can end up modifying the original slice.
+
+Remember, these are general guidelines, and there can be exceptions depending on the specific scenario or problem you're trying to solve. Always choose the data structure that most closely matches your specific use case and makes your code as clear and understandable as possible.
+
+*/
+
+/*
+type ByteSize int
+
+const (
+	_           = iota // ignore first value by assigning to blank identifier
+	KB ByteSize = 1 << (10 * iota)
+	MB
+	GB
+	TB
+	PB
+	EB
+	// ZB
+	// YB
+)
+
+func main() {
+	fmt.Printf("KB %d \t\t %b\n", KB, KB)
+	fmt.Printf("MB %d \t\t %b\n", MB, MB)
+	fmt.Printf("GB %d \t\t %b\n", GB, GB)
+	fmt.Printf("TB %d \t %b\n", TB, TB)
+	fmt.Printf("PB %d \t %b\n", PB, PB)
+	fmt.Printf("EB %d \t %b\n", EB, EB)
+}
 */
