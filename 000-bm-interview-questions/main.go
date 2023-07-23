@@ -245,7 +245,7 @@ func main() {
 	questions = append(questions, "How do we do benchmarking in Go?")
 	questions = append(questions, "What are method sets, and how do you use them?")
 	questions = append(questions, "What is an interface?")
-	questions = append(questions, "What is a concrete data type?")
+	questions = append(questions, "What is concrete data?")
 	questions = append(questions, "What is a type set?")
 	questions = append(questions, "What is a concrete type?")
 	questions = append(questions, "Explain generics.")
@@ -351,8 +351,20 @@ func main() {
 	`)
 	questions = append(questions, `Teach us something most people don't know about Go.`)
 	questions = append(questions, `Tell us about bytes, code points, and characters in relation to strings and UTF-8.`)
-	questions = append(questions, ``)
-	questions = append(questions, ``)
+	questions = append(questions, `What is embedding a struct and inner-type promotion?`)
+	questions = append(questions, `Fix this code so that type HUMAN is embedded in type SECRETAGENT
+	
+	type human struct {
+		name  string
+		email string
+	}
+	
+	type secretAgent struct {
+		person human
+		id  string
+	}
+
+	`)
 	questions = append(questions, ``)
 	questions = append(questions, ``)
 	questions = append(questions, ``)
@@ -922,4 +934,74 @@ func main() {
 	fmt.Printf("PB %d \t %b\n", PB, PB)
 	fmt.Printf("EB %d \t %b\n", EB, EB)
 }
+*/
+
+/*
+In Go (often referred to as Golang), the keyword `const` is used to declare a constant. A constant is a simple, immutable value that remains the same throughout the life of a program. This contrasts with variables, which can have their values changed.
+
+Here's an example of a constant declaration:
+
+```go
+const Pi = 3.14159
+```
+
+Now, in terms of "constants of a kind" and "constants of a type", it helps to understand the Go specification.
+
+The specification refers to the concepts of "types" and "kinds". In Go, every type has a kind. For instance, the kind of the type `int` is `int`, the kind of the type `*int` is `pointer`, the kind of the type `[]int` is `slice`, and so on. There are several predeclared types such as `bool`, `int`, `int8`, `int16`, `int32`, `int64`, `uint`, `uint8`, `uint16`, `uint32`, `uint64`, `uintptr`, `float32`, `float64`, `complex64`, `complex128`, `string`, etc., each of these types has its own kind.
+
+In Go, constants can be untyped or typed.
+
+**Untyped Constants**
+
+Untyped constants in Go are just that: constants that don't have a type yet. These constants are known as "constants of a kind". They have a default type that is used when a type is needed, such as when assigning to a variable, but they can be used wherever any type of constant is allowed as long as they are representable in that type.
+
+Here is an example:
+
+```go
+const MyConstant = 123  // MyConstant is a constant of kind int
+```
+
+In this example, `MyConstant` doesn't have a specified type, but it has a kind: `int`.
+
+**Typed Constants**
+
+When you declare a constant with a specific type, you create a "constant of a type". This means that the constant not only has a value, but also has a specific type associated with it.
+
+Here is an example:
+
+```go
+const MyTypedConstant int = 123  // MyTypedConstant is a constant of type int
+```
+
+In this example, `MyTypedConstant` is a constant of type `int`. Unlike the untyped constant, this constant cannot be used wherever any type of constant is allowed. It can only be used where an `int` is allowed.
+
+In summary, a "constant of a kind" (or an untyped constant) in Go is a constant that hasn't been given a specific type but can be used with any compatible type, while a "constant of a type" (or a typed constant) in Go is a constant that has been given a specific type and can only be used as that type.
+
+
+The type of an untyped constant, also known as a "constant of a kind", is determined at compile time in Go.
+
+Untyped constants in Go are a bit special. They have a default type associated with them, but they can "become" other types if it's clear from the context what type they should be. This is why they are referred to as untyped constants, they're more flexible than typed constants.
+
+Here's an example:
+
+```go
+const MyConstant = 123 // untyped constant
+
+var i int = MyConstant // MyConstant becomes an int here
+var f float64 = MyConstant // MyConstant becomes a float64 here
+```
+
+In this example, `MyConstant` is an untyped constant with a value of `123`. When we assign `MyConstant` to `i`, which is of type `int`, `MyConstant` "becomes" an `int`. Similarly, when we assign `MyConstant` to `f`, which is of type `float64`, `MyConstant` "becomes" a `float64`.
+
+All of this happens at compile time, not at runtime. The Go compiler determines the type of the untyped constant from the context in which it's used.
+
+However, this flexibility has its limits. An untyped constant can only "become" a type if it's a valid representation for that type. For example, the untyped constant `123` can "become" an `int` or a `float64`, but it can't "become" a `string` because `123` isn't a valid `string`. If you try to do something like this:
+
+```go
+const MyConstant = 123 // untyped constant
+
+var s string = MyConstant // this will not compile
+```
+
+The Go compiler will throw an error because it can't use `123` as a `string`. This determination of type compatibility is also done at compile time.
 */

@@ -1,0 +1,259 @@
+THREE CATEGORIES OF TYPES
+
+(1) builtin - VALUE SEMANTICS
+numeric
+string
+bool
+
+(2) reference - VALUE SEMANTICS
+map
+slice
+func
+interface
+channel
+(there may be times when you need to take the address of a slice or a map, 
+but you'll do that when sharing down the call stack and into a function
+decode or unmarshal)
+
+(3) struct - VALUE or POINTER SEMANTICS
+At the time you define the struct, you have to decide whether you're using
+value or pointer semantics. Examples: time pacakge (value semantics), 
+os.File (pointer semantics). Once you make your choice, maintain
+strict consistency with your choice.
+
+*************************************************************
+
+value to pointer, in small situations - yes
+unmarshal
+decode
+
+pointer to value - no
+
+*************************************************************
+
+code in this order:
+
+types
+factory functions
+methods
+(keep methods together - don't scatter across code base)
+(you don't need a separate file for every type)
+
+*************************************************************
+
+4.1.2 methods part 2
+
+*************************************************************
+
+when you know the data semnatic, you know the behavior
+when you know the behavior, you know the cost
+when you know the cost, now you're engineering
+bill kennedy
+
+*************************************************************
+
+we do not write getters or setters in go
+this brings a code review to a stop
+we don't want API's that manipulate state
+API's must provide something
+changing state is not enough
+
+
+*************************************************************
+
+So if you're using interfaces for the sake of using interfaces
+and there's no real value behind it, you're decoupling and getting
+those DOUBLE INDIRECTIONS and taking those allocations on the heap,
+that is not a productive allocation. That's a non-productive allocation
+that you don't want to take. Know your costs. 
+C:\Users\toddm\Documents\learn-to-code-go-version-03\000-xb-notes\01\main.go
+
+*************************************************************
+4.2.1 interfaces part 1 polymorphism
+*************************************************************
+
+Polymorhphism means that you write a certain program 
+and it behaves differently depending on the data that it operates on.
+Tom Kurtz (inventor of basic)
+
+*************************************************************
+
+A piece of code changes its behavior depending on the CONCRETE data it is operating on
+
+everything is driven from the concrete; including this decoupling:
+data semantics
+data oriented design
+
+*************************************************************
+
+one way we can categorize types:
+
+concrete data types
+interface data types
+
+*************************************************************
+HEAP Allocation
+
+IMPORTANT: IF THE COMPILER DOES NOT KNOW THE SIZE OF SOMETHING AT COMPILE TIME
+THEN THAT MUST ME ALLOCATED (constructed) ON THE HEAP
+
+example of bad design:
+func readMe(n int) ([]byte, error) {
+    xs := make([]int, n) // we don't know 'n' at compile time
+}
+
+example of bad design:
+func readMe() ([]byte, error) {
+    xs := make([]int, 4096)
+    ...code...
+    return xs 
+    // xs returns up the callstack and escapes the stack frame to the heap
+    // because a slice is a pointer to a backing array 
+}
+
+*************************************************************
+
+"... interface types are VALUELESS..."bk
+
+"... values of type reader do not exist - it's an interface type..." bk
+
+" ... i will accept any piece of concrete data, any value, or any pointer that
+implements this behavior, that exhibits the full method set of behavior defined by reader..."bk
+
+an interface says, "Hey baby, if you have these methods, then you're my type." me
+
+"An interface doesn't ask for data based upon what it is, it asks for data based upon what it can do." bk
+"... you don't want a Bill, you want a programmer, and many different people can satisfy that need."
+
+"... as soon as we have DECOUPLING, that means we have to allocate on the heap. But if we want
+that decoupling, we'll take that cost."
+
+*************************************************************
+
+an interface value is a two word data structure:
+1: I-TABLE (interface table) and the type of data stored in the i-table
+-- the i-table is a two word data structure:
+---- the type of data being stored (file, struct, etc)
+---- the implementation of the method(s) for that data
+-------- example: 
+------------ file
+------------ read method
+2: pointer to concrete data
+
+*************************************************************
+
+Why method sets? Why do values of a TYPE only implement interfaces
+using method receivers of a TYPE?
+
+"What if I told you that not every value that you work with in Go has an address?" bk
+
+CONSTANTS OF A KIND (untyped constant)
+CONSTANTS OF A TYPE
+
+A value that doesn't have an address can't be shared, and if it can't be shared, 
+it can't be using methods that use pointer receivers.
+
+
+example:
+
+type notifier interface {
+    notify()
+}
+
+type duration int
+
+func (d *duration) notify() {
+	fmt.Println("Sending Notification in", *d)
+}
+
+func main() {
+	duration(42).notify()
+
+	// cannot call pointer method on duration(42)
+	// cannot take the address of duration(42)
+}
+
+*************************************************************
+
+IMPORTANT: 
+do not go from pointer semantics to value semantics 
+
+*************************************************************
+
+In Go (often referred to as Golang), the keyword `const` is used to declare a constant. A constant is a simple, immutable value that remains the same throughout the life of a program. This contrasts with variables, which can have their values changed.
+
+Here's an example of a constant declaration:
+
+```go
+const Pi = 3.14159
+```
+
+Now, in terms of "constants of a kind" and "constants of a type", it helps to understand the Go specification.
+
+The specification refers to the concepts of "types" and "kinds". In Go, every type has a kind. For instance, the kind of the type `int` is `int`, the kind of the type `*int` is `pointer`, the kind of the type `[]int` is `slice`, and so on. There are several predeclared types such as `bool`, `int`, `int8`, `int16`, `int32`, `int64`, `uint`, `uint8`, `uint16`, `uint32`, `uint64`, `uintptr`, `float32`, `float64`, `complex64`, `complex128`, `string`, etc., each of these types has its own kind.
+
+In Go, constants can be untyped or typed.
+
+**Untyped Constants**
+
+Untyped constants in Go are just that: constants that don't have a type yet. These constants are known as "constants of a kind". They have a default type that is used when a type is needed, such as when assigning to a variable, but they can be used wherever any type of constant is allowed as long as they are representable in that type.
+
+Here is an example:
+
+```go
+const MyConstant = 123  // MyConstant is a constant of kind int
+```
+
+In this example, `MyConstant` doesn't have a specified type, but it has a kind: `int`.
+
+**Typed Constants**
+
+When you declare a constant with a specific type, you create a "constant of a type". This means that the constant not only has a value, but also has a specific type associated with it.
+
+Here is an example:
+
+```go
+const MyTypedConstant int = 123  // MyTypedConstant is a constant of type int
+```
+
+In this example, `MyTypedConstant` is a constant of type `int`. Unlike the untyped constant, this constant cannot be used wherever any type of constant is allowed. It can only be used where an `int` is allowed.
+
+In summary, a "constant of a kind" (or an untyped constant) in Go is a constant that hasn't been given a specific type but can be used with any compatible type, while a "constant of a type" (or a typed constant) in Go is a constant that has been given a specific type and can only be used as that type.
+
+
+The type of an untyped constant, also known as a "constant of a kind", is determined at compile time in Go.
+
+Untyped constants in Go are a bit special. They have a default type associated with them, but they can "become" other types if it's clear from the context what type they should be. This is why they are referred to as untyped constants, they're more flexible than typed constants.
+
+Here's an example:
+
+```go
+const MyConstant = 123 // untyped constant
+
+var i int = MyConstant // MyConstant becomes an int here
+var f float64 = MyConstant // MyConstant becomes a float64 here
+```
+
+In this example, `MyConstant` is an untyped constant with a value of `123`. When we assign `MyConstant` to `i`, which is of type `int`, `MyConstant` "becomes" an `int`. Similarly, when we assign `MyConstant` to `f`, which is of type `float64`, `MyConstant` "becomes" a `float64`.
+
+All of this happens at compile time, not at runtime. The Go compiler determines the type of the untyped constant from the context in which it's used.
+
+However, this flexibility has its limits. An untyped constant can only "become" a type if it's a valid representation for that type. For example, the untyped constant `123` can "become" an `int` or a `float64`, but it can't "become" a `string` because `123` isn't a valid `string`. If you try to do something like this:
+
+```go
+const MyConstant = 123 // untyped constant
+
+var s string = MyConstant // this will not compile
+```
+
+The Go compiler will throw an error because it can't use `123` as a `string`. This determination of type compatibility is also done at compile time.
+
+*************************************************************
+
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+
+
