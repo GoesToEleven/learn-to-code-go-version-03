@@ -30,7 +30,9 @@ decode
 pointer to value - no
 
 *************************************************************
+ORDER - ORDER - ORDER - ORDER - ORDER - ORDER - ORDER - ORDER
 
+CODE ORDER
 code in this order:
 
 types
@@ -250,10 +252,361 @@ The Go compiler will throw an error because it can't use `123` as a `string`. Th
 
 *************************************************************
 
+"Multiple inheritence is not a good design pattern in Go." bk
+
+"Inner-types can have innter-types can have inner-types, 
+but this is also not a good design pattern in Go." bk
+
+*************************************************************
+
+PACKAGING
+Every folder in a source tree represents a basic unit of code 
+which is a static library. Every folder represents an API.
+
+From the compiler's point of view, each folder represents 
+a static library that has to be compiled then linked together.
+
+naming convention
+package name same as folder name
+
+*************************************************************
+COMPOSITION - COMPOSITION - COMPOSITION - COMPOSITION - COMPOSITION 
+composition is about bring together different types of data into collections or groups
+*************************************************************
+grouping 5.1
+
+"...embedding does not create a sub-typing relationship..." bk
+(example: type ANIMAL embedded in DOG and CAT does not make 
+values of type DOG or CAT an animal) 
+--> solution: use interfaces
+(example: 
+type animal interface { someMethod()}
+)
+
+stop thinking about what dogs are cats ARE
+and start thinkinga bout what dogs and cats DO
+
+*************************************************************
+SUPER IMPORTANT
+move from "WHAT IS" to "WHAT DOES"
+group things by what they do
+don't focus on what things are
+focus on what things can do
+*************************************************************
+
+don't embed types to provide abstraction layers of reusable state
+embed types for behavior
+EMBED FOR BEHAVIOR
+that's where the decoupling comes from - from behavior
+
+once we identify what a dog and cat DO 
+then we can go in and define those interfaces
+
+INTERFACES ALWAYS DESCRIBE THE BEHAVIOR OF THINGS
+not what things ARE
+our CONCRETE TYPES should define those nouns
+those person, places, things, characteristics
+
+Group things not by what they ARE but by what they DO
+
+the problem itself is solved in the CONCRETE
+but the decoupling is solved in the BEHAVIOR
+
+*************************************************************
+Duplication is cheaper than the wrong abstraction
+*************************************************************
+
+GENERAL RULES
+
+- declare types that represent something new or unique
+- Validate that a value of any type is created or used on its own. (see below)
+- Embed types to reuse existing behaviors you need to satisfy.
+- Question types that are an alias or abstraction for an existing type.
+- Question types whose sole purpose is to share common state.
+- If we do define a type, we want to see values of that type somewhere in the program
+
+*************************************************************
+11:45
+DON'T DO THIS
+
+type Handle int             // this doesn't represent anything new
+func Foo(h handle) {}
+
+// there is no compiler type protection
+// you can still do this b/c 10 is of type kind
+foo(10) 
+
+DO THIS
+
+func Foo(handle int){}      // this is more readable; we're not hiding anything
+
+DO THIS (like in the time pkg)
+
+type Duration int64         // this represents a nanosecond of time; something new & unique
+                            // we can also tell if something is new & unique if it has a method set that's reasonable
+
+*************************************************************
+5-2-1-decoupling-part-1
+*************************************************************
+
+STEPS FOR WRITING CODE:
+(1) PL API (primitive level - just get it working - optimization #1)
+concrete implementation first
+NO INTERFACES
+
+(2) LL abstraction/API (lower level)
+
+(3) HL abstraction/API (higher level)
+
+
+*************************************************************
+
+"A good API is not just easy to use, 
+but it's hard to misuse." BK
+
+"We don't design interfaces,
+we discover them." BK
+
+
+*************************************************************
+INTERFACE POLLUTION
+*************************************************************
+
+We don't need an interface unless we need to decouple something.
+And decoupling means we're going to have more than one implementation
+of some THING (concrete data, state, noun). Polymorphism means that
+a piece of code changes behavior depending upon the piece of
+concrete data it's operating on. If code is only operating
+on one piece of concrete data, we don't need decoupling.
+We can work with what it IS and not worry about what it DOES.
+
+*************************************************************
+ERROR HANDLING
+*************************************************************
+
+nil
+two types of things can be nil:
+- interfaces set to their zero value
+- reference types set to their zero value
+
+In Go programming language, `nil` is a predeclared identifier representing the zero value for a number of types, such as pointers, functions, interfaces, slices, channels, and maps. The type of `nil` is determined by the context in which it's used.
+
+For instance, if `nil` is used as a function's return value, it represents a function that doesn't point to any valid execution code. If `nil` is used as the value for a pointer, it means the pointer doesn't point to any value. If used with a map, it indicates that the map doesn't have any initialized data.
+
+Here are some examples:
+
+// for pointers
+var p *int = nil
+
+// for slices
+var s []int = nil
+
+// for maps
+var m map[string]int = nil
+
+// for channels
+var c chan string = nil
+
+// for functions
+var f func() = nil
+
+// for interfaces
+var i interface{} = nil
+
+In these examples, each of the variables is assigned the zero value for their respective type. Keep in mind, though, that the `nil` in Go is not exactly equivalent to `null` in some other languages, and its behavior can vary based on the type it is associated with. For instance, a `nil` slice has a length and capacity of 0, but a `nil` map can't be added to until it's initialized with `make`.
+
+*************************************************************
+
+IMPORTANT
+All functions returning an error
+need to return the error interface for the error
+and not a custom error type
+see this: \000-bm-interview-questions\01\13-error\03-find-bug-01\main.go
+
+*************************************************************
+PACKAGING
+*************************************************************
+
+package oriented design
+- define how to structure your project
+- communicate to your team how the project is structured
+- identify where a package belongs in your project
+
+*************************************************************
+
+You can think of packaging as applying the idea of microservices on a source tree.
+
+Two packages can't cross-import each other. Imports are a one-way street.
+
+Think about building your application around a set of very clear and static API sets.
+
+There aren't sub-packages. Just because an API is listed in another API, that doesn't 
+make it a sub-package. That's just where it's stored to match our mental model.
+see: \000-bm-interview-questions\01\14-packaging\01
+
+
+*************************************************************
+
+PACKAGE DESIGN PHILOSOPHY
+
+PROVIDE, NOT CONTAIN
+- name packages to describe what they provide
+- packages should not be a dumping ground for disparate concerns
+
+USER FOCUSED DESIGN
+intuitive and simple to use
+respect impact on resources and performance
+protect user's app from cascading changes
+prevent the need for type assertions to concrete data
+reduce, minimize, simplify code base
+
+RESUABILITY
+be reusable; portable
+single point of dependency (beyond the std library)
+
+*************************************************************
+
+every package should be it's own island
+
+*************************************************************
+
+
+*************************************************************
+GOROUTINES
+*************************************************************
+
+OS MECHANICS & OS SCHEDULER MECHANICS
+
+CURRENCY is out-of-order execution
+PARALLELISM means we're executing two or more threads of execution at a time
+
+*************************************************************
+
+first hardware scenario
+1 processor has 1 HARDWARE THREAD
+(for this scenario, we'll simplify and say that
+every hardware thread can only execute 1 instruction at a time)  
+
+now there is an OPERATING SYSTEM on top of the hardware
+for each HARDWARE THREAD there is an OPERATING SYSTEM THREAD
+
+a thread is a path of execution
+it is the job of the thread to execute instructions one at a time
+
+GO SCHEDULER THREADS
+--------------------------
+OS & OS thread
+--------------------------
+hardware & hardware thread
+
+
+os thread can have three different states
+- running
+- runable (wants to run)
+- waiting (off the radar; waiting for something to happen; a network return or something)
+
+scheduler period
+the time in which a thread must run to create the illusion that something is running
+example: 100 ms (millisecond)
+
+CONTEXT SWITCH
+switching from one thread to another thread
+cost: 1000 - 2000 nanoseconds 
+
+MTS
+minimum time on service
+
+CPU BOUND WORKLOAD
+the only work this thread needs to do is on the CPU
+
+IO BOUND / BLOCKING WORKLOAD
+this thread needs to do work, or wait, on other resources like a network
+
+takeaway:
+if we have CPU BOUND WORKLOAD, minimize context switches
+
+PREEMPTIVE SCHEDULER
+
+scheduling is unpredictable
+we can't control it
+
+synchronization and orchestration
+
+
+*************************************************************
+GO SCHEDULER MECHANICS
+*************************************************************
+
+- The GO RUNTIME determines how many hardware threads you have on your machine
+- - example: 8 logical processors (1 per hardware thread)
+- - - every logical processor (P) is given an OS thread (M)
+- - - - P <-⬇-> M (OS) <--> HW (hardware)
+- - - -     ⬇
+- - - -     G (go routine)
+
+GOROUTINE states
+running
+runnable
+waiting
+
+CONTEXT SWITCHING with goroutines
+200 nanoseconds
+
+CONTEXT SWITCHING with goroutine by the go scheduler
+- go (keyword)
+- - LRQ (local run queue) - goroutines 
+- - GRQ (global run queue) goroutines in a runnable state not yet assigned to a P
+- garbage collection (GC)
+- system calls (sys calls)
+- blocking calls (synchoronization, orchestration, mutexes, cgo)
+
+NETWORK PULLER (NP)
+synchronous system calls
+
+*************************************************************
+DATA RACES
+*************************************************************
+
+ATOMIC synchoronizations are the fastest way to do synchronizations
+because they are at the hardware level
+
+*************************************************************
+CHANNELS
+*************************************************************
+
+Signaling Semantics
+
+Do we want a guarantee that the signal sent has been received?
+- we can signal 1-to-1 with data
+- we can signal 1-to-many by closing a channel
+
+*************************************************************
+CHANNELS - BASIC PATTERNS
+*************************************************************
+
+WAIT FOR RESULT
+Unbuffered channels don't have any capacity to hold data,
+so they require both a sender and receiver to be ready at the same time.
+The send operation on an unbuffered channel blocks until
+another goroutine is ready to receive the data,
+and conversely, the receive operation blocks
+until another goroutine is ready to send data.
+\000-bm-interview-questions\01\17-channels\02-wait-for-result\main.go
+
+FAN OUT
+
 
 *************************************************************
 *************************************************************
 *************************************************************
-
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
+*************************************************************
 
 

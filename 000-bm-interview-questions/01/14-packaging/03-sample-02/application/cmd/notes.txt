@@ -1,0 +1,2 @@
+cmd will be where all of your binaries are
+it will have a folder with main.go under that
