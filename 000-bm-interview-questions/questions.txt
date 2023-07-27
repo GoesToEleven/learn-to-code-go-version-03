@@ -1,0 +1,65 @@
+INTRODUCTION
+COMPANY
+GO
+
+
+ORDER
+
+--- WELCOME ---
+Take the address of a variable and show it by printing it out.
+
+--- SET 1 ---
+
+What will the last print statement print, and why? (PART A)
+	not fixed: https://go.dev/play/p/bSxwLO0mRNH
+
+Fix this code so that it increments age correctly (PART B)
+	not fixed: https://go.dev/play/p/bSxwLO0mRNH
+	fixed: https://go.dev/play/p/Tpsl2S4CtPf
+
+Explain what this code will print
+	https://go.dev/play/p/ifhWmIY5I-H
+
+what will this code print (PART A)
+	https://go.dev/play/p/-ozMYP1qL4l
+
+Fix this code so that when xs[0] is changed this doesn't change 'sports' (PART B)
+	not fixed: https://go.dev/play/p/-ozMYP1qL4l
+	fixed: https://go.dev/play/p/GG3GGfD7ux2
+
+Fix this code with a pool of goroutine workers
+	not fixed: https://go.dev/play/p/a0Uwq9CtTeF
+	fixed: https://go.dev/play/p/73d_-GdYDBt
+
+--- SET 2 ---
+
+Explain the differences between:
+	var wg sync.WaitGroup
+	atomic.AddInt64(&counter, 1)
+	var mu sync.Mutex	
+
+Will this print the same for both print statements
+	initial code: https://go.dev/play/p/CgbIkKrWS0s
+	insights: https://go.dev/play/p/9RbDIRs1Xda
+
+
+Fix this code with waitgroups and a deadlock: (PART A)
+	not fixed: https://go.dev/play/p/JOQJ91Dmh-d
+	fixed: https://go.dev/play/p/fT1R6oX2NXK
+
+Fix this codewith waitgroups and a race condition (PART B)
+	not fixed: https://go.dev/play/p/cJbeHJvKqGt
+	fixed: https://go.dev/play/p/3a5SGAvsZ_6
+
+What does this line of code do, and when might you use it:
+	atomic.AddInt64(&counter, 1)
+
+--- SET 3 ---
+
+What's problematic with this code working with append
+	not fixed: https://go.dev/play/p/04NLYE1I7W4
+	fixed: https://go.dev/play/p/guYNTv-lfFi
+
+Fix this code working with a map
+	not fixed: https://go.dev/play/p/d001JBoJcAV
+	fixed: https://go.dev/play/p/RCVcb_4z2oK

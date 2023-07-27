@@ -29,3 +29,5 @@ func ptrSemantics(ss []string, n int) {
 		ss[i] = fmt.Sprintf("item %d", i)
 	}
 }
+
+// go test -bench .

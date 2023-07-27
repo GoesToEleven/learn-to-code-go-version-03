@@ -9,111 +9,251 @@ func main() {
 	// ------------------------------------------------
 	// BEGINNER QUESTIONS
 	// ------------------------------------------------
-
+	questions = append(questions, `What is the blank identifier?`)
+	questions = append(questions, "What's the difference between declare, assign, and initialize?")
+	questions = append(questions, "Explain allocation and initialization.")
 	questions = append(questions, "What is the difference between make([]int, 10), make([]int, 0, 10), make([]int, 10, 10)")
-	/*
-		VALUE semantics & POINTER semantics
-		categories: builtin, reference, user defined type structs
-		general rules of thumb for value semantics vs pointer semantics
-		mechanical sympathy - cache lines, prefetcher, performance
-		stack vs heap - polluting the heap
-		slice: three word data structure - pointer, len, cap
-		slice is one of the most significant data structures the go language
-		append vs copy
-		declare, assign, initialize, allocate
-	*/
+	questions = append(questions, "What types can a map use as a key in the Go programming language?")
+	questions = append(questions, "What does it mean to write idiomatic Go code?")
+	questions = append(questions, "Which do you choose: performance or readability?")
+	questions = append(questions, "Why was Go created, and who created it?")
+	questions = append(questions, "Can you explain what is meant by 'Go is strongly typed?'")
+	questions = append(questions, "What is the var keyword used for and when do you use it?")
+	questions = append(questions, `When dealing with computer architecture, what does the 'word size' mean?`)
+	questions = append(questions, "How does a computer work?")
+	questions = append(questions, "What is a compiler?")
+	questions = append(questions, "What is a garbage collector?")
+	questions = append(questions, "Can you give an example of a problem you've solved using Go? What challenges did you encounter, and how did you overcome them?")
+	questions = append(questions, "Explain how package management works in Go.")
+	questions = append(questions, `What is the difference between make and new?`)
+	questions = append(questions, `Tell us about bytes, code points, and characters in relation to strings and UTF-8.`)
+	questions = append(questions, `What is embedding a struct and inner-type promotion?`)
 
-	questions = append(questions, "Explain these types in Go: builtin, reference, structs")
-	/*
-		BUILTIN: bool, string, numeric
-		REFERENCE: slice, map, channel, pointer, interface, function
-		STRUCTS: structs
-	*/
+	questions = append(questions, `Fix this code so that type HUMAN is embedded in type SECRETAGENT
+	
+	type human struct {
+		name  string
+		email string
+	}
+	
+	type secretAgent struct {
+		person human
+		id  string
+	}
 
-	questions = append(questions, "What is the short-declaration operator and when do you use it?")
-	/*
-		differentiate between := and var
-		var should be used to declare zero value
-	*/
+	`)
+	// not fixed:
+	// fixed: https://go.dev/play/p/zO0ZBicZM7u
+
+	questions = append(questions, `Fix this code working with a map:
+	package main
+
+	import "fmt"
+	
+	func main() {
+		var m map[string]int
+		m["b"] = 42
+		fmt.Println(m)
+	}
+	
+	`)
+	// not fixed: https://go.dev/play/p/d001JBoJcAV
+	// fixed: https://go.dev/play/p/RCVcb_4z2oK
+
+	questions = append(questions, `What's problematic with this code working with append:
+
+	func slice() {
+		xi := make([]int, 10)
+		for i := 0; i < 10; i++ {
+			xi1 = append(xi1, i)
+		}
+		fmt.Println(xi1)
+	}		
+	`)
+	// not fixed: https://go.dev/play/p/04NLYE1I7W4
+	// fixed: https://go.dev/play/p/guYNTv-lfFi
 
 	// ------------------------------------------------
 	// INTERMEDIATE QUESTIONS
 	// ------------------------------------------------
-
+	questions = append(questions, "What is the comma ok idiom?")
+	questions = append(questions, "Is Go an Object Oriented language?")
+	questions = append(questions, `Somebody says that 'a string is a two word data structure' - what does this mean?`)
+	questions = append(questions, `Somebody says that 'a slice is a three word data structure' - what does this mean?`)
+	questions = append(questions, `Tell me the difference between a nil slice and an empty slice:
+	
+	var xs []string
+	// vs
+	xs := []string{}
+	
+	`)
+	questions = append(questions, "How does Go handle error handling compared to other languages?")
+	questions = append(questions, "What is nil?")
+	questions = append(questions, "How do we do benchmarking in Go?")
 	questions = append(questions, "Put these in the correct order: centisecond, second, nanosecond, millisecond, decisecond, microsecond")
-	/*
-		second
-		decisecond 1/10
-		centisecond 1/100
-		millisecond 1/1_000
-		microsecond 1/1_000_000
-		nanosecond 1/1_000_000_000
-		----
-		3GHZ 3_000_000_000 ops/sec
-		in nanosecond 3 operations
-		----
-
-	*/
-
-	questions = append(questions, "Explain value semantics and pointer semantics. What are rules-of-thumb for using one versus the other?")
-
-	questions = append(questions, "What types can a map use as a key in the Go programming language?")
-	/*
-		MAP TYPES
-		A map is an unordered group of elements of one type, called the ELEMENT type, indexed by a set of unique keys of another type, called the KEY type. The value of an uninitialized map is nil.
-
-		MapType     = "map" "[" KeyType "]" ElementType .
-		KeyType     = Type .
-
-		THE COMPARISON OPERATORS == AND != MUST BE FULLY DEFINED FOR OPERANDS OF THE KEY TYPE; THUS THE KEY TYPE MUST NOT BE A FUNCTION, MAP, OR SLICE. IF THE KEY TYPE IS AN INTERFACE TYPE, THESE COMPARISON OPERATORS MUST BE DEFINED FOR THE DYNAMIC KEY VALUES; FAILURE WILL CAUSE A RUN-TIME PANIC.
-		(golang spec)
-
-		MAPS
-		Maps are a convenient and powerful built-in data structure that associate values of one type (the KEY) with values of another type (the ELEMENT or VALUE). THE KEY CAN BE OF ANY TYPE FOR WHICH THE EQUALITY OPERATOR IS DEFINED, SUCH AS INTEGERS, FLOATING POINT AND COMPLEX NUMBERS, STRINGS, POINTERS, INTERFACES (AS LONG AS THE DYNAMIC TYPE SUPPORTS EQUALITY), STRUCTS AND ARRAYS. SLICES CANNOT BE USED AS MAP KEYS, BECAUSE EQUALITY IS NOT DEFINED ON THEM.
-		(effective go)
-	*/
-
-	questions = append(questions, "What does it mean to write idiomatic Go code?")
-	/*
-		"Idiomatic" Go code refers to the way of writing code that adheres to the accepted standards, conventions, and stylistic choices of the Go programming language community. It is the kind of code that experienced Go programmers would write, and it is typically simple, clear, and efficient.
-
-		Here are some principles of idiomatic Go:
-
-		1. Simplicity Over Cleverness: Go is a language that values simplicity and clarity over cleverness and brevity. Idiomatic Go code is not necessarily the shortest or most ingenious solution; instead, it prioritizes readability and maintainability.
-
-		2. Error Handling: Go prefers explicit error handling. Functions often return an error as the last return value. It's considered good practice to always check for errors and handle them immediately.
-
-		3. Naming Conventions: Go uses CamelCase for identifier names. Public names start with a capital letter and private names with a lowercase letter. Short, descriptive names are preferred.
-
-		4. Formatting: Go includes a tool called `gofmt` that automatically formats Go source code, and this tool is widely used. Idiomatic Go code is `gofmt`-formatted code.
-
-		5. Package Design: Go encourages grouping related code into packages. Good package design is important in idiomatic Go. Packages should be designed with a clear purpose and API, and should have cohesive responsibilities.
-
-		6. Concurrency: Go has built-in support for concurrent programming with goroutines and channels. Using these features correctly is a part of writing idiomatic Go code.
-
-		7. Avoid Global State and Side Effects: Idiomatic Go code prefers pure functions that don't alter global state or have unexpected side effects.
-
-		8. Documentation: Go has built-in support for package documentation. Idiomatic Go code includes helpful comments and package documentation.
-
-		9. Test-Driven Development: Go has a robust built-in testing framework, and the Go community values test-driven development. Writing tests for your code is considered part of writing idiomatic Go.
-
-		Remember, though, that while idioms can help in writing clear and efficient code, they are not rules. They can be broken if the situation warrants it.
-
-	*/
-	questions = append(questions, "Who is Rob Pike?")
-	questions = append(questions, "Who is Ken Thompson?")
-	questions = append(questions, "Who is Robert Griesemer")
-
-	questions = append(questions, "What is the var keyword used for and when do you use it?")
-
-	questions = append(questions, "How are arrays and slices different in Go? What are rules-of-thumb around arrays and slices in Go?")
-
 	questions = append(questions, "What are pointers? Show us pointers at work in code.")
+	questions = append(questions, "Explain value semantics and pointer semantics. What are rules-of-thumb for using one versus the other?")
+	questions = append(questions, "What is the stack, and what is the heap?")
+	questions = append(questions, "What is escape analysis?")
+	questions = append(questions, "What is an interface?")
+	questions = append(questions, "What are method sets, and how do you use them?")
+	questions = append(questions, "What is a type set?")
+	questions = append(questions, "What is concrete data?")
+	questions = append(questions, "Explain generics.")
+	questions = append(questions, "What is the difference between concurrency and parallelism?")
+	questions = append(questions, "What is a Goroutine?")
+	questions = append(questions, "Describe a time when you used goroutines and channels?")
+	questions = append(questions, `Should you use buffered channels? Why or why not?`)
+	questions = append(questions, "What is the difference between switch and select?")
+	questions = append(questions, "Explain internal, external, and data latencies in Go.")
+	questions = append(questions, `Explain the differences between:
+	var wg sync.WaitGroup
+	atomic.AddInt64(&counter, 1)
+	var mu sync.Mutex	
+	`)
+
+	questions = append(questions, `Will this print the same for both print statements:
+	
+	people := make([]person, 2)
+
+	p1 := people[1]
+	p1.age++
+	fmt.Println(p1.age)
+	fmt.Println(people[1].age)
+	
+	`)
+	// initial code: https://go.dev/play/p/CgbIkKrWS0s
+	// insights: https://go.dev/play/p/9RbDIRs1Xda
+
+	questions = append(questions, `Fix this code with waitgroups and a deadlock:
+	
+	func main() {
+		var wg sync.WaitGroup
+		wg.Add(3)
+	
+		go func() {
+			fmt.Println("process one")
+			wg.Done()
+		}()
+	
+		go func() {
+			fmt.Println("process two")
+			wg.Done()
+		}()
+	
+		wg.Wait()
+	}
+
+	`)
+	// not fixed: https://go.dev/play/p/JOQJ91Dmh-d
+	// fixed: https://go.dev/play/p/fT1R6oX2NXK
+
+	questions = append(questions, `Fix this codewith waitgroups and a race condition:
+	
+	func main() {
+		var counter int
+		var wg sync.WaitGroup
+		wg.Add(3)
+	
+		go func() {
+			counter++
+			wg.Done()
+		}()
+	
+		go func() {
+			counter++
+			wg.Done()
+		}()
+	
+		wg.Wait()
+		fmt.Println("Final Counter:", counter)
+	}
+
+	`)
+	// not fixed: https://go.dev/play/p/cJbeHJvKqGt
+	// fixed: https://go.dev/play/p/3a5SGAvsZ_6
+
+	questions = append(questions, `What does this line of code do, and when might you use it:
+	
+	atomic.AddInt64(&counter, 1)
+
+	`)
 
 	// ------------------------------------------------
 	// ADVANCED QUESTIONS
 	// ------------------------------------------------
+	questions = append(questions, `Teach us something most people don't know about Go.`)
+	questions = append(questions, `What don't you like about the Go programming language?`)
+	questions = append(questions, `What's the difference between synchronization & orchestration?`)
+	questions = append(questions, "How might you use a nil channel?")
 	questions = append(questions, "Explain how a linked list works.")
+	questions = append(questions, "What is iota? Can you show us how to use iota with bitshifting?")
+	questions = append(questions, "Have you worked on a large-scale project using Go? If so, how did Go's features contribute to the project's success?")
+	questions = append(questions, "What tools do you typically use for testing Go code?")
+	questions = append(questions, "What is a multiplexer?")
+	questions = append(questions, "What is the difference between TCP and UDP?")
+
+	questions = append(questions, `What will the last print statement print, and why?
+	
+	type person struct {
+		age int
+	}
+	
+	func main() {
+		people := make([]person, 2)
+	
+		p1 := &people[1]
+		fmt.Printf("%p \n", p1)
+		fmt.Printf("%p \n", &people[1])
+		p1.age++
+		fmt.Println(p1.age)
+		fmt.Println(people[1].age)
+		fmt.Println("len, cap", len(people), cap(people))
+	
+		// Add a new person
+		people = append(people, person{})
+		fmt.Println("len, cap", len(people), cap(people))
+	
+		// Add another year for p1
+		p1.age++
+		fmt.Printf("%p \n", p1)
+		fmt.Printf("%p \n", &people[1])
+		
+
+	`)
+	// https://go.dev/play/p/bSxwLO0mRNH
+
+	questions = append(questions, `Fix this code so that it increments age correctly:
+	
+	type person struct {
+		age int
+	}
+	
+	func main() {
+		people := make([]person, 2)
+	
+		p1 := &people[1]
+		fmt.Printf("%p \n", p1)
+		fmt.Printf("%p \n", &people[1])
+		p1.age++
+		fmt.Println(p1.age)
+		fmt.Println(people[1].age)
+		fmt.Println("len, cap", len(people), cap(people))
+	
+		// Add a new person
+		people = append(people, person{})
+		fmt.Println("len, cap", len(people), cap(people))
+	
+		// Add another year for p1
+		p1.age++
+		fmt.Printf("%p \n", p1)
+		fmt.Printf("%p \n", &people[1])
+		fmt.Println(people[1].age)
+	}
+
+	`)
+	// not fixed: https://go.dev/play/p/bSxwLO0mRNH
+	// fixed: https://go.dev/play/p/Tpsl2S4CtPf
 
 	questions = append(questions, `Explain what this code will print:
 	
@@ -187,42 +327,38 @@ func main() {
 	// not fixed: https://go.dev/play/p/-ozMYP1qL4l
 	// fixed: https://go.dev/play/p/GG3GGfD7ux2
 
-	questions = append(questions, "How does a computer work?")
-	questions = append(questions, "What is iota? Can you show us how to use iota with bitshifting?")
-	questions = append(questions, "What is a Goroutine?")
-	questions = append(questions, "What is the difference between concurrency and parallelism?")
-	questions = append(questions, "What is a compiler?")
-	questions = append(questions, "What is the stack?")
-	questions = append(questions, "What is the heap?")
-	questions = append(questions, "What is escape analysis?")
-	questions = append(questions, "Which do you choose: performance or readability?")
-	questions = append(questions, "Which do you choose: brevity or readability?")
-	questions = append(questions, "What is a garbage collector?")
-	questions = append(questions, "Is Go an Object Oriented language?")
-	questions = append(questions, "Is Go a Data Oriented language?")
-	questions = append(questions, "How does Go handle error handling compared to other languages?")
-	questions = append(questions, "Why was Go created, and who created it?")
-	questions = append(questions, "Can you explain what is meant by 'Go is strongly typed?'")
-	questions = append(questions, "Can you give an example of a problem you've solved using Go? What challenges did you encounter, and how did you overcome them?")
-	questions = append(questions, "Can you describe a time when you used channels and goroutines to solve a concurrency problem?")
-	questions = append(questions, "Have you worked on a large-scale project using Go? If so, how did Go's features contribute to the project's success?")
-	questions = append(questions, "What tools do you typically use for testing Go code?")
-	questions = append(questions, "How would you set up a CI/CD pipeline for a Go project?")
-	questions = append(questions, "Can you explain how package management works in Go?")
-	questions = append(questions, `What's problematic with this code:
+	questions = append(questions, `Fix this code with a pool of goroutine workers:
+	
+	g := runtime.GOMAXPROCS(0)
+	ch := make(chan string, g)
+	for c := 0; c < g; c++ {
+		go func() {
+			for d := range ch {
+				fmt.Printf("child %d : recv'd signal : %s\n", child, d)
+			}
+			fmt.Printf("child %d : recv'd shutdown signal\n", child)
+		}()
+	}
 
-	func slice() {
-		xi := make([]int, 10)
-		for i := 0; i < 10; i++ {
-			xi1 = append(xi1, i)
-		}
-		fmt.Println(xi1)
-	}		
+	const work = 10
+	for w := 0; w < work; w++ {
+		ch <- "data"
+		fmt.Println("parent : sent signal :", w)
+	}
+
+	close(ch)
+	
 	`)
-	questions = append(questions, "What is your IDE for Go, and why?")
-	questions = append(questions, "Can you argue in favor of your perspective, and accept when your perspective isn't chosen?")
-	questions = append(questions, "What do you do to stay current with programming?")
-	questions = append(questions, `Do you recognize any of these, and if so, what are they and have you worked with them:
+	// not fixed: https://go.dev/play/p/a0Uwq9CtTeF
+	// fixed: https://go.dev/play/p/73d_-GdYDBt
+
+	// ------------------------------------------------
+	// TOOLING  QUESTIONS
+	// ------------------------------------------------
+	questions = append(questions, "What is Docker and what made it innovative?")
+	questions = append(questions, "Tell us about containers and container orchestration.")
+	questions = append(questions, "How would you set up a CI/CD pipeline for a Go project?")
+	questions = append(questions, `Tell us what these do:
 	cobra
 	viper
 	opentelemetry
@@ -231,197 +367,17 @@ func main() {
 	chi
 	zshell
 	`)
-	questions = append(questions, "What is a multiplexer?")
-	questions = append(questions, "What is the difference between TCP and UDP?")
-	questions = append(questions, "Who is Caleb Doxsey?")
-	questions = append(questions, "Tell me about containers and container orchestration.")
-	questions = append(questions, "What made Docker innovative?")
+
+	// ------------------------------------------------
+	// SOFT SKILL QUESTIONS
+	// ------------------------------------------------
 	questions = append(questions, "Tell us about your soft-skills.")
+	questions = append(questions, "What makes you a valuable member of a team?")
+	questions = append(questions, "Can you argue in favor of your perspective, and accept when your perspective isn't chosen?")
 	questions = append(questions, "Tell us about a time you failed, and what you learned from it.")
 	questions = append(questions, "Tell us about a time you succeeded, and why you succeeded.")
-	questions = append(questions, "What makes you a valuable member of a team?")
-	questions = append(questions, "Explain internal, external, and data latencies in Go.")
-	questions = append(questions, "What is the mascot of the Go programming language?")
-	questions = append(questions, "How do we do benchmarking in Go?")
-	questions = append(questions, "What are method sets, and how do you use them?")
-	questions = append(questions, "What is an interface?")
-	questions = append(questions, "What is concrete data?")
-	questions = append(questions, "What is a type set?")
-	questions = append(questions, "What is a concrete type?")
-	questions = append(questions, "Explain generics.")
-	questions = append(questions, "What's the difference between declare, assign, and initialize?")
-	questions = append(questions, "Explain allocation and initialization.")
-	questions = append(questions, "What is nil?")
-	questions = append(questions, "How might you use a nil channel?")
-	questions = append(questions, "What is the difference between switch and select?")
-	questions = append(questions, "What is the comma ok idiom?")
-	questions = append(questions, `Fix this code:
-	package main
+	questions = append(questions, "What do you do to stay current with programming?")
 
-	import "fmt"
-	
-	func main() {
-		var m map[string]int
-		m["b"] = 42
-		fmt.Println(m)
-	}
-	
-	`)
-	questions = append(questions, `Should you use buffered channels? Why or why not?`)
-	questions = append(questions, `What's a cache line, what's it's common size, and why would you think about this in relation to the Go programming language?`)
-	questions = append(questions, `Somebody says that 'a string is a two word data structure' - what does this mean?`)
-	questions = append(questions, `Somebody says that 'a slice is a three word data structure' - what does this mean?`)
-	questions = append(questions, `When dealing with computer architecture, what does the 'word size' mean?`)
-
-	questions = append(questions, `What is the difference between make and new?`)
-	questions = append(questions, `What is the blank identifier?`)
-	questions = append(questions, `Fix this code, then benchmark the two functions:
-
-	func main() {
-		qty := 10
-		var vs []string
-		ps := make([]string, 0, qty)
-
-		vs = valSemantics(vs, qty)
-		fmt.Println(len(vs), cap(vs))
-
-		ptrSemantics(ps, qty)
-		fmt.Println(len(ps), cap(ps))
-	}
-
-	func valSemantics(ss []string, n int) []string {
-		for i := 0; i < n; i++ {
-			s := fmt.Sprintf("item %d", i)
-			ss = append(ss, s)
-		}
-		return ss
-	}
-
-	func ptrSemantics(ss []string, n int) {
-		for i := 0; i < n; i++ {
-			ss[i] = fmt.Sprintf("item %d", i)
-		}
-	}
-
-	
-	
-	`)
-
-	questions = append(questions, `Will this print the same for both print statements:
-	
-	people := make([]person, 2)
-
-	p1 := people[1]
-	p1.age++
-	fmt.Println(p1.age)
-	fmt.Println(people[1].age)
-	
-	`)
-	questions = append(questions, `What will the last print statement print, and why?
-	
-	people := make([]person, 2)
-
-	p1 := &people[1]
-	p1.age++
-	fmt.Println(people[1].age)
-
-	// Add a new person
-	people = append(people, person{})
-
-	// Add another year for p1
-	p1.age++
-	fmt.Println(people[1].age)
-
-	`)
-	questions = append(questions, `Fix this code:
-	
-	people := make([]person, 2)
-
-	p1 := &people[1]
-	p1.age++
-	fmt.Println(people[1].age)
-
-	// Add a new person
-	people = append(people, person{})
-
-	// Add another year for p1
-	p1.age++
-	fmt.Println(people[1].age)
-
-	`)
-	questions = append(questions, `Teach us something most people don't know about Go.`)
-	questions = append(questions, `Tell us about bytes, code points, and characters in relation to strings and UTF-8.`)
-	questions = append(questions, `What is embedding a struct and inner-type promotion?`)
-	questions = append(questions, `Fix this code so that type HUMAN is embedded in type SECRETAGENT
-	
-	type human struct {
-		name  string
-		email string
-	}
-	
-	type secretAgent struct {
-		person human
-		id  string
-	}
-
-	`)
-	questions = append(questions, `What don't you like about the Go programming language?`)
-	questions = append(questions, `What's the difference between synchronization & orchestration?`)
-	questions = append(questions, `Fix this code:
-	
-	func main() {
-		var wg sync.WaitGroup
-		wg.Add(3)
-	
-		go func() {
-			fmt.Println("process one")
-			wg.Done()
-		}()
-	
-		go func() {
-			fmt.Println("process two")
-			wg.Done()
-		}()
-	
-		wg.Wait()
-	}
-
-	`)
-	questions = append(questions, `Fix this code:
-	
-	func main() {
-		var counter int
-		var wg sync.WaitGroup
-		wg.Add(3)
-	
-		go func() {
-			counter++
-			wg.Done()
-		}()
-	
-		go func() {
-			counter++
-			wg.Done()
-		}()
-	
-		wg.Wait()
-		fmt.Println("Final Counter:", counter)
-	}
-
-	`)
-	questions = append(questions, `What does this line of code do, and when might you use it:
-	
-	atomic.AddInt64(&counter, 1)
-
-	`)
-	questions = append(questions, `Explain the differences between:
-	
-	var wg sync.WaitGroup
-	atomic.AddInt64(&counter, 1)
-	var mu sync.Mutex
-	
-	`)
-	questions = append(questions, ``)
 	questions = append(questions, ``)
 	questions = append(questions, ``)
 	questions = append(questions, ``)
