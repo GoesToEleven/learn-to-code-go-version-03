@@ -17,40 +17,41 @@ func main() {
 	pooling()
 }
 
-// pooling: In this pattern, the parent goroutine signals 100 pieces of work
+// pooling: In this pattern, the parent goroutine signals N pieces of work
 // to a pool of child goroutines waiting for work to perform.
 func pooling() {
 
 	// GOMAXPROCS sets the maximum number of CPUs that can be executing simultaneously
 	// an argument of 0 returns the current number of logical CPUs used by the Go runtime.
-	g := runtime.GOMAXPROCS(0)
 
 	// NumCPU returns the number of logical CPUs usable by the current process.
 	// This is the total number of logical CPUs on the machine, regardless of the current GOMAXPROCS setting.
 	// This value can be useful when you're trying to make decisions about the level of concurrency in your program
 	// or understand the hardware capabilities of the machine where the process is running.
+
+	g := runtime.GOMAXPROCS(0)
 	fmt.Println("num CPU's:", runtime.NumCPU())
 
-	ch := make(chan string)
+	ch := make(chan int)
 
-	for c := 0; c < g; c++ {
-		go func(child int) {
+	for i := 0; i < g; i++ {
+		go func(worker int) {
 			for d := range ch {
-				fmt.Printf("child %d : recv'd signal : %s\n", child, d)
+				fmt.Printf("recv: %d - worker %d \n", d, worker)
 			}
-			fmt.Printf("child %d : recv'd shutdown signal\n", child)
-		}(c)
+			fmt.Printf("shutdown signal - worker %d \n", worker)
+		}(i)
 	}
 
-	const work = 10
-	for w := 0; w < work; w++ {
-		ch <- "data"
-		fmt.Println("parent : sent signal :", w)
+	// send out work
+	for i := 0; i < 10; i++ {
+		ch <- i
+		fmt.Printf("sent: %d \n", i)
 	}
 
 	close(ch)
-	fmt.Println("parent : sent shutdown signal")
+	fmt.Println("sent shutdown signal")
 
-	time.Sleep(time.Second)
+	time.Sleep(2 * time.Second)
 	fmt.Println("-------------------------------------------------")
 }
