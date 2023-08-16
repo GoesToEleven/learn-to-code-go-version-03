@@ -1,14 +1,7 @@
-INTRODUCTION
-COMPANY
-GO
-
-
-ORDER
-
 --- WELCOME ---
 Take the address of a variable and show it by printing it out.
 
---- SET 1 ---
+--- ADVANCED ---
 
 What will the last print statement print, and why? (PART A)
 	not fixed: https://go.dev/play/p/bSxwLO0mRNH
@@ -31,7 +24,16 @@ Fix this code with a pool of goroutine workers
 	not fixed: https://go.dev/play/p/a0Uwq9CtTeF
 	fixed: https://go.dev/play/p/73d_-GdYDBt
 
---- SET 2 ---
+--- INTERMEDIATE ---
+
+Factorial
+start: https://go.dev/play/p/pbhJz3NnccP
+solution - loop: https://go.dev/play/p/J0zTUH28GTJ
+solution - recursion: https://go.dev/play/p/62ZdcASE3Be
+
+Fibonacci
+start: https://go.dev/play/p/zVdHdaJu7e_x
+solution: https://go.dev/play/p/lpYZuM6cjTc
 
 Explain the differences between:
 	var wg sync.WaitGroup
@@ -54,7 +56,7 @@ Fix this codewith waitgroups and a race condition (PART B)
 What does this line of code do, and when might you use it:
 	atomic.AddInt64(&counter, 1)
 
---- SET 3 ---
+--- BEGINNER ---
 
 What's problematic with this code working with append
 	not fixed: https://go.dev/play/p/04NLYE1I7W4
