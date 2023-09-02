@@ -85,5 +85,5 @@ The addition of leap seconds can pose challenges for computing systems, especial
 ### Summary
 UTC is the standard for timekeeping used worldwide, based on both atomic time and astronomical observations. It serves as the basis for local time zones and is crucial for various aspects of modern life, including computing, telecommunications, and international coordination.
 
-![time zones](learn-to-code-go-version-03/000-br-bk-go-tour/02-time-pkg/UTC-time-zones.png?raw=true "Time Zones")
+![global utc time zones](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/02-time-pkg/UTC-time-zones.png)
 source: https://en.wikipedia.org/wiki/Time_zone#/media/File:World_Time_Zones_Map.png
