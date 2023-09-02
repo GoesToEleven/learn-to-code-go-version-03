@@ -25,12 +25,12 @@ func main() {
 	fmt.Printf("Elapsed time: %s\n", elapsed)
 }
 ```
-
+# Monotonic time
 In this example, `start` and `end` are `time.Time` structs that contain both the wall time and the monotonic time. When `end.Sub(start)` is computed, it uses the monotonic clock readings to accurately measure the time elapsed, even if the system clock has been adjusted during that interval.
 
 Using a monotonic clock is important for reliable time measurement because wall clock time can be adjusted backward or forward, for example, when synchronizing with a time server or due to daylight saving time adjustments. These adjustments could lead to incorrect or even negative duration calculations if you were only relying on the wall clock time.
 
-#Time Units
+# Time Units
 - Second (s): The second is the base unit of time in the International System of Units (SI).
 - Decisecond (ds): 1 decisecond = 0.1 seconds.
 - Centisecond (cs): 1 centisecond = 0.01 seconds.
@@ -39,7 +39,7 @@ Using a monotonic clock is important for reliable time measurement because wall 
 - Nanosecond (ns): 1 nanosecond = 0.000000001 seconds = 1×10^-9 seconds. This unit of time is - frequently used in computing and in the timing of electronic circuits.
 - Picosecond (ps): 1 picosecond = 0.000000000001 seconds = 1×10^-12 seconds. This unit of time is used in ultrafast science, like in laser physics and in the measurement of molecular dynamics.
 
-#UTC
+# UTC
 UTC stands for Coordinated Universal Time, and it serves as the primary time standard by which the world regulates clocks and time. Although the acronym "UTC" doesn't align with either the English or French phrases for Coordinated Universal Time, the name was chosen as a compromise to accommodate various languages.
 
 ### Historical Background
