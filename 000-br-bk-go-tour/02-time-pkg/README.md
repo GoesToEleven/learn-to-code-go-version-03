@@ -1,3 +1,4 @@
+# Monotonic time
 In computing, a clock is considered "monotonic" if it only ever advances forward in time, never backward. A monotonic clock guarantees that the values it returns will be strictly increasing over time, which is useful for measuring elapsed time between events in a reliable way. However, unlike real-time clocks, monotonic clocks are not set to any particular standard time and may not persist their values across reboots.
 
 In Go, the `time` package provides a way to access a monotonic clock through its `time.Now()` function. The `time.Time` struct returned by this function embeds both a wall clock time and a monotonic clock reading. If you take the difference between two `time.Time` values, Go will use the monotonic clock reading to compute the duration, if available.
@@ -25,7 +26,7 @@ func main() {
 	fmt.Printf("Elapsed time: %s\n", elapsed)
 }
 ```
-# Monotonic time
+### Monotonic time continue
 In this example, `start` and `end` are `time.Time` structs that contain both the wall time and the monotonic time. When `end.Sub(start)` is computed, it uses the monotonic clock readings to accurately measure the time elapsed, even if the system clock has been adjusted during that interval.
 
 Using a monotonic clock is important for reliable time measurement because wall clock time can be adjusted backward or forward, for example, when synchronizing with a time server or due to daylight saving time adjustments. These adjustments could lead to incorrect or even negative duration calculations if you were only relying on the wall clock time.
