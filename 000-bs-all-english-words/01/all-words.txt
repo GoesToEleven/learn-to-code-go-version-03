@@ -72417,6 +72417,7 @@ dystopia
 dystopian
 dystopians
 dystopias
+dystopic
 dystrophia
 dystrophias
 dystrophic
@@ -74743,6 +74744,7 @@ eloining
 eloinment
 eloinments
 eloins
+elon
 elongate
 elongated
 elongates
@@ -162496,6 +162498,7 @@ oppugner
 oppugners
 oppugning
 oppugns
+oprah
 ops
 opsimath
 opsimathies
@@ -215510,6 +215513,7 @@ selfheal
 selfheals
 selfhood
 selfhoods
+selfies
 selfing
 selfings
 selfish

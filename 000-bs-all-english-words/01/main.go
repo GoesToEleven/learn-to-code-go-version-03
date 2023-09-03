@@ -142,19 +142,11 @@ func cleanWord(word string, rxp *regexp.Regexp) string {
 	word = strings.TrimSpace(word)
 
 	// Discard word with undesired characters
-	switch {
-	case strings.Contains(word, "-"):
-		return ""
-	case strings.Contains(word, "."):
-		return ""
-	case strings.Contains(word, "="):
-		return ""
-	case strings.Contains(word, "'"):
-		return ""
-	case strings.Contains(word, "`"):
-		return ""
-	case rxp.MatchString(word):
-		return ""
+	xs := []string{"\a", "\b", "\f", "\n", "\r", "\t", "\v", "\\", "\"", "-", ".", "=", "'", "`", "?", "$", "’", "“", "‘"}
+	for _, v := range xs {
+		if strings.Contains(word, v) {
+			return ""
+		}
 	}
 
 	// Discard word with numeric digits
@@ -162,6 +154,11 @@ func cleanWord(word string, rxp *regexp.Regexp) string {
 		if unicode.IsDigit(r) {
 			return ""
 		}
+	}
+
+	// Discard word with money
+	if rxp.MatchString(word) {
+		return ""
 	}
 
 	return word
