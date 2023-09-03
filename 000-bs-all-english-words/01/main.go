@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"regexp"
 	"sort"
 	"strings"
 	"unicode"
@@ -41,12 +40,6 @@ func main() {
 
 // readWords reads all of the words
 func readWords(ff []fs.FileInfo) (map[string]int, error) {
-	// Compile a regular expression to match money and numeric items
-	moneyAndNumericRegexp, err := regexp.Compile(`^\$?[\d,]+(\.\d{0,2})?$`)
-	if err != nil {
-		log.Fatal("Regexp didn't compile", err)
-	}
-
 	// Create a map for this specific file
 	words := make(map[string]int)
 
@@ -73,7 +66,7 @@ func readWords(ff []fs.FileInfo) (map[string]int, error) {
 			// Loop through all of the words
 			for scanner.Scan() {
 				word := scanner.Text()
-				word = cleanWord(word, moneyAndNumericRegexp)
+				word = cleanWord(word)
 				// Add word to map
 				if word != "" {
 					words[word]++
@@ -133,7 +126,7 @@ func writeWords(xw []string) {
 }
 
 // CleanWord removes digits from the word
-func cleanWord(word string, rxp *regexp.Regexp) string {
+func cleanWord(word string) string {
 
 	word = strings.ToLower(word)
 	// Remove leading and trailing undesired characters
@@ -154,11 +147,6 @@ func cleanWord(word string, rxp *regexp.Regexp) string {
 		if unicode.IsDigit(r) {
 			return ""
 		}
-	}
-
-	// Discard word with money
-	if rxp.MatchString(word) {
-		return ""
 	}
 
 	return word
