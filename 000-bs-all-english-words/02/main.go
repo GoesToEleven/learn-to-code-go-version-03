@@ -3,9 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
-	"regexp"
 	"strings"
 	"unicode"
 )
@@ -47,11 +45,7 @@ func ReadWords(filename string) (map[string]bool, error) {
 }
 
 func checkSpelling(f *os.File, allWords map[string]bool) {
-	// Compile a regular expression to match money and numeric items
-	moneyAndNumericRegexp, err := regexp.Compile(`^\$?[\d,]+(\.\d{0,2})?$`)
-	if err != nil {
-		log.Fatal("Regexp didn't compile", err)
-	}
+
 	// Create a scanner and read the file line by line.
 	scanner := bufio.NewScanner(f)
 	lineNumber := 0
@@ -61,11 +55,11 @@ func checkSpelling(f *os.File, allWords map[string]bool) {
 		wordsInLine := strings.Fields(line)
 
 		for _, word := range wordsInLine {
-			word = cleanWord(word, moneyAndNumericRegexp)
+			word = cleanWord(word)
 
 			_, exists := allWords[word]
 			if word != "" && !exists {
-					fmt.Printf("Line %d: Spelling error in word %s\n", lineNumber, word)
+				fmt.Printf("Line %d: Spelling error in word %s\n", lineNumber, word)
 			}
 		}
 	}
@@ -76,7 +70,7 @@ func checkSpelling(f *os.File, allWords map[string]bool) {
 }
 
 // CleanWord removes digits from the word
-func cleanWord(word string, rxp *regexp.Regexp) string {
+func cleanWord(word string) string {
 
 	word = strings.ToLower(word)
 	// Remove leading and trailing undesired characters
@@ -97,11 +91,6 @@ func cleanWord(word string, rxp *regexp.Regexp) string {
 		if unicode.IsDigit(r) {
 			return ""
 		}
-	}
-
-	// Discard word with money
-	if rxp.MatchString(word) {
-		return ""
 	}
 
 	return word
