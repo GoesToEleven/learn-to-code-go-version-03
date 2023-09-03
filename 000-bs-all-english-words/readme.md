@@ -24,6 +24,9 @@ https://www.wordgamedictionary.com/dictionary/
 big.txt
 https://norvig.com/spell-correct.html
 
+yob*.txt
+https://www.ssa.gov/oact/babynames/limits.html
+
 --------------------------
 files-others
 
