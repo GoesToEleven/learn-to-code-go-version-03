@@ -66,10 +66,14 @@ func readWords(ff []fs.FileInfo) (map[string]int, error) {
 			// Loop through all of the words
 			for scanner.Scan() {
 				word := scanner.Text()
-				word = cleanWord(word)
-				// Add word to map
-				if word != "" {
-					words[word]++
+				xw := strings.Split(word, ",")
+				for _, w := range xw {
+					w = cleanWord(w)
+					// Add word to map
+					if w != "" {
+						words[w]++
+					}
+
 				}
 			}
 
