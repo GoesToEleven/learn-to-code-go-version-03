@@ -139,7 +139,7 @@ func cleanWord(word string) string {
 	word = strings.TrimSpace(word)
 
 	// Discard word with undesired characters
-	xs := []string{"\a", "\b", "\f", "\n", "\r", "\t", "\v", "\\", "\"", "-", ".", "=", "'", "`", "?", "$", "’", "“", "‘"}
+	xs := []string{"\a", "\b", "\f", "\n", "\r", "\t", "\v", "\\", "\"", "-", ".", "=", "'", "`", "?", "$", "’", "“", "‘", "–"}
 	for _, v := range xs {
 		if strings.Contains(word, v) {
 			return ""
