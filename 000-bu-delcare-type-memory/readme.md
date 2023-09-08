@@ -1,4 +1,4 @@
-"Go is easy to learn and hard to master."
+<font size="42">Go is easy to learn and hard to master."</font>
 - Andrew Brudnak
 
 # Notes - Variables
@@ -318,7 +318,6 @@ In this case, we're directly re-interpreting the underlying bits of an `int` as 
 - **Casting**: Involves re-interpreting underlying bits, typically using unsafe operations. Generally not recommended in idiomatic Go.
 
 The term "casting" may be used casually to describe conversions in Go, but it's important to understand the subtleties to write correct and idiomatic Go code.
-
 
 ### Advantages of Statically Typed Languages
 
