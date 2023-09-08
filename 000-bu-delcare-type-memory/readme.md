@@ -1,5 +1,4 @@
-# "Go is easy to learn and hard to master."
-### Andrew Brudnak
+# "Go is easy to learn and hard to master." ~ Andrew Brudnak
 
 # Notes - Variables
 
