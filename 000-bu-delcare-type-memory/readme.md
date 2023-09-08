@@ -308,3 +308,44 @@ Go is open-source and has a thriving community that contributes to its ecosystem
 The definitive specification of the Go language is maintained by its creators. The primary implementation is the Go compiler, `gc`, originally written in C but now in Go itself.
 
 The Go programming language is used for a wide range of applications including web backends, network servers, data pipelines, and machine learning, among others.
+
+# Static Type vs Dynamic Type Language
+
+In programming, a language is said to be "statically typed" when the type of a variable is known at compile-time instead of at runtime. This means that you have to explicitly declare the type of the variable or it has to be inferred by the compiler before the program runs. Because the type information is available at compile-time, the compiler can catch type errors before the program executes. This is in contrast to dynamically-typed languages, where the type of a variable can be changed at runtime and type errors are generally caught during execution of the program.
+
+### Advantages of Statically Typed Languages
+
+1. **Type Safety**: Because types are checked at compile-time, many type-related errors are caught early in the development cycle, which can make the code more robust and easier to maintain.
+  
+2. **Performance**: Knowing the types of variables at compile-time can enable the compiler to optimize the generated code more effectively, which often results in faster execution times.
+
+3. **Code Clarity**: Explicit type declarations can serve as a form of documentation; they make it easier to understand how the program is supposed to work.
+
+4. **Tooling**: The compile-time type information enables better support from various tools like IDEs, linters, and auto-completers, which can make development easier and more efficient.
+
+### Examples
+
+Here are some examples to illustrate the difference:
+
+In a statically-typed language like Go, you might declare a variable as follows:
+
+```go
+var x int = 42
+```
+
+Here, `x` is explicitly declared to be of type `int`, and attempting to assign a value of another type to `x` will result in a compile-time error:
+
+```go
+x = "hello"  // Compile-time error
+```
+
+In a dynamically-typed language like Python, the type of a variable is determined at runtime:
+
+```python
+x = 42  # x is an integer
+x = "hello"  # x is now a string
+```
+
+In this Python example, `x` can be reassigned to a value of a different type without any issues. The type is checked at runtime, not compile-time.
+
+Statically-typed languages include C, C++, Java, Go, Rust, and many others. Dynamically-typed languages include Python, Ruby, JavaScript, and others. Some languages like TypeScript offer a static type layer on top of a dynamically-typed language (JavaScript, in the case of TypeScript).
