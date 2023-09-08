@@ -1,9 +1,12 @@
+"Go is easy to learn and hard to master."
+- Andrew Brudnak
+
 # Notes - Variables
 
 ### Type
 - type tells us two things
-    - size: amount of memory used
-    - representation: what is stored there
+    - the amount of memory we’re going to be reading and writing; amount of memory used
+    - what that memory represents; what is stored there
 - three classes of types
     - builtin: numeric, string, bool
     - reference
@@ -261,6 +264,99 @@ The choice between value and pointer semantics depends on various factors like:
 
 Go allows you to choose between these semantics, offering flexibility in how you design your programs.
 
+# Conversion vs Casting
+
+### Overview
+- Conversion creates a new variable of a different type, allocating new memory.
+- Casting changes the type associated with existing bits
+
+In the Go programming language, conversion and casting are sometimes used interchangeably, but they have subtle differences. In general, both refer to the process of converting a value from one type to another. However, they are used in different contexts and for different kinds of transformations.
+
+### Conversion
+Conversion in Go is a way to create a new value from an existing one, but the new value has a different type. You usually do this with a built-in conversion operation, where the source type and destination type are explicitly mentioned. For simple types, this operation is straightforward.
+
+For example, converting an `int` to `float64`:
+```go
+var myInt int = 42
+var myFloat float64 = float64(myInt)
+```
+
+Or converting a `[]byte` to `string`:
+```go
+var myBytes []byte = []byte{72, 101, 108, 108, 111}
+var myString string = string(myBytes)
+```
+
+The Go runtime will handle the details of the conversion, and as long as it's a valid conversion (e.g., there's no loss of data, or it's allowed by the language rules), it will happen smoothly.
+
+### Casting
+
+Casting is usually used to mean a more direct re-interpretation of the underlying bits that represent a value. In Go, you don't "cast" values in the way you might in languages like C or C++; Go is stricter about type conversions. The closest thing might be when you're working with `unsafe.Pointer` to perform low-level operations, but this is generally not recommended unless absolutely necessary.
+
+For example, using `unsafe` to cast an `int` pointer to a `float64` pointer:
+```go
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+func main() {
+	var x int = 42
+	var y *float64 = (*float64)(unsafe.Pointer(&x))
+
+	fmt.Println(*y)  // Output will be undefined behavior
+}
+```
+
+In this case, we're directly re-interpreting the underlying bits of an `int` as a `float64`, which is considered unsafe and should be avoided in idiomatic Go code.
+
+### Summary - Conversion vs Casting
+
+- **Conversion**: Involves a type change that's explicitly handled by Go's runtime, creating a new value of a different type based on an existing one.
+- **Casting**: Involves re-interpreting underlying bits, typically using unsafe operations. Generally not recommended in idiomatic Go.
+
+The term "casting" may be used casually to describe conversions in Go, but it's important to understand the subtleties to write correct and idiomatic Go code.
+
+
+### Advantages of Statically Typed Languages
+
+1. **Type Safety**: Because types are checked at compile-time, many type-related errors are caught early in the development cycle, which can make the code more robust and easier to maintain.
+  
+2. **Performance**: Knowing the types of variables at compile-time can enable the compiler to optimize the generated code more effectively, which often results in faster execution times.
+
+3. **Code Clarity**: Explicit type declarations can serve as a form of documentation; they make it easier to understand how the program is supposed to work.
+
+4. **Tooling**: The compile-time type information enables better support from various tools like IDEs, linters, and auto-completers, which can make development easier and more efficient.
+
+### Examples
+
+Here are some examples to illustrate the difference:
+
+In a statically-typed language like Go, you might declare a variable as follows:
+
+```go
+var x int = 42
+```
+
+Here, `x` is explicitly declared to be of type `int`, and attempting to assign a value of another type to `x` will result in a compile-time error:
+
+```go
+x = "hello"  // Compile-time error
+```
+
+In a dynamically-typed language like Python, the type of a variable is determined at runtime:
+
+```python
+x = 42  # x is an integer
+x = "hello"  # x is now a string
+```
+
+In this Python example, `x` can be reassigned to a value of a different type without any issues. The type is checked at runtime, not compile-time.
+
+Statically-typed languages include C, C++, Java, Go, Rust, and many others. Dynamically-typed languages include Python, Ruby, JavaScript, and others. Some languages like TypeScript offer a static type layer on top of a dynamically-typed language (JavaScript, in the case of TypeScript).
+
 # Go
 
 The Go programming language, often referred to as Golang, is defined by its specification, which outlines the syntax, semantics, and core libraries. Here's a broad overview of what defines the Go language:
@@ -312,40 +408,3 @@ The Go programming language is used for a wide range of applications including w
 # Static Type vs Dynamic Type Language
 
 In programming, a language is said to be "statically typed" when the type of a variable is known at compile-time instead of at runtime. This means that you have to explicitly declare the type of the variable or it has to be inferred by the compiler before the program runs. Because the type information is available at compile-time, the compiler can catch type errors before the program executes. This is in contrast to dynamically-typed languages, where the type of a variable can be changed at runtime and type errors are generally caught during execution of the program.
-
-### Advantages of Statically Typed Languages
-
-1. **Type Safety**: Because types are checked at compile-time, many type-related errors are caught early in the development cycle, which can make the code more robust and easier to maintain.
-  
-2. **Performance**: Knowing the types of variables at compile-time can enable the compiler to optimize the generated code more effectively, which often results in faster execution times.
-
-3. **Code Clarity**: Explicit type declarations can serve as a form of documentation; they make it easier to understand how the program is supposed to work.
-
-4. **Tooling**: The compile-time type information enables better support from various tools like IDEs, linters, and auto-completers, which can make development easier and more efficient.
-
-### Examples
-
-Here are some examples to illustrate the difference:
-
-In a statically-typed language like Go, you might declare a variable as follows:
-
-```go
-var x int = 42
-```
-
-Here, `x` is explicitly declared to be of type `int`, and attempting to assign a value of another type to `x` will result in a compile-time error:
-
-```go
-x = "hello"  // Compile-time error
-```
-
-In a dynamically-typed language like Python, the type of a variable is determined at runtime:
-
-```python
-x = 42  # x is an integer
-x = "hello"  # x is now a string
-```
-
-In this Python example, `x` can be reassigned to a value of a different type without any issues. The type is checked at runtime, not compile-time.
-
-Statically-typed languages include C, C++, Java, Go, Rust, and many others. Dynamically-typed languages include Python, Ruby, JavaScript, and others. Some languages like TypeScript offer a static type layer on top of a dynamically-typed language (JavaScript, in the case of TypeScript).
