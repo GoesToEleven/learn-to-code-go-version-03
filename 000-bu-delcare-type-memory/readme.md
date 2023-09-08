@@ -1,4 +1,4 @@
-<font size="42">Go is easy to learn and hard to master."</font>
+<font size=42>"Go is easy to learn and hard to master."</font>
 - Andrew Brudnak
 
 # Notes - Variables
