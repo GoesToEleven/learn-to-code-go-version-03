@@ -5,19 +5,17 @@
     - size: amount of memory used
     - representation: what is stored there
 - three classes of types
-    - builtin
-    - numeric, string, bool
+    - builtin: numeric, string, bool
     - reference
-struct
-initialize = declaring and assigning
-var
-use for zero value
-short declaration operator
-inside code block
-conversion over casting
-conversion has more casting
-allocates new memory and copies values in
-
+    - struct
+- initialize = declaring and assigning
+- var
+    - use for zero value
+- short declaration operator
+    - inside code block
+- conversion over casting
+    - conversion has more safety than casting
+    - conversion allocates new memory and copies values in
 
 # Types & Memory
 `bool` uses 1 byte of memory
