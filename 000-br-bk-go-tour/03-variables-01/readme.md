@@ -7,7 +7,7 @@
 
 1. [Notes on Variables](#notes-on-variables)
 1. [Types Memory](#types-memory)
-1. [Declare, Assign, Initialize, Zero Value](declare-assign)
+1. [Declare Assign Initialize and Zero Value](declare-assign-initialize-and-zero-value)
 1. []()
 1. []()
 1. []()
@@ -39,7 +39,7 @@
 `string` uses 2 bytes of memory
 `slice` uses 3 bytes of memory
 
-# Declare, Assign, Initialize, Zero Value
+# Declare Assign Initialize and Zero Value
 In the Go programming language, the terms "declare," "assign," "initialize," and "zero value" have specific meanings that are important for managing variables and their states throughout the lifecycle of a program. Let's break down each term:
 
 ### Declare
