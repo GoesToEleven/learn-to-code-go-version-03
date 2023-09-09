@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"mymodule/000-br-bk-go-tour/06a-variables-02-struct-types/ptr-value-semantics/ptrvaluesemantics"
+	"mymodule/000-br-bk-go-tour/06a-variables-02-struct-types/ptrvaluesemantics"
 	"unsafe"
 )
 
@@ -36,6 +38,8 @@ func main() {
 	example2()
 	example3()
 	example4()
+
+	ptrvaluesemantics.PtrValSem
 }
 
 func example1() {

@@ -5,24 +5,313 @@
 # Takeaways
 1. Language mechanics
 2. Optimize for readability
-3. The best way to get rid of your padding is to order your fields from largest to smallest.
-4. These are guidelines. There are exceptions to everything.
+3. Use value semantics as much as possible - more readable; less heap allocations.
+4. The best way to get rid of your padding is to order your fields from largest to smallest.
+5. These are guidelines. There are exceptions to everything.
 
 # Table of Contents
 
 1. [Struct Literal, Anonymous Struct, Zero Value](struct-literal-anonymous-struct-zero-value)
-1. [Embedding Types & Inner-Type Promotion](embedding-types-&-inner-type-promotion)
-1. []()
-1. [Composite Types & Aggregate Types](#composite-types)
-2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
-3. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
-4. [Understanding The Alignof Function](#understanding-the-alignof-function)
-5. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
+2. [Methods](#methods)
+3. [Method Set Preview](#method-set-preview)
+4. [Embedding Types & Inner-Type Promotion](embedding-types-&-inner-type-promotion)
+5. [Composite Types & Aggregate Types](#composite-types)
+6. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
+7. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
+8. [Understanding The Alignof Function](#understanding-the-alignof-function)
+9. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
 
 # Struct Literal, Anonymous Struct, Zero Value
-don't use an empty literal
 
-# Methods	
+A `struct` is a composite data type that groups together variables under a single name for more organized and effective data management.
+
+```go
+type Person struct {
+    Name string
+    Age  int
+}
+```
+
+### Struct Literal
+
+A struct literal is an expression that creates a new struct value and fills in its fields. 
+
+You can create a new `Person` instance using a struct literal like this:
+
+```go
+p1 := Person{"James", 30}  // Without field names
+p2 := Person{Name: "Jenny", Age: 27}  // With field names
+
+p3 := Person{
+    Name: "Q", 
+    Age: 72,    // Note trailing comma
+}  
+
+```
+
+### Anonymous Struct
+
+Anonymous structs are structs that don't have a formal type definition.
+
+Example:
+
+```go
+point := struct {
+    X, Y int
+}{10, 20}
+
+fmt.Println(point.X, point.Y)  // Output: 10 20
+```
+
+In this example, `point` is variable that stores an anonymous sturct. Notice that the struct isn't defined as a type like the struct `people` above.
+
+### Struct Initialized to its Zero Value
+
+If a struct is not explicitly initialized, its fields are given their zero values. For numeric types, the zero value is `0`; for strings, it's an empty string `""`; for booleans, it's `false`; and for pointers, slices, and maps, it's `nil`.
+
+
+```go
+var p4 Person  // Initialized to zero value
+fmt.Println(p4.Name)  // Output: "" (zero value for string)
+fmt.Println(p4.Age)   // Output: 0 (zero value for int)
+```
+
+In this example, `p4` is of type `Person` with the struct initialized to its zero value, so `p.Name` will be an empty string and `p.Age` will be `0`.
+
+### Struct Initialized to its Zero Value - empty struct literal
+
+Some people use an 'empty struct literal' to initialize a struct to its zero value, but generally spekaing, most of the time just the 'var' idiom, as above with `var p4 person` to create a struct value initialized to its zero value.
+
+**this is not idiomatic**
+```go
+p5 := person{}
+```
+
+# Methods
+Methods are functions associated with a particular type. You can call these methods using "dot" notation from values of a type that has methods. Methods allow us to define behaviors specific to types, similar to object-oriented programming paradigms in languages like Java or Python. The syntax for methods involves specifying a **"receiver"** which indicates the type with which the method should be associated. The receiver is basically a special kind of argument that receives the value (or a pointer to the value) on which the method is invoked.
+
+Let's define some methods for the `Person` struct:
+
+```go
+type Person struct {
+    Name string
+    Age  int
+}
+```
+
+### Value Receiver
+
+A value receiver gets a copy of the struct that it operates on.
+
+```go
+func (p Person) Describe() string {
+    return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+}
+
+func (p Person) IsAdult() bool {
+    return p.Age >= 18
+}
+```
+
+Here, `Describe` and `IsAdult` are methods associated with the `Person` struct. Each takes a receiver `p` of type `Person`. In these methods, `p` is a copy of the original `Person` instance.
+
+To use these methods:
+
+```go
+package main
+
+import "fmt"
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+func (p Person) Describe() string {
+    return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+}
+
+func (p Person) IsAdult() bool {
+    return p.Age >= 18
+}
+
+func main() {
+    john := Person{"John", 28}
+    fmt.Println(john.Describe()) // Output: Name: John, Age: 28
+    fmt.Println(john.IsAdult())  // Output: true
+}
+```
+
+### Pointer Receiver
+
+Using a pointer receiver allows the method to modify the original struct value. It also avoids making a copy of the struct, which might be more efficient for large structs.
+
+```go
+func (p *Person) HaveBirthday() {
+    p.Age++
+}
+```
+
+Here, `HaveBirthday` has a pointer receiver (`*Person`), allowing it to modify the original `Person` instance.
+
+Example usage:
+
+```go
+package main
+
+import "fmt"
+
+type Person struct {
+    Name string
+    Age  int
+}
+
+func (p Person) Describe() string {
+    return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+}
+
+func (p Person) IsAdult() bool {
+    return p.Age >= 18
+}
+
+func (p *Person) HaveBirthday() {
+    p.Age++
+}
+
+func main() {
+    john := Person{"John", 28}
+    fmt.Println(john.Describe()) // Output: Name: John, Age: 28
+
+    john.HaveBirthday()
+    fmt.Println(john.Describe()) // Output: Name: John, Age: 29
+}
+```
+
+### When to use Value Receivers and Pointer Receivers
+
+These are general guidelines:
+
+- Use a value receiver when you don't need to modify the receiver or when you want to work with a copy of the data.
+    - You can also return a modified receiver (the value of the struct type to which the method is attached). This allows you to modify the receiver, and then return it.
+    - **Use value receivers as much as possible.** Switch to pointer receivers only if absolutely necessary. ***Value semantics is more readable and also reduces allocations on the heap.***
+    - Using value receivers is also known as **value semantics.**
+- Use a pointer receiver for methods that need to modify the receiver or when you want to avoid the cost of copying large structs.
+    - Using pointer receivers is also known as **pointer semantics**.
+
+### Method set preview
+
+1. When we learn about **"method sets"**, we will see that ***THE METHOD SET OF A TYPE DETERMINES WHAT INTERFACES THE TYPE IMPLEMENTS.*** 
+2. The method set of a type is influenced by whether the methods use value semantics (value receivers) or pointer semantics (pointer receivers).
+
+##### Method Sets for Value Types
+
+If you have a type `T`, the method set of the value type `T` includes all methods that have a value receiver of type `T`. In other words, these are methods you can call on a variable of type `T`. This set of methods is the set used to determine which interfaces the the value of type `T` implements.
+
+For example, consider the following `Person` struct and methods:
+
+```go
+type Person struct {
+	Name string
+	Age  int
+}
+
+// Value receiver
+func (p Person) Describe() string {
+	return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+}
+
+// Value receiver
+func (p Person) IsAdult() bool {
+	return p.Age >= 18
+}
+
+// Pointer receiver
+func (p *Person) RunsPtr() bool {
+	fmt.Println("Printing from in RunsPtr")
+	p.Age++
+	return true
+}
+
+// IMPORTANT
+// Notice that both value semantics & pointer semantics run both methods
+// with value receivers and pointer receivers
+// methods sets are important for determining interface implementation
+
+func PtrValSem() {
+	fmt.Printf("VALUE SEMANTICS \n \n")
+
+	p1 := Person{"James", 32}
+	fmt.Println(p1.Describe())
+	fmt.Println(p1.IsAdult())
+
+	fmt.Println()
+
+	fmt.Println(p1.Age)
+	fmt.Println(p1.RunsPtr())
+	fmt.Println(p1.Age)
+
+	fmt.Printf("\nPOINTER SEMANTICS \n \n")
+
+	p2 := &Person{"Jenny", 27}
+	fmt.Println(p2.Describe())
+	fmt.Println(p2.IsAdult())
+
+	fmt.Println()
+
+	fmt.Println(p2.Age)
+	fmt.Println(p2.RunsPtr())
+	fmt.Println(p2.Age)
+}
+
+```
+
+Here, the method set of the value type `Person` ONLY INCLUDES VALUE RECEIVERS `Describe` and `IsAdult`:
+
+```go
+p1 := Person{"James", 32}
+```
+
+### Method Sets for Pointer Types
+
+For a pointer type `*T`, the method set includes all methods with either value receivers or pointer receivers of type `T`. This means that you can call both pointer-receiver methods and value-receiver methods on a pointer of type `*T`.
+
+In the code above, the method set of the value type `*Person` INCLUDES VALUE RECEIVERS AND POINTER RECEIVERS `Describe`, `IsAdult`, and `RunsPtr`:
+
+```go
+p2 := &Person{"Jenny", 27}
+```
+
+***THE METHOD SET OF A VALUE DETERMINES INTERFACE IMPLEMENTATION.***
+
+### In Relation to Interfaces
+
+Understanding method sets becomes particularly important when working with interfaces. A type must have all the methods specified in an interface to implement that interface. Whether the methods use value receivers or pointer receivers will affect interface implementation.
+
+For example, consider the interface:
+
+```go
+type Describer interface {
+    Describe() string
+}
+```
+
+In this case, both `Person` and `*Person` implement the `Describer` interface because `Describe` is a value-receiver method.
+
+But if the interface were:
+
+```go
+type Runner interface {
+    RunsPtr()
+}
+```
+
+Only `*Person` would implement the `Runner` interface because `RunsPtr` uses a pointer receiver.
+
+Understanding method sets and the distinctions between value and pointer semantics can help you design better Go programs, especially when interfaces are involved.
+
+
+##### Method Sets for Value Types
+
 
 # Embedding Types & Inner-Type Promotion
 You can include one struct type within another by **embedding it as a field without a field name.** This is known as "embedding" and it provides a way to reuse code and model is-a or has-a relationships. When you embed a type in another struct, the fields and methods of the embedded **"inner"** type become accessible as if they were part of the **"outer"** type. This is often referred to as "promotion."
