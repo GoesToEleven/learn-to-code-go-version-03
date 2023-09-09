@@ -5,7 +5,33 @@ import (
 	"unsafe"
 )
 
+type person struct {
+	first string
+}
+
 func main() {
+	// struct literal
+	p1 := person{
+		first: "James",
+	}
+
+	// zero value
+	var p3 person 	// do this
+	p2 := person{} 	// mostly don't do this empty literal
+
+	// anonymous struct
+	a1 := struct{
+		name string
+	}{
+		name: "Rover",
+	}
+
+	fmt.Println(p1)
+	fmt.Println(p2)
+	fmt.Println(p3)
+	fmt.Println(a1)
+
+
 	example1()
 	example2()
 	example3()

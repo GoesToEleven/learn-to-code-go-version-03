@@ -1,10 +1,185 @@
+# "Here's the reality - I don't care about any of this stuff." ~ Bill Kennedy
+
+### "Order the fields in your struct in a logical way that makes sense for **readability** and not in terms of padding. But if we ever found ourselves in a situation where we needed to reduce the amount of memory we were allocating, now this understanding of padding can allow us to do some form of micro-optimization." ~ Bill Kennedy
+
+# Takeaways
+1. Language mechanics
+2. Optimize for readability
+3. The best way to get rid of your padding is to order your fields from largest to smallest.
+4. These are guidelines. There are exceptions to everything.
+
 # Table of Contents
 
+1. [Struct Literal, Anonymous Struct, Zero Value](struct-literal-anonymous-struct-zero-value)
+1. [Embedding Types & Inner-Type Promotion](embedding-types-&-inner-type-promotion)
+1. []()
 1. [Composite Types & Aggregate Types](#composite-types)
 2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 3. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
 4. [Understanding The Alignof Function](#understanding-the-alignof-function)
 5. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
+
+# Struct Literal, Anonymous Struct, Zero Value
+don't use an empty literal
+
+# Methods	
+
+# Embedding Types & Inner-Type Promotion
+You can include one struct type within another by **embedding it as a field without a field name.** This is known as "embedding" and it provides a way to reuse code and model is-a or has-a relationships. When you embed a type in another struct, the fields and methods of the embedded **"inner"** type become accessible as if they were part of the **"outer"** type. This is often referred to as "promotion."
+
+### Basic Embedding
+Here's a simple example to illustrate embedding:
+
+```go
+package main
+
+import "fmt"
+
+type Address struct {
+    Street string
+    City   string
+    State  string
+    Zip    string
+}
+
+type Person struct {
+    Name    string
+    Age     int
+    Address // Embedding Address struct
+}
+
+func main() {
+    p := Person{
+        Name: "John",
+        Age:  30,
+        Address: Address{
+            Street: "123 Main St",
+            City:   "Anytown",
+            State:  "CA",
+            Zip:    "12345",
+        },
+    }
+
+    fmt.Println("Name:", p.Name)
+    fmt.Println("Age:", p.Age)
+    fmt.Println("Street:", p.Street) // Note the promoted field
+    fmt.Println("City:", p.City)       // Note the promoted field
+}
+```
+
+In the above example, `Person` embeds `Address`. This allows us to directly access the `Street` and `City` fields on a `Person` object, as if they were fields of `Person` itself.
+
+### Method Promotion
+In addition to fields, methods are also promoted. If the embedded type has any methods, those become accessible as methods of the outer type.
+
+```go
+package main
+
+import "fmt"
+
+type Writer struct{}
+
+func (w *Writer) Write(p []byte) (n int, err error) {
+    n = len(p)
+    fmt.Println(string(p))
+    return n, nil
+}
+
+type AdvancedWriter struct {
+    *Writer // Embedding Writer as a pointer
+}
+
+func main() {
+    aw := &AdvancedWriter{&Writer{}}
+    aw.Write([]byte("Hello, World!")) // Using Write method of embedded Writer
+}
+```
+
+### Overriding Methods and Fields
+
+You can also override methods and fields of the embedded type by declaring them in the outer type:
+
+```go
+package main
+
+import "fmt"
+
+type Animal struct{}
+
+func (a *Animal) Speak() {
+    fmt.Println("Animal speaks.")
+}
+
+type Dog struct {
+    Animal // Embedding Animal
+}
+
+// Overriding Speak method
+func (d *Dog) Speak() {
+    fmt.Println("Woof woof!")
+}
+
+func main() {
+    d := &Dog{}
+    d.Speak() // Output will be "Woof woof!"
+}
+```
+
+In this example, we have a `Dog` struct that embeds an `Animal` struct. Both `Animal` and `Dog` have a method named `Speak()`. When we call `Speak()` on a `Dog` object, it uses the method defined in the `Dog` struct, overriding the one from `Animal`.
+
+### Limitations and Ambiguity
+
+When you have two embedded types with fields or methods having the same name, you can't access them directly from the outer struct to avoid ambiguity. In such cases, you'll have to specify which embedded type's field or method you want to access:
+
+```go
+package main
+
+import "fmt"
+
+type Writer struct {
+    Name string
+}
+
+func (w *Writer) Write() {
+    fmt.Println("Writer is writing.")
+}
+
+type Reader struct {
+    Name string
+}
+
+func (r *Reader) Read() {
+    fmt.Println("Reader is reading.")
+}
+
+type WriterReader struct {
+    Writer
+    Reader
+}
+
+func main() {
+    wr := &WriterReader{
+        Writer: Writer{Name: "Writer"},
+        Reader: Reader{Name: "Reader"},
+    }
+
+    // Ambiguous field
+    // fmt.Println(wr.Name) // This will throw an error
+
+    // Disambiguate
+    fmt.Println(wr.Writer.Name)
+    fmt.Println(wr.Reader.Name)
+
+    // Methods aren't ambiguous
+    wr.Write()
+    wr.Read()
+}
+```
+
+In this example, both `Writer` and `Reader` have a field named `Name`. If you try to access `Name` directly from `WriterReader`, it will result in a compilation error due to ambiguity. You have to specify whether you mean `Writer.Name` or `Reader.Name`.
+
+So that's a quick overview of field embedding and inner type promotion in Go. It's a very powerful feature and it's used extensively in idiomatic Go code.
+
 
 # Composite Types & Aggregate Types
 
@@ -318,14 +493,12 @@ Memory layout:
 
 ```
 +------+------+------+------+------+------+------+------+------+------+------+------+------+
-|   A  | pad  | pad  | pad  | pad  | pad  | pad  | pad  |          B (8 bytes)           |          C (4 bytes)           |
+|   A  | pad  | pad  | pad  | pad  | pad  | pad  | pad  |          B (8 bytes)             | C (4 bytes) | pad  | pad  | pad  | pad  |
 +------+------+------+------+------+------+------+------+------+------+------+------+------+
-1 byte   7 bytes                         8 bytes                           4 bytes
+1 byte   7 bytes                         8 bytes                           4 bytes 4 bytes
 ```
 
-Total Size: 1 byte (A) + 7 bytes (padding) + 8 bytes (B) + 4 bytes (C) = 20 bytes
-
-Actuality: 24 bytes
+Total Size: 1 byte (A) + 7 bytes (padding) + 8 bytes (B) + 4 bytes (C) + 4 bytes (padding) = 24 bytes
 
 ```bash
 EXAMPLE 4 - Unoptimized
@@ -335,7 +508,7 @@ Alignment of int32: 4
 Alignment of Unoptimized: 8
 Size of Unoptimized: 24
 ```
-***Perhaps 4 bytes of padding were added after C***
+***The entire struct also has to fall on an alignment for the largest field that is in that struct***
 
 ### Illustrations & Explanations #4 - Optimized
 
