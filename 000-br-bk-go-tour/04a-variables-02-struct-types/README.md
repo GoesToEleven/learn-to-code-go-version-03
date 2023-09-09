@@ -15,10 +15,10 @@
 
 # Table of Contents
 
-1. [Struct Literal, Anonymous Struct, Zero Value](struct-literal-anonymous-struct-zero-value)
+1. [Struct Literal, Anonymous Struct, Zero Value](#struct-literal-anonymous-struct-zero-value)
 2. [Methods](#methods)
 3. [Method Set Preview](#method-set-preview)
-4. [Embedding Types & Inner-Type Promotion](embedding-types-innertype-promotion)
+4. [Embedding Types & Inner-Type Promotion](#embedding-types-innertype-promotion)
 5. [Composite Types & Aggregate Types](#composite-types)
 6. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 7. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
