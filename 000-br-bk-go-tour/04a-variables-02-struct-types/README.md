@@ -18,7 +18,7 @@
 1. [Struct Literal, Anonymous Struct, Zero Value](struct-literal-anonymous-struct-zero-value)
 2. [Methods](#methods)
 3. [Method Set Preview](#method-set-preview)
-4. [Embedding Types & Inner-Type Promotion](embedding-types-&-inner-type-promotion)
+4. [Embedding Types & Inner-Type Promotion](embedding-types-innertype-promotion)
 5. [Composite Types & Aggregate Types](#composite-types)
 6. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 7. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
@@ -319,7 +319,7 @@ Understanding method sets and the distinctions between value and pointer semanti
 ##### Method Sets for Value Types
 
 
-# Embedding Types & Inner-Type Promotion
+# Embedding Types InnerType Promotion
 You can include one struct type within another by **embedding it as a field without a field name.** This is known as "embedding" and it provides a way to reuse code and model is-a or has-a relationships. When you embed a type in another struct, the fields and methods of the embedded **"inner"** type become accessible as if they were part of the **"outer"** type. This is often referred to as "promotion."
 
 ### Basic Embedding
