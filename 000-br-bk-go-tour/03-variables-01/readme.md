@@ -1,6 +1,20 @@
 # "Go is easy to learn and hard to master." ~ Andrew Brudnak
 
-# Notes - Variables
+# Takeaways
+1. L
+
+# Table of Contents
+
+1. [Notes on Variables](#notes-on-variables)
+1. [Types & Memory](#types-&-memory)
+1. [Declare, Assign, Initialize, Zero Value](declare,-assign,-initialize,-zero-value)
+1. []()
+1. []()
+1. []()
+1. []()
+
+
+# Notes on Variables
 
 ### Type
 - type tells us two things

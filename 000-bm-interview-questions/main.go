@@ -183,6 +183,7 @@ func main() {
 	// ADVANCED QUESTIONS
 	// ------------------------------------------------
 	questions = append(questions, `Teach us something most people don't know about Go.`)
+	questions = append(questions, `Explain alignment, padding bytes, and mechanical sympathy.`)
 	questions = append(questions, `What don't you like about the Go programming language?`)
 	questions = append(questions, `What's the difference between synchronization & orchestration?`)
 	questions = append(questions, "How might you use a nil channel?")

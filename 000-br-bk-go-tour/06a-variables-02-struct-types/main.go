@@ -37,6 +37,7 @@ func main() {
 	example3()
 	example4()
 
+	// Pointer semantics & value semantics
 	ptrvaluesemantics.PtrValSem()
 }
 

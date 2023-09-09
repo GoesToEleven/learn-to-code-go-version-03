@@ -1,6 +1,7 @@
-# "Here's the reality - I don't care about any of this stuff." ~ Bill Kennedy
 
-### "Order the fields in your struct in a logical way that makes sense for **readability** and not in terms of padding. But if we ever found ourselves in a situation where we needed to reduce the amount of memory we were allocating, now this understanding of padding can allow us to do some form of micro-optimization." ~ Bill Kennedy
+# "Order the fields in your struct in a logical way that makes sense for **readability** and not in terms of padding. But if we ever found ourselves in a situation where we needed to reduce the amount of memory we were allocating, now this understanding of padding can allow us to do some form of micro-optimization." ~ Bill Kennedy
+
+### "Here's the reality - I don't care about any of this stuff." ~ A friend who is a Go genius
 
 # Takeaways
 1. Language mechanics
@@ -20,6 +21,8 @@
 7. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
 8. [Understanding The Alignof Function](#understanding-the-alignof-function)
 9. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
+10. [Code review](#code-review)
+
 
 # Struct Literal, Anonymous Struct, Zero Value
 
@@ -895,3 +898,12 @@ Let's consider the examples:
 - `struct { string; uint32 }`: Here, the garbage collector can stop immediately after scanning the internal pointer of the `string` as `uint32` doesn't contain any pointers. Thus, it only has "8 pointer bytes" to scan.
 
 The comment also wisely notes that while rearranging the fields for minimal memory usage might seem beneficial, it can have other side effects like "false sharing," a form of memory contention. In a multi-threaded environment like Go's goroutines, false sharing can lead to performance issues.
+
+# Code review
+
+### struct fields largest to smallest
+- Why are you micro-optimizing?
+- Optimize for readability first
+
+### empty literal struct
+- use var instead: var p person
