@@ -9,13 +9,13 @@
 2. Time unites: second, decisecond, centisecond, millisecond, microsecond, nanosecond, picosecond
 3. UTC
 4. super fun code with bufio.NewScanner() for `formatting time` (see the code base)
-5. [described in this video]() `01/02 03:04:05PM '06 -0700` 
+5. [SOON TO BE RELEASED described in this video]() `01/02 03:04:05PM '06 -0700` 
 
 # Table of Contents
 1. [Monotonic time](#monotonic-time)
-2. [Time Units](time-units)
+2. [Time Units](#time-units)
 3. [UTC](#utc)
-4. [Coupons for Go courses](coupons-for-go-courses)
+4. [Coupons for Go courses](#coupons-for-go-courses)
 
 # Monotonic time
 In computing, a clock is considered "monotonic" if it ***only ever advances forward*** in time, never backward. A monotonic clock guarantees that the values it returns will be strictly increasing over time, which is **useful for measuring elapsed time between events in a reliable way.** However, unlike real-time clocks, monotonic clocks are not set to any particular standard time and may not persist their values across reboots.
