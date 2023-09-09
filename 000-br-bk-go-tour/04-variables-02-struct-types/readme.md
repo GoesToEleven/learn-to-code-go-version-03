@@ -4,6 +4,7 @@
 2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 3. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
 4. [Understanding The Alignof Function](#understanding-the-alignof-function)
+5. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
 
 # Composite Types & Aggregate Types
 
@@ -179,3 +180,28 @@ In this example, the alignment of `int32` is 4 bytes, `int64` is 8 bytes, and `f
 - The result of `unsafe.Alignof` is Go-implementation and architecture-specific. Therefore, it might differ when you switch from one Go implementation or CPU architecture to another.
 
 Understanding alignment via `unsafe.Alignof` can provide insights into the memory layout and potential performance characteristics of your Go programs, but it's generally not something you need to worry about unless you are working on very low-level or performance-critical code.
+
+# Field Alignment Analysis Tool
+
+### Scan Up
+
+This is in relation to [this package here](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment) [https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
+
+The comment describes an analyzer tool that checks Go structs for how they could be optimized in terms of memory usage. Specifically, it talks about two different metrics:
+
+1. The size of the struct: how much memory it uses.
+2. The number of "pointer bytes": the amount of memory the garbage collector needs to scan to find all the pointers within the struct.
+
+In Go, some types have "inner pointers," meaning that the actual data is not stored inline within the struct but rather is pointed to by a pointer within the object. For example, a `string` in Go is effectively a struct containing a pointer to an array of characters (the actual string data) and a length. When the garbage collector is looking for pointers, it not only has to look at the memory occupied by the struct itself but also follow these inner pointers to scan the additional memory that these pointers reference.
+
+The phrase "scan up through the string's inner pointer" means that the garbage collector has to follow the internal pointer within the `string` type to scan the underlying data for more pointers. The term "scan up" here probably refers to the operation of following a pointer to look at the data it references, rather than scanning in any specific "upward" or "downward" direction in memory.
+
+Let's consider the examples:
+
+- `struct { uint32; string }`: This struct has a `uint32` (4 bytes) and a `string` (which contains a pointer, typically 8 bytes on a 64-bit system, and a length, usually also 8 bytes). The struct itself occupies 4 + 8 + 8 = 20 bytes, but the garbage collector has to consider the internal pointer of the `string`, making it "16 pointer bytes" that have to be scanned.
+  
+- `struct { string; *uint32 }`: This struct contains a `string` (16 bytes as explained before) and a pointer to a `uint32` (8 bytes on a 64-bit system). Therefore, the garbage collector has to scan both the internal pointer of the `string` and the pointer to `uint32`, totaling "24 pointer bytes."
+
+- `struct { string; uint32 }`: Here, the garbage collector can stop immediately after scanning the internal pointer of the `string` as `uint32` doesn't contain any pointers. Thus, it only has "8 pointer bytes" to scan.
+
+The comment also wisely notes that while rearranging the fields for minimal memory usage might seem beneficial, it can have other side effects like "false sharing," a form of memory contention. In a multi-threaded environment like Go's goroutines, false sharing can lead to performance issues.

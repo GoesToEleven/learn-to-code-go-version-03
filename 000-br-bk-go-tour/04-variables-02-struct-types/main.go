@@ -17,11 +17,13 @@ func example1() {
 		C float64 // 8 bytes
 	}
 
+	a := Example{}
 	fmt.Println("EXAMPLE 1")
 	fmt.Println("Alignment of bool:", unsafe.Alignof(bool(true)))
 	fmt.Println("Alignment of int32:", unsafe.Alignof(int32(0)))
 	fmt.Println("Alignment of float64:", unsafe.Alignof(float64(0.0)))
-	fmt.Println("Alignment of Example:", unsafe.Alignof(Example{}))
+	fmt.Println("Alignment of Example:", unsafe.Alignof(a))
+	fmt.Println("Size of Example:", unsafe.Sizeof(a))
 	fmt.Println()
 }
 
