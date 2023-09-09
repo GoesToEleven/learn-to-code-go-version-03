@@ -18,7 +18,7 @@
 1. [Notes on Variables](#notes-on-variables)
 2. [Types Memory](#types-memory)
 3. [Declare Assign Initialize and Zero Value](#declare-assign-initialize-and-zero-value)
-4. [Builtin Reference and Struct types](builtin-reference-and-struct-types)
+4. [Builtin Reference and Struct types](#builtin-reference-and-struct-types)
 5. [String is a builtin type](#string-is-a-builtin-type)
 6. [Zero Value](#zero-value)
 7. [Value Semantics and Pointer Semantics](#value-semantics-and-pointer-semantics)
@@ -26,7 +26,7 @@
 9. [Advantages of Statically Typed Languages](#advantages-of-statically-typed-languages)
 10. [Go](#go)
 11. [Code review](#code-review)
-12. [Coupons for Go courses](coupons-for-go-courses)
+12. [Coupons for Go courses](#coupons-for-go-courses)
 
 # Notes on Variables
 
