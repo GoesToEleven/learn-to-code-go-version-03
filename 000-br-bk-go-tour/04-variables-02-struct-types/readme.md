@@ -185,7 +185,7 @@ Understanding alignment via `unsafe.Alignof` can provide insights into the memor
 
 ### Scan Up
 
-This is in relation to [this package here](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment) [https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
+This is in relation to [this package here: https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
 
 The comment describes an analyzer tool that checks Go structs for how they could be optimized in terms of memory usage. Specifically, it talks about two different metrics:
 
