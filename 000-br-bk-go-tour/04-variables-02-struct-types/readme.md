@@ -2,6 +2,8 @@
 
 1. [Composite Types & Aggregate Types](#composite-types)
 2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
+3. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
+
 # Composite Types & Aggregate Types
 
 In the context of the Go programming language, the terms "composite types" and "aggregate types" are often used interchangeably. However, it's worth breaking down the nuances of these two terms to clarify the distinction.
@@ -89,3 +91,35 @@ type Optimized struct {
 ```
 
 Understanding mechanical sympathy, alignment, and padding bytes can help you write Go code that runs more efficiently, especially in system-critical or resource-constrained environments.
+
+# CPU Cycles & CPU Operations Per Cycle
+
+The terms "CPU cycles" and "CPU operations" are often used interchangeably but they have distinct meanings in the context of computer architecture and performance analysis.
+
+### CPU Cycles
+
+A CPU cycle is the smallest unit of time for a CPU and is measured by the clock rate, often represented in gigahertz (GHz). For example, a 3 GHz CPU completes 3 billion cycles per second. During each cycle, the CPU can perform a certain amount of work, such as fetching instructions from memory, decoding instructions, executing instructions, or writing data back to memory.
+
+However, not all actions can be completed in a single CPU cycle. Modern CPUs have multiple stages in their pipeline to fetch, decode, execute, and retire instructions. This allows them to work on multiple instructions simultaneously but also means that individual instructions may take multiple cycles to complete.
+
+### CPU Operations
+
+CPU operations refer to the actual tasks that a CPU performs, typically represented as instructions in machine code. These operations include arithmetic calculations, data movement, logical operations, and control flow changes, among others. Each operation may correspond to a specific machine language instruction or a set of instructions that the CPU can execute.
+
+The relationship between CPU cycles and operations can be complex:
+
+1. **CPI (Cycles Per Instruction)**: Not all operations are completed in one cycle. Some might require multiple cycles, depending on the complexity of the operation and the CPU architecture. The CPI metric gives an average number of cycles needed for an instruction.
+
+2. **Superscalar Architecture**: Modern CPUs can often execute multiple instructions per cycle, thanks to features like multiple execution units and out-of-order execution.
+
+3. **Instruction Pipelining**: Modern CPUs use pipelining to break down each operation into smaller steps, allowing the CPU to work on different stages of multiple instructions simultaneously.
+
+4. **Instruction Set Architecture (ISA)**: Different CPUs may have different sets of operations, and some may even have specialized instructions that perform a complex task in a single operation, affecting the operation-to-cycle ratio.
+
+### Summary
+
+- **CPU Cycles**: A unit of time for the CPU, measured in clock speed (GHz). Defines how many cycles the CPU has in one second to perform tasks.
+  
+- **CPU Operations**: The actual tasks or instructions that a CPU performs. These can vary in complexity and may take multiple cycles to complete.
+
+Understanding both concepts is crucial for performance tuning and optimization, both in software and hardware design.
