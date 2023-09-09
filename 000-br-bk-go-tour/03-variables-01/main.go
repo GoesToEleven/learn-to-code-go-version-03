@@ -61,8 +61,8 @@ is generally more efficient than accessing data in smaller or larger chunks.`)
 	*/
 
 	/*
-		In Go, the underlying bytes of a string are not formally stored in a Go array (`[N]byte`),
-		but they are stored in a contiguous block of memory, much like how an array works at the memory level.
+		In Go, the UNDERLYING BYTES of a string are not formally stored in a Go array (`[N]byte`),
+		but they are STORED IN A CONTIGUOUS BLOCK OF MEMORY, much like how an array works at the memory level.
 		The `str unsafe.Pointer` field in the `stringStruct` points to the first byte of this contiguous block of memory.
 
 		Since strings in Go are UTF-8 encoded,

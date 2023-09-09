@@ -8,6 +8,12 @@ import (
 )
 
 func main() {
+	var y int
+	fmt.Println(y)
+	
+	x := 42
+	fmt.Println(x)
+
 	t := time.Now()
 	fmt.Println(t)
 
@@ -19,4 +25,7 @@ func main() {
 		}
 		fmt.Println(t.Format(s.Text()))
 	}
+
+	var zz int
+	fmt.Println(zz)
 }
