@@ -4,7 +4,7 @@
 ### "Here's the reality - I don't care about any of this stuff." ~ A friend who is a Go genius
 
 # Video
-[Here is the video on YouTube]()
+[SOON TO BE PUBLISHED Here is the video on YouTube]()
 
 # Takeaways
 1. Language mechanics
@@ -27,7 +27,7 @@
 10. [Code review](#code-review)
 11. [Coupons for Go courses](coupons-for-go-courses)
 
-# Struct Literal, Anonymous Struct, Zero Value
+# Struct Literal Anonymous Struct Zero Value
 
 A `struct` is a composite data type that groups together variables under a single name for more organized and effective data management.
 
