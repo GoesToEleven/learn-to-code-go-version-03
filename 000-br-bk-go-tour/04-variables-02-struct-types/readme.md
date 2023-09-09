@@ -161,6 +161,223 @@ Alignment of float64: 8
 
 In this example, the alignment of `int32` is 4 bytes, `int64` is 8 bytes, and `float64` is 8 bytes as well. This means that, in memory, the starting address of a variable of type `int32` will be a multiple of 4, for `int64` it will be a multiple of 8, and for `float64`, it will be a multiple of 8.
 
+On a 64-bit machine, that is a machine that has a word size of 64 bits or 8 bytes, this means is that 
+
+- The int32 needs to be stored at byte location 0 or 4 in a word. 
+- The int64 and float64 need to be stored at byte location 0 in a word.
+
+A variable's starting address in memory must align with its alignment requirement. That is, the starting address should be a multiple of the alignment value. This ensures that the CPU can access the data efficiently, often in a single cycle, without having to deal with misalignment penalties.
+
+### To further explain this example
+
+1. **int32**: If a variable of type `int32` has an alignment of 4 bytes, it means that the starting address of this variable in memory would be a multiple of 4 (e.g., 0, 4, 8, 12, ...).
+
+2. **int64 and float64**: Similarly, if a variable of type `int64` or `float64` has an alignment of 8 bytes, the starting address in memory would be a multiple of 8 (e.g., 0, 8, 16, 24, ...).
+
+### Illustrations & Explanations #1
+
+```go
+	type Example struct {
+		A bool    // 1 byte
+		B int16   // 2 bytes
+		C float32 // 4 bytes
+	}
+	// padding: 1 byte for A
+```
+
+In the `Example` struct, padding might be introduced to ensure that each field aligns with memory locations that are multiples of their respective sizes. When needed, the alignment requirement is typically the same as the size of the type for built-in types.
+
+Here's how the memory layout might look, assuming the machine architecture requires alignment:
+
+1. **Field `A` (bool)**: Takes 1 byte of memory, but will likely have 1 byte of padding after it to ensure that `B` starts at an address that is a multiple of 2.
+  
+   - `A`: 1 byte
+   - Padding after `A`: 1 byte
+
+2. **Field `B` (int16)**: Takes 2 bytes of memory and is aligned on a 2-byte boundary.
+
+   - `B`: 2 bytes
+
+3. **Field `C` (float32)**: Takes 4 bytes of memory and would typically be aligned on a 4-byte boundary.
+
+   - `C`: 4 bytes
+
+So, the struct might have 1 byte of padding after the `bool` field `A` to ensure that `B` starts at an address that is a multiple of 2.
+
+Total Size: 1 byte (A) + 1 byte (padding) + 2 bytes (B) + 4 bytes (C) = 8 bytes
+
+Please note that the Go language specification doesn't guarantee the layout of structs in memory, so the actual layout might differ depending on compiler optimizations and the target architecture. However, the layout above is commonly seen in practice on systems that require data alignment.
+
+
+### Illustrations & Explanations #2
+
+```go
+	type Example struct {
+		A bool    // 1 byte
+		B int32   // 4 bytes
+		C float32 // 4 bytes
+	}
+	// padding: 3 bytes for A
+```
+
+Let's examine the potential padding:
+
+1. **Field `A` (bool)**: Takes 1 byte of memory, but will likely have 3 bytes of padding after it to ensure that `B` starts at an address that is a multiple of 4.
+  
+   - `A`: 1 byte
+   - Padding after `A`: 3 bytes
+
+2. **Field `B` (int32)**: Takes 4 bytes of memory and would typically be aligned on a 4-byte boundary.
+  
+   - `B`: 4 bytes
+
+3. **Field `C` (float32)**: Tkes 4 bytes of memory and would typically be aligned on a 4-byte boundary.
+  
+   - `C`: 4 bytes
+
+Here's how the struct would likely be laid out in memory, assuming the machine architecture requires alignment:
+
+Memory layout:
+
+```
++------+------+------+------+------+------+------+------+
+|   A  | pad  | pad  | pad  |   B (4 bytes)    |   C (4 bytes)    |
++------+------+------+------+------+------+------+------+
+1 byte   3 bytes       4 bytes          4 bytes
+```
+
+Total Size: 1 byte (A) + 3 bytes (padding) + 4 bytes (B) + 4 bytes (C) = 12 bytes
+
+Again, the Go language specification doesn't guarantee specific memory layouts for structs, so the actual layout might differ depending on compiler optimizations and the target architecture. However, this layout would be typical for systems that require data to be aligned.
+
+### Illustrations & Explanations #3
+
+```go
+	type Example struct {
+		A bool    // 1 byte
+		B int32   // 4 bytes
+		C float64 // 8 bytes
+	}
+```
+
+The padding and alignment would look like this:
+
+1. **Field `A` (bool)**: Takes 1 byte of memory, but will likely have 3 bytes of padding after it to ensure that `B` starts at an address that is a multiple of 4.
+
+    - `A`: 1 byte
+    - Padding after `A`: 3 bytes
+
+2. **Field `B` (int32)**: Takes 4 bytes of memory and would be aligned on a 4-byte boundary.
+
+    - `B`: 4 bytes
+
+3. **Field `C` (float64)**: Takes 8 bytes of memory and would typically be aligned on an 8-byte boundary. 
+
+    - `C`: 8 bytes
+
+Here's how the struct would likely be laid out in memory:
+
+```
++------+------+------+------+------+------+------+------+------+------+
+|   A  | pad  | pad  | pad  |   B (4 bytes)    |          C (8 bytes)          |
++------+------+------+------+------+------+------+------+------+------+
+1 byte   3 bytes       4 bytes                          8 bytes
+```
+
+Total Size: 1 byte (A) + 3 bytes (padding) + 4 bytes (B) + 8 bytes (C) = 16 bytes
+
+### Illustrations & Explanations #4 - Unoptimized
+
+```go
+type Unoptimized struct {
+		A bool    // 1 byte
+		B float64 // 8 bytes
+		C int32   // 4 bytes
+		// Padding: 7 bytes for A, 4 bytes for C (assuming 64-bit machine)
+	}
+```
+
+In the `Unoptimized` struct, padding and alignment might look like this based on typical alignment requirements for the respective types:
+
+1. **Field `A` (bool)**: Takes 1 byte of memory, but will likely have 7 bytes of padding after it to ensure that `B` starts at an address that is a multiple of 8.
+
+    - `A`: 1 byte
+    - Padding after `A`: 7 bytes
+
+2. **Field `B` (float64)**: Takes 8 bytes of memory and would typically be aligned on an 8-byte boundary.
+
+    - `B`: 8 bytes
+
+3. **Field `C` (int32)**: Takes 4 bytes of memory and would typically be aligned on a 4-byte boundary.
+
+    - `C`: 4 bytes
+
+Here's how the struct would likely be laid out in memory:
+
+Memory layout:
+
+```
++------+------+------+------+------+------+------+------+------+------+------+------+------+
+|   A  | pad  | pad  | pad  | pad  | pad  | pad  | pad  |          B (8 bytes)           |          C (4 bytes)           |
++------+------+------+------+------+------+------+------+------+------+------+------+------+
+1 byte   7 bytes                         8 bytes                           4 bytes
+```
+
+Total Size: 1 byte (A) + 7 bytes (padding) + 8 bytes (B) + 4 bytes (C) = 20 bytes
+
+Actuality: 24 bytes
+
+```bash
+EXAMPLE 4 - Unoptimized
+Alignment of bool: 1
+Alignment of float64: 8
+Alignment of int32: 4
+Alignment of Unoptimized: 8
+Size of Unoptimized: 24
+```
+***Perhaps 4 bytes of padding were added after C***
+
+### Illustrations & Explanations #4 - Optimized
+
+```go
+	type Optimized struct {
+		B float64 // 8 bytes
+		C int32   // 4 bytes
+		A bool    // 1 byte
+		// Padding: None or minimal (assuming 64-bit machine)
+	}
+```
+
+In the `Optimized` struct, we've rearranged the fields to minimize padding. Let's examine the alignment and padding based on typical alignment requirements:
+
+1. **Field `B` (float64)**: Takes 8 bytes of memory and would typically be aligned on an 8-byte boundary.
+  
+    - `B`: 8 bytes
+
+2. **Field `C` (int32)**: Takes 4 bytes of memory and would typically be aligned on a 4-byte boundary. In this case, it would also naturally fall into an address that is a multiple of 4, assuming `B` started at an 8-byte-aligned address.
+  
+    - `C`: 4 bytes
+
+3. **Field `A` (bool)**: Takes 1 byte of memory. Given that `C` ends on a 4-byte boundary, `A` would start at the next byte.
+  
+    - `A`: 1 byte
+    - Padding after `A`: To align the size of the entire struct to a multiple of the largest field (float64, which has an alignment requirement of 8 bytes), you would have 3 bytes of padding at the end of the struct.
+
+Here's how the struct would likely be laid out in memory:
+
+Memory layout:
+
+```
++------+------+------+------+------+------+------+------+
+|                    B (8 bytes)                    |        C (4 bytes)         |   A  | pad  | pad  | pad  |
++------+------+------+------+------+------+------+------+
+                        8 bytes                               4 bytes          1 byte   3 bytes
+```
+
+Total Size: 8 bytes (B) + 4 bytes (C) + 1 byte (A) + 3 bytes (padding) = 16 bytes
+
+By rearranging the fields like this, we have minimized the padding needed, and the size of the struct is now 16 bytes instead of 20 bytes, as it was in the previous `Unoptimized` version. This is a typical optimization for systems that require data to be aligned.
+
 ### Why is this Important?
 
 1. **Performance**: Misaligned reads and writes can be slower because they may require multiple CPU cycles and additional operations to complete.
@@ -182,6 +399,17 @@ In this example, the alignment of `int32` is 4 bytes, `int64` is 8 bytes, and `f
 Understanding alignment via `unsafe.Alignof` can provide insights into the memory layout and potential performance characteristics of your Go programs, but it's generally not something you need to worry about unless you are working on very low-level or performance-critical code.
 
 # Field Alignment Analysis Tool
+
+### Tool location & instructions
+
+You can find the **most recent version** of this tool here:
+[https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment	)
+
+To see how to run this tool, look in this folder of my github repo, open up main.go, and read the comments:
+
+learn-to-code-go-version-03/000-br-bk-go-tour/05-field-alignment-analyzer
+[https://github.com/GoesToEleven/learn-to-code-go-version-03/tree/main/000-br-bk-go-tour/05-field-alignment-analyzer](https://github.com/GoesToEleven/learn-to-code-go-version-03/tree/main/000-br-bk-go-tour/05-field-alignment-analyzer)
+
 
 ### The meaning of `scan up` 
 
