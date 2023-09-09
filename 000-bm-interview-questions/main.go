@@ -417,16 +417,16 @@ func main() {
 func sliceDiff() {
 	xi1 := make([]int, 10)
 	xi2 := make([]int, 0, 10)
-	xi3 := make([]int, 10, 10)
+	// xi3 := make([]int, 10, 10)
 
 	for i := 0; i < 10; i++ {
 		xi1 = append(xi1, i)
 		xi2 = append(xi2, i)
-		xi3 = append(xi3, i)
+		// xi3 = append(xi3, i)
 	}
 	fmt.Println(xi1)
 	fmt.Println(xi2)
-	fmt.Println(xi3)
+	// fmt.Println(xi3)
 
 }
 
