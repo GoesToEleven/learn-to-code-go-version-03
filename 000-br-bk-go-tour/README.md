@@ -1,6 +1,6 @@
 # Welcome
 
-This repo and the [FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list=PLSak_q1UXfPqSyH2r5DnCXUJKIlbrLVGn) are here to help you learn the Go programming language!
+This repo and [THE FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list=PLSak_q1UXfPqSyH2r5DnCXUJKIlbrLVGn) are here to help you learn the Go programming language!
 
 # Table of Contents
 1. [Strings, unicode, UTF-8](/000-br-bk-go-tour/01-string-unicode-utf8/) & [free video on YouTube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
