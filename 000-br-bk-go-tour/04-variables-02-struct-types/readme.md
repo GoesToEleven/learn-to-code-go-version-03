@@ -1,7 +1,7 @@
 # Table of Contents
 
 1. [Composite Types & Aggregate Types](#composite-types-&-aggregate-types)
-2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy,-alignment,-&-padding-bytes)
+2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 # Composite Types & Aggregate Types
 
 In the context of the Go programming language, the terms "composite types" and "aggregate types" are often used interchangeably. However, it's worth breaking down the nuances of these two terms to clarify the distinction.
