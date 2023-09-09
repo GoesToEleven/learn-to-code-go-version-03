@@ -1,18 +1,32 @@
 # "Go is easy to learn and hard to master." ~ Andrew Brudnak
 
+# Video
+[Here is the video on YouTube]()
+
 # Takeaways
-1. L
+1. Type tells us (1) size and (2) representation
+2. Three classes of type: builtin, reference, struct (user defined composite)
+3. initialize = declare & assign
+4. Conversion over casting
+5. Every line of code either reads, writes, or allocates memory
+6. integrity: accurate, consistent, efficient
+7. We have a language we use to talk about the language
+8. Remember, nobody can stop you from learning.
 
 # Table of Contents
 
 1. [Notes on Variables](#notes-on-variables)
-1. [Types Memory](#types-memory)
-1. [Declare Assign Initialize and Zero Value](#declare-assign-initialize-and-zero-value)
-1. []()
-1. []()
-1. []()
-1. []()
-
+2. [Types Memory](#types-memory)
+3. [Declare Assign Initialize and Zero Value](#declare-assign-initialize-and-zero-value)
+4. [Builtin Reference and Struct types](builtin-reference-and-struct-types)
+5. [String is a builtin type](#string-is-a-builtin-type)
+6. [Zero Value](#zero-value)
+7. [Value Semantics and Pointer Semantics](#value-semantics-and-pointer-semantics)
+8. [Conversion vs Casting](#conversion-vs-casting)
+9. [Advantages of Statically Typed Languages](#advantages-of-statically-typed-languages)
+10. [Go](#go)
+11. [Code review](#code-review)
+12. [Coupons for Go courses](coupons-for-go-courses)
 
 # Notes on Variables
 
@@ -96,7 +110,7 @@ var d *int  // d is nil
 
 Understanding these concepts is crucial for effectively managing variable states and resource allocation in Go programs.
 
-# Built-in, Reference, & Struct types
+# Builtin Reference and Struct types
 
 In Go, types are categorized in various ways, with some of the most common categories being built-in types, reference types, and struct types. Understanding these different types is essential for effective Go programming. Here's a breakdown of each:
 
@@ -174,7 +188,7 @@ p.Address = "123 Main St"
 
 Each of these types has its own set of characteristics and best-use cases, and they can be combined to create more complex data structures. For instance, you can have a slice of structs or a map whose values are channels, and so on. Understanding the nuances between these types is crucial for writing idiomatic and efficient Go code.
 
-# String is a built-in type
+# String is a builtin type
 
 In Go, the `string` type is often described as being "like" a data structure containing a pointer to its underlying bytes and a length, similar to how slices work. Despite this, strings in Go are considered value types, not reference types, for several important reasons:
 
@@ -244,7 +258,7 @@ The zero value is always of the same type as the variable, contributing to Go's 
 
 So, while the concept of a zero value may seem trivial, it serves several important roles in making Go code robust, readable, and maintainable.
 
-# Value Semantics & Pointer Semantics 
+# Value Semantics and Pointer Semantics 
 
 In the Go programming language, the terms "value semantics" and "pointer semantics" refer to how data is accessed and manipulated through variables, particularly in the context of function calls and assignments. Understanding these semantics helps you to write correct and efficient Go programs. Here's a breakdown of each:
 
@@ -362,7 +376,7 @@ In this case, we're directly re-interpreting the underlying bits of an `int` as 
 
 The term "casting" may be used casually to describe conversions in Go, but it's important to understand the subtleties to write correct and idiomatic Go code.
 
-### Advantages of Statically Typed Languages
+# Advantages of Statically Typed Languages
 
 1. **Type Safety**: Because types are checked at compile-time, many type-related errors are caught early in the development cycle, which can make the code more robust and easier to maintain.
   
@@ -450,3 +464,15 @@ The Go programming language is used for a wide range of applications including w
 # Static Type vs Dynamic Type Language
 
 In programming, a language is said to be "statically typed" when the type of a variable is known at compile-time instead of at runtime. This means that you have to explicitly declare the type of the variable or it has to be inferred by the compiler before the program runs. Because the type information is available at compile-time, the compiler can catch type errors before the program executes. This is in contrast to dynamically-typed languages, where the type of a variable can be changed at runtime and type errors are generally caught during execution of the program.
+
+# Code Review
+
+### int
+- using anything other than int
+- Why are you using an int32 or int64; why not just int?
+
+# Coupons for Go courses
+1. [Bill Kennedy](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) courses 
+    - coupon: toddmcleod
+2. [Todd McLeod](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0) courses
+    - click on my user icon for more courses

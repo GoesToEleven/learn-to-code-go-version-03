@@ -3,6 +3,9 @@
 
 ### "Here's the reality - I don't care about any of this stuff." ~ A friend who is a Go genius
 
+# Video
+[Here is the video on YouTube]()
+
 # Takeaways
 1. Language mechanics
 2. Optimize for readability
@@ -22,7 +25,7 @@
 8. [Understanding The Alignof Function](#understanding-the-alignof-function)
 9. [Field Alignment Analysis Tool](#field-alignment-analysis-tool)
 10. [Code review](#code-review)
-
+11. [Coupons for Go courses](coupons-for-go-courses)
 
 # Struct Literal, Anonymous Struct, Zero Value
 
@@ -907,3 +910,9 @@ The comment also wisely notes that while rearranging the fields for minimal memo
 
 ### empty literal struct
 - use var instead: var p person
+
+# Coupons for Go courses
+1. [Bill Kennedy](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) courses 
+    - coupon: toddmcleod
+2. [Todd McLeod](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0) courses
+    - click on my user icon for more courses

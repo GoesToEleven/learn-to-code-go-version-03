@@ -1,3 +1,22 @@
+# "Drop by drop, the bucket gets filled."
+
+# Video
+[Here is video #1 on YouTube]()
+[Here is video #2 on YouTube]()
+
+# Takeaways
+1. Monotonic time
+2. Time unites: second, decisecond, centisecond, millisecond, microsecond, nanosecond, picosecond
+3. UTC
+4. super fun code with bufio.NewScanner() for `formatting time` (see the code base)
+5. [described in this video]() `01/02 03:04:05PM '06 -0700` 
+
+# Table of Contents
+1. [Monotonic time](#monotonic-time)
+2. [Time Units](time-units)
+3. [UTC](#utc)
+4. [Coupons for Go courses](coupons-for-go-courses)
+
 # Monotonic time
 In computing, a clock is considered "monotonic" if it ***only ever advances forward*** in time, never backward. A monotonic clock guarantees that the values it returns will be strictly increasing over time, which is **useful for measuring elapsed time between events in a reliable way.** However, unlike real-time clocks, monotonic clocks are not set to any particular standard time and may not persist their values across reboots.
 
@@ -87,3 +106,9 @@ UTC is the standard for timekeeping used worldwide, based on both atomic time an
 
 ![global utc time zones](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/02-time-pkg/UTC-time-zones.png)
 source: https://en.wikipedia.org/wiki/Time_zone#/media/File:World_Time_Zones_Map.png
+
+# Coupons for Go courses
+1. [Bill Kennedy](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) courses 
+    - coupon: toddmcleod
+2. [Todd McLeod](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0) courses
+    - click on my user icon for more courses

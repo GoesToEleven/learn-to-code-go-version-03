@@ -88,8 +88,10 @@ func main() {
 	
 	`)
 	questions = append(questions, "How does Go handle error handling compared to other languages?")
+	questions = append(questions, "Conversion or casting, and why?")
 	questions = append(questions, "What is nil?")
 	questions = append(questions, "How do we do benchmarking in Go?")
+	questions = append(questions, "What is the difference between an int and a uint, and how does this relate to mechanical sympathy?")
 	questions = append(questions, "Put these in the correct order: centisecond, second, nanosecond, millisecond, decisecond, microsecond")
 	questions = append(questions, "What are pointers? Show us pointers at work in code.")
 	questions = append(questions, "Explain value semantics and pointer semantics. What are rules-of-thumb for using one versus the other?")
