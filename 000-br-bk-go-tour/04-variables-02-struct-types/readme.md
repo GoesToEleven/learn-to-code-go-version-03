@@ -1,6 +1,6 @@
 # Table of Contents
 
-1. [Composite Types & Aggregate Types](# Composite Types & Aggregate Types)
+1. [Composite Types & Aggregate Types](#composite-types-&-aggregate-types)
 
 # Composite Types & Aggregate Types
 
