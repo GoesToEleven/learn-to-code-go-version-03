@@ -3,6 +3,7 @@
 1. [Composite Types & Aggregate Types](#composite-types)
 2. [Mechanical Sympathy, Alignment, & Padding Bytes](#mechanical-sympathy)
 3. [CPU Cycles & CPU Operations Per Cycle](#cpu-cycles)
+4. [Understanding The Alignof Function](#understanding-the-alignof-function)
 
 # Composite Types & Aggregate Types
 
@@ -123,3 +124,58 @@ The relationship between CPU cycles and operations can be complex:
 - **CPU Operations**: The actual tasks or instructions that a CPU performs. These can vary in complexity and may take multiple cycles to complete.
 
 Understanding both concepts is crucial for performance tuning and optimization, both in software and hardware design.
+
+# Understanding The Alignof Function
+
+The `unsafe.Alignof` function in Go's `unsafe` package returns the alignment of a type in bytes. The alignment is the smallest number `n` such that an address `a` for a variable of that type will always be a multiple of `n`. Understanding alignment can be crucial for low-level programming, performance tuning, and interacting with C code using cgo.
+
+Here's a basic example:
+
+```go
+package main
+
+import (
+	"fmt"
+	"unsafe"
+)
+
+func main() {
+	var x int32
+	var y int64
+	var z float64
+
+	fmt.Println("Alignment of int32:", unsafe.Alignof(x))
+	fmt.Println("Alignment of int64:", unsafe.Alignof(y))
+	fmt.Println("Alignment of float64:", unsafe.Alignof(z))
+}
+```
+
+This will usually output:
+
+```
+Alignment of int32: 4
+Alignment of int64: 8
+Alignment of float64: 8
+```
+
+In this example, the alignment of `int32` is 4 bytes, `int64` is 8 bytes, and `float64` is 8 bytes as well. This means that, in memory, the starting address of a variable of type `int32` will be a multiple of 4, for `int64` it will be a multiple of 8, and for `float64`, it will be a multiple of 8.
+
+### Why is this Important?
+
+1. **Performance**: Misaligned reads and writes can be slower because they may require multiple CPU cycles and additional operations to complete.
+
+2. **Hardware Requirements**: Some hardware architectures do not even support misaligned access and will trigger a runtime fault if attempted.
+
+3. **Interoperability**: When interfacing with low-level languages like C or when doing system programming, knowing the alignment is essential for data structure compatibility.
+
+4. **Memory Layout**: Understanding alignment can help you design data structures that require less padding, thereby using memory more efficiently.
+
+### Caveats
+
+- Using `unsafe` should be done carefully, as incorrect use can lead to various problems like undefined behavior and difficult-to-debug issues.
+  
+- Go does a good job of handling alignment automatically in most cases, so you typically don't need to worry about it for day-to-day coding tasks.
+
+- The result of `unsafe.Alignof` is Go-implementation and architecture-specific. Therefore, it might differ when you switch from one Go implementation or CPU architecture to another.
+
+Understanding alignment via `unsafe.Alignof` can provide insights into the memory layout and potential performance characteristics of your Go programs, but it's generally not something you need to worry about unless you are working on very low-level or performance-critical code.
