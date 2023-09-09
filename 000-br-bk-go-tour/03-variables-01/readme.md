@@ -7,7 +7,7 @@
 
 1. [Notes on Variables](#notes-on-variables)
 1. [Types Memory](#types-memory)
-1. [Declare Assign Initialize and Zero Value](declare-assign-initialize-and-zero-value)
+1. [Declare Assign Initialize and Zero Value](#declare-assign-initialize-and-zero-value)
 1. []()
 1. []()
 1. []()
