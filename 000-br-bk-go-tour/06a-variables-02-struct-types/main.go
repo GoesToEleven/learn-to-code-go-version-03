@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"mymodule/000-br-bk-go-tour/06a-variables-02-struct-types/ptr-value-semantics/ptrvaluesemantics"
 	"mymodule/000-br-bk-go-tour/06a-variables-02-struct-types/ptrvaluesemantics"
 	"unsafe"
 )
@@ -18,11 +17,11 @@ func main() {
 	}
 
 	// zero value
-	var p3 person 	// do this
-	p2 := person{} 	// mostly don't do this empty literal
+	var p3 person  // do this
+	p2 := person{} // mostly don't do this empty literal
 
 	// anonymous struct
-	a1 := struct{
+	a1 := struct {
 		name string
 	}{
 		name: "Rover",
@@ -33,13 +32,12 @@ func main() {
 	fmt.Println(p3)
 	fmt.Println(a1)
 
-
 	example1()
 	example2()
 	example3()
 	example4()
 
-	ptrvaluesemantics.PtrValSem
+	ptrvaluesemantics.PtrValSem()
 }
 
 func example1() {
@@ -57,6 +55,7 @@ func example1() {
 	fmt.Println("Alignment of float64:", unsafe.Alignof(float32(0.0)))
 	fmt.Println("Alignment of Example:", unsafe.Alignof(a))
 	fmt.Println("Size of Example:", unsafe.Sizeof(a))
+	fmt.Println(a)
 	fmt.Println()
 }
 
@@ -74,6 +73,7 @@ func example2() {
 	fmt.Println("Alignment of float64:", unsafe.Alignof(float32(0.0)))
 	fmt.Println("Alignment of Example:", unsafe.Alignof(a))
 	fmt.Println("Size of Example:", unsafe.Sizeof(a))
+	fmt.Println(a)
 	fmt.Println()
 }
 
@@ -92,6 +92,7 @@ func example3() {
 	fmt.Println("Alignment of float64:", unsafe.Alignof(float64(0.0)))
 	fmt.Println("Alignment of Example:", unsafe.Alignof(a))
 	fmt.Println("Size of Example:", unsafe.Sizeof(a))
+	fmt.Println(a)
 	fmt.Println()
 }
 
@@ -110,6 +111,7 @@ func example4() {
 	fmt.Println("Alignment of int32:", unsafe.Alignof(int32(0)))
 	fmt.Println("Alignment of Unoptimized:", unsafe.Alignof(a))
 	fmt.Println("Size of Unoptimized:", unsafe.Sizeof(a))
+	fmt.Println(a)
 	fmt.Println()
 
 	// With optimization
@@ -126,5 +128,6 @@ func example4() {
 	fmt.Println("Alignment of bool:", unsafe.Alignof(bool(true)))
 	fmt.Println("Alignment of Optimized:", unsafe.Alignof(b))
 	fmt.Println("Size of Optimized:", unsafe.Sizeof(b))
+	fmt.Println(b)
 	fmt.Println()
 }
