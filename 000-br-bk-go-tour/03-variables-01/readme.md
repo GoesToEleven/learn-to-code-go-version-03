@@ -20,7 +20,7 @@
 3. [Declare Assign Initialize and Zero Value](#declare-assign-initialize-and-zero-value)
 4. [Builtin Reference and Struct types](#builtin-reference-and-struct-types)
 5. [String is a builtin type](#string-is-a-builtin-type)
-6. [Zero Value](#zero-value)
+6. [Zero Value Details](#zero-value-details)
 7. [Value Semantics and Pointer Semantics](#value-semantics-and-pointer-semantics)
 8. [Conversion vs Casting](#conversion-vs-casting)
 9. [Advantages of Statically Typed Languages](#advantages-of-statically-typed-languages)
@@ -228,7 +228,7 @@ From a practical perspective, treating strings as value types simplifies many th
 
 In summary, even though strings in Go might seem similar to slices—having a pointer to underlying data and a length—they are immutable and exhibit value semantics, making them fundamentally different from reference types like slices, maps, and channels. This is why they are considered value types in Go.
 
-# Zero Value
+# Zero Value Details
 
 In Go, the concept of a zero value is significant for several reasons, some of which can help ensure the integrity of code:
 
