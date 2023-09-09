@@ -1,31 +1,50 @@
 package main
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-	"time"
-)
+import "fmt"
 
 func main() {
-	var y int
-	fmt.Println(y)
-	
-	x := 42
-	fmt.Println(x)
+	fmt.Printf("VALUE SEMANTICS \n \n")
 
-	t := time.Now()
-	fmt.Println(t)
+	p1 := Person{"James", 32}
+	fmt.Println(p1.Describe())
+	fmt.Println(p1.IsAdult())
 
-	s := bufio.NewScanner(os.Stdin)
-	for {
-		fmt.Print("> ")
-		if !s.Scan() {
-			break
-		}
-		fmt.Println(t.Format(s.Text()))
-	}
+	fmt.Println()
 
-	var zz int
-	fmt.Println(zz)
+	fmt.Println(p1.Age)
+	fmt.Println(p1.RunsPtr())
+	fmt.Println(p1.Age)
+
+	fmt.Printf("\nPOINTER SEMANTICS \n \n")
+
+	p2 := &Person{"Jenny", 27}
+	fmt.Println(p2.Describe())
+	fmt.Println(p2.IsAdult())
+
+	fmt.Println()
+
+	fmt.Println(p2.Age)
+	fmt.Println(p2.RunsPtr())
+	fmt.Println(p2.Age)
+}
+
+type Person struct {
+	Name string
+	Age  int
+}
+
+// Value receiver
+func (p Person) Describe() string {
+	return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+}
+
+// Value receiver
+func (p Person) IsAdult() bool {
+	return p.Age >= 18
+}
+
+func (p *Person) RunsPtr() bool {
+	fmt.Println("Printing from in RunsPtr")
+	p.Age++
+	return true
 }
