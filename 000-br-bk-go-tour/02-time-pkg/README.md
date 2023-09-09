@@ -108,7 +108,7 @@ UTC is the standard for timekeeping used worldwide, based on both atomic time an
 source: https://en.wikipedia.org/wiki/Time_zone#/media/File:World_Time_Zones_Map.png
 
 # Coupons for Go courses
-1. [Bill Kennedy](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) courses 
+1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) 
     - coupon: toddmcleod
-2. [Todd McLeod](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0) courses
+2. [Todd McLeod courses](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0)
     - click on my user icon for more courses
