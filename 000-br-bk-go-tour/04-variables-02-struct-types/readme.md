@@ -183,7 +183,7 @@ Understanding alignment via `unsafe.Alignof` can provide insights into the memor
 
 # Field Alignment Analysis Tool
 
-### Scan Up
+### The meaning of `scan up` 
 
 This is in relation to [this package here: https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
 
