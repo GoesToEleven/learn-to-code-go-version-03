@@ -6,8 +6,8 @@
 # Table of Contents
 
 1. [Notes on Variables](#notes-on-variables)
-1. [Types & Memory](#types-&-memory)
-1. [Declare, Assign, Initialize, Zero Value](declare-assign-initialize-zero-value)
+1. [Types Memory](#types-memory)
+1. [Declare, Assign, Initialize, Zero Value](declare-assign)
 1. []()
 1. []()
 1. []()
@@ -33,7 +33,7 @@
     - conversion has more safety than casting - it is A NEW ALLOCATION of memory - conversion allocates new memory and copies values in
     - "Instead of telling the compiler to map a set of bytes to a different representation, the bytes need to be copied to a new memory location for the new representation." Bill Kennedy
     
-# Types & Memory
+# Types Memory
 `bool` uses 1 byte of memory
 `int` uses 1-8 bytes of memory
 `string` uses 2 bytes of memory
