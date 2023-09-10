@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"mymodule/000-br-bk-go-tour/04a-variables-02-struct-types/ptrvaluesemantics"
+	"mymodule/000-br-bk-go-tour/04a-struct-types/ptrvaluesemantics"
 	"unsafe"
 )
 
