@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"mymodule/000-br-bk-go-tour/06a-variables-02-struct-types/ptrvaluesemantics"
+	"mymodule/000-br-bk-go-tour/04a-variables-02-struct-types/ptrvaluesemantics"
 	"unsafe"
 )
 
@@ -52,8 +52,8 @@ func example1() {
 	a := Example{}
 	fmt.Println("EXAMPLE 1")
 	fmt.Println("Alignment of bool:", unsafe.Alignof(bool(true)))
-	fmt.Println("Alignment of int32:", unsafe.Alignof(int16(0)))
-	fmt.Println("Alignment of float64:", unsafe.Alignof(float32(0.0)))
+	fmt.Println("Alignment of int16:", unsafe.Alignof(int16(0)))
+	fmt.Println("Alignment of float32:", unsafe.Alignof(float32(0.0)))
 	fmt.Println("Alignment of Example:", unsafe.Alignof(a))
 	fmt.Println("Size of Example:", unsafe.Sizeof(a))
 	fmt.Println(a)

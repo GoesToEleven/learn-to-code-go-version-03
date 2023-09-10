@@ -11,6 +11,7 @@
 2. Optimize for readability
 3. Use value semantics as much as possible - more readable; less heap allocations.
 4. The best way to get rid of your padding is to order your fields from largest to smallest.
+5. Method sets are the methods used for INTERFACE IMPLEMENTATION: T, T and *T, T & *T 
 5. These are guidelines. There are exceptions to everything.
 
 # Table of Contents
@@ -86,9 +87,9 @@ In this example, `p4` is of type `Person` with the struct initialized to its zer
 
 ### Struct Initialized to its Zero Value - empty struct literal
 
-Some people use an 'empty struct literal' to initialize a struct to its zero value, but generally spekaing, most of the time just the 'var' idiom, as above with `var p4 person` to create a struct value initialized to its zero value.
+Some people use an 'empty struct literal' to initialize a struct to its zero value, but generally speaking, only use the 'var' idiom, as above with `var p4 person` to create a struct value initialized to its zero value.
 
-**this is not idiomatic**
+**=This is not idiomatic:**
 ```go
 p5 := person{}
 ```
@@ -150,7 +151,7 @@ func main() {
 
 ### Pointer Receiver
 
-Using a pointer receiver allows the method to modify the original struct value. It also avoids making a copy of the struct, which might be more efficient for large structs.
+Using a pointer receiver allows the method to modify the original struct value. It also avoids making a copy of the struct, which might be more efficient for large structs. **Please note, just so this is clear in your head, everything in Go is pass by value.** With a pointer receiver, the method receives a value which is a pointer to an address, then it a makes a copy of that pointer to an address and assigns it to the receiver's parameter. In the `HaveBirthday` method, n these methods, `p` is a copy of the address pointing to the `Person` instance.
 
 ```go
 func (p *Person) HaveBirthday() {
@@ -209,9 +210,9 @@ These are general guidelines:
 1. When we learn about **"method sets"**, we will see that ***THE METHOD SET OF A TYPE DETERMINES WHAT INTERFACES THE TYPE IMPLEMENTS.*** 
 2. The method set of a type is influenced by whether the methods use value semantics (value receivers) or pointer semantics (pointer receivers).
 
-##### Method Sets for Value Types
+#### Method Sets for Value Types
 
-If you have a type `T`, the method set of the value type `T` includes all methods that have a value receiver of type `T`. In other words, these are methods you can call on a variable of type `T`. This set of methods is the set used to determine which interfaces the the value of type `T` implements.
+If you have a type `T`, the method set of the value type `T` includes all methods that have a value receiver of type `T`. This set of methods is the set used to determine which interfaces the the value of type `T` implements.
 
 For example, consider the following `Person` struct and methods:
 
@@ -239,9 +240,9 @@ func (p *Person) RunsPtr() bool {
 }
 
 // IMPORTANT
-// Notice that both value semantics & pointer semantics run both methods
-// with value receivers and pointer receivers
-// methods sets are important for determining interface implementation
+// Notice that both value semantics & pointer semantics run methods
+// with both value receivers and pointer receivers.
+// Methods sets are important for determining INTERFACE IMPLEMENTATION.
 
 func PtrValSem() {
 	fmt.Printf("VALUE SEMANTICS \n \n")
@@ -277,7 +278,7 @@ Here, the method set of the value type `Person` ONLY INCLUDES VALUE RECEIVERS `D
 p1 := Person{"James", 32}
 ```
 
-### Method Sets for Pointer Types
+#### Method Sets for Pointer Types
 
 For a pointer type `*T`, the method set includes all methods with either value receivers or pointer receivers of type `T`. This means that you can call both pointer-receiver methods and value-receiver methods on a pointer of type `*T`.
 
@@ -314,10 +315,6 @@ type Runner interface {
 Only `*Person` would implement the `Runner` interface because `RunsPtr` uses a pointer receiver.
 
 Understanding method sets and the distinctions between value and pointer semantics can help you design better Go programs, especially when interfaces are involved.
-
-
-##### Method Sets for Value Types
-
 
 # Embedding Types InnerType Promotion
 You can include one struct type within another by **embedding it as a field without a field name.** This is known as "embedding" and it provides a way to reuse code and model is-a or has-a relationships. When you embed a type in another struct, the fields and methods of the embedded **"inner"** type become accessible as if they were part of the **"outer"** type. This is often referred to as "promotion."
@@ -374,19 +371,27 @@ import "fmt"
 
 type Writer struct{}
 
-func (w *Writer) Write(p []byte) (n int, err error) {
+// Embedding Writer
+// An 'Advanced Writer' is also a 'Writer'
+type AdvancedWriter struct {
+    Writer 
+}
+
+// This is attached to 'Writer'
+// It will be availabled to an 'Advanced Writer'
+func (w Writer) Write(p []byte) (n int, err error) {
     n = len(p)
     fmt.Println(string(p))
     return n, nil
 }
 
-type AdvancedWriter struct {
-    *Writer // Embedding Writer as a pointer
-}
 
 func main() {
-    aw := &AdvancedWriter{&Writer{}}
-    aw.Write([]byte("Hello, World!")) // Using Write method of embedded Writer
+    aw := AdvancedWriter{Writer{}}
+
+    // The 'Advanced Writer' can Use the 
+    // Write method of the embedded 'Writer'
+    aw.Write([]byte("Hello, World!")) 
 }
 ```
 
@@ -401,22 +406,25 @@ import "fmt"
 
 type Animal struct{}
 
-func (a *Animal) Speak() {
+// Every 'Dog' is also an 'Animal'
+type Dog struct {
+    Animal 
+}
+
+func (a Animal) Speak() {
     fmt.Println("Animal speaks.")
 }
 
-type Dog struct {
-    Animal // Embedding Animal
-}
-
-// Overriding Speak method
-func (d *Dog) Speak() {
+// Override 'Animal' Speak method
+func (d Dog) Speak() {
     fmt.Println("Woof woof!")
 }
 
 func main() {
-    d := &Dog{}
-    d.Speak() // Output will be "Woof woof!"
+    d := Dog{}
+
+    // Output will be "Woof woof!"
+    d.Speak() 
 }
 ```
 
@@ -435,7 +443,7 @@ type Writer struct {
     Name string
 }
 
-func (w *Writer) Write() {
+func (w Writer) Write() {
     fmt.Println("Writer is writing.")
 }
 
@@ -443,7 +451,7 @@ type Reader struct {
     Name string
 }
 
-func (r *Reader) Read() {
+func (r Reader) Read() {
     fmt.Println("Reader is reading.")
 }
 
@@ -453,13 +461,14 @@ type WriterReader struct {
 }
 
 func main() {
-    wr := &WriterReader{
+    wr := WriterReader{
         Writer: Writer{Name: "Writer"},
         Reader: Reader{Name: "Reader"},
     }
 
     // Ambiguous field
-    // fmt.Println(wr.Name) // This will throw an error
+    // This will throw an error
+    // fmt.Println(wr.Name) 
 
     // Disambiguate
     fmt.Println(wr.Writer.Name)
@@ -475,10 +484,11 @@ In this example, both `Writer` and `Reader` have a field named `Name`. If you tr
 
 So that's a quick overview of field embedding and inner type promotion in Go. It's a very powerful feature and it's used extensively in idiomatic Go code.
 
-
 # Composite Types & Aggregate Types
 
-In the context of the Go programming language, the terms "composite types" and "aggregate types" are often used interchangeably. However, it's worth breaking down the nuances of these two terms to clarify the distinction.
+Structs are known as composite types. 
+
+The terms "composite types" and "aggregate types" are often used interchangeably. However, it's worth breaking down the nuances of these two terms to clarify the distinction.
 
 ### Composite Types
 
@@ -498,13 +508,9 @@ The term "aggregate types" is not strictly defined in Go's language specificatio
 
 In the context of Go, you might consider arrays and structs as aggregate types because they "aggregate" multiple values of the same or different types, respectively.
 
-### Summary
-
-In summary, while all aggregate types (in the general sense) could be considered composite types in Go, not all composite types would traditionally be considered aggregate types. For example, channels and maps in Go could be considered composite but not aggregate, as they don't just bundle existing types together—they provide additional functionality and behavior.
+While all aggregate types (in the general sense) could be considered composite types in Go, not all composite types would traditionally be considered aggregate types. For example, channels and maps in Go could be considered composite but not aggregate, as they don't just bundle existing types together—they provide additional functionality and behavior.
 
 In practice, the terms are often used interchangeably, and the specific meaning is usually clear from the context in which they are used.
-
-In the context of the Go programming language, the concepts of mechanical sympathy, alignment, and padding bytes all come under the larger umbrella of system-level optimizations. Understanding these can lead to more performant code, better resource utilization, and improved interoperability with hardware components.
 
 # Mechanical Sympathy, Alignment, & Padding Bytes
 
@@ -516,7 +522,7 @@ Mechanical sympathy refers to writing code that is sympathetic to the underlying
 
 In computer memory, data is usually read in "chunks" that align with the architecture's word size. For example, on a 64-bit machine, data is most efficiently accessed when it is aligned on 64-bit (8-byte) boundaries. Misaligned access usually results in slower performance due to additional CPU cycles spent in rearranging the data.
 
-In Go, the language runtime and compiler handle most of the alignment issues, but you should still be aware of it, especially when you're working with low-level programming involving direct memory access or when you're trying to optimize data structures. The `unsafe.Alignof` function can help you understand the alignment of different types in Go.
+In Go, the language runtime and compiler handle most of the alignment issues, but you should still be aware of it, especially when you're trying to optimize data structures. The `unsafe.Alignof` function can help you understand the alignment of different types in Go.
 
 ```go
 import (
@@ -526,13 +532,13 @@ import (
 
 type Example struct {
 	A bool    // 1 byte
-	B int32   // 4 bytes
+	B int16   // 2 bytes
 	C float64 // 8 bytes
 }
 
 func main() {
 	fmt.Println("Alignment of bool:", unsafe.Alignof(bool(true)))
-	fmt.Println("Alignment of int32:", unsafe.Alignof(int32(0)))
+	fmt.Println("Alignment of int32:", unsafe.Alignof(int16(0)))
 	fmt.Println("Alignment of float64:", unsafe.Alignof(float64(0.0)))
 	fmt.Println("Alignment of Example:", unsafe.Alignof(Example{}))
 }
@@ -550,7 +556,7 @@ type Unoptimized struct {
 	A bool    // 1 byte
 	B float64 // 8 bytes
 	C int32   // 4 bytes
-	// Padding: 3 bytes for A, 4 bytes for C (assuming 64-bit machine)
+	// Padding: 7 bytes for A, 4 bytes for C (assuming 64-bit machine)
 }
 
 // With optimization
@@ -558,7 +564,7 @@ type Optimized struct {
 	B float64 // 8 bytes
 	C int32   // 4 bytes
 	A bool    // 1 byte
-	// Padding: None or minimal (assuming 64-bit machine)
+	// Padding: 3 bytes for A (assuming 64-bit machine)
 }
 ```
 
@@ -781,6 +787,7 @@ In the `Unoptimized` struct, padding and alignment might look like this based on
 3. **Field `C` (int32)**: Takes 4 bytes of memory and would typically be aligned on a 4-byte boundary.
 
     - `C`: 4 bytes
+    - Padding after `C`: To align the size of the entire struct to a multiple of the largest field (float64, which has an alignment requirement of 8 bytes), you would have 4 bytes of padding at the end of the struct.
 
 Here's how the struct would likely be laid out in memory:
 
@@ -812,7 +819,7 @@ Size of Unoptimized: 24
 		B float64 // 8 bytes
 		C int32   // 4 bytes
 		A bool    // 1 byte
-		// Padding: None or minimal (assuming 64-bit machine)
+		// Padding: A has 3 bytes (assuming 64-bit machine)
 	}
 ```
 
@@ -844,7 +851,7 @@ Memory layout:
 
 Total Size: 8 bytes (B) + 4 bytes (C) + 1 byte (A) + 3 bytes (padding) = 16 bytes
 
-By rearranging the fields like this, we have minimized the padding needed, and the size of the struct is now 16 bytes instead of 20 bytes, as it was in the previous `Unoptimized` version. This is a typical optimization for systems that require data to be aligned.
+By rearranging the fields like this, we have minimized the padding needed, and the size of the struct is now 16 bytes instead of 24 bytes, as it was in the previous `Unoptimized` version. This is a typical optimization for systems that require data to be aligned.
 
 ### Why is this Important?
 
@@ -878,31 +885,7 @@ To see how to run this tool, look in this folder of my github repo, open up main
 learn-to-code-go-version-03/000-br-bk-go-tour/05-field-alignment-analyzer
 [https://github.com/GoesToEleven/learn-to-code-go-version-03/tree/main/000-br-bk-go-tour/05-field-alignment-analyzer](https://github.com/GoesToEleven/learn-to-code-go-version-03/tree/main/000-br-bk-go-tour/05-field-alignment-analyzer)
 
-
-### The meaning of `scan up` 
-
-This is in relation to [this package here: https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment](https://pkg.go.dev/golang.org/x/tools/go/analysis/passes/fieldalignment)
-
-The comment describes an analyzer tool that checks Go structs for how they could be optimized in terms of memory usage. Specifically, it talks about two different metrics:
-
-1. The size of the struct: how much memory it uses.
-2. The number of "pointer bytes": the amount of memory the garbage collector needs to scan to find all the pointers within the struct.
-
-In Go, some types have "inner pointers," meaning that the actual data is not stored inline within the struct but rather is pointed to by a pointer within the object. For example, a `string` in Go is effectively a struct containing a pointer to an array of characters (the actual string data) and a length. When the garbage collector is looking for pointers, it not only has to look at the memory occupied by the struct itself but also follow these inner pointers to scan the additional memory that these pointers reference.
-
-The phrase "scan up through the string's inner pointer" means that the garbage collector has to follow the internal pointer within the `string` type to scan the underlying data for more pointers. The term "scan up" here probably refers to the operation of following a pointer to look at the data it references, rather than scanning in any specific "upward" or "downward" direction in memory.
-
-Let's consider the examples:
-
-- `struct { uint32; string }`: This struct has a `uint32` (4 bytes) and a `string` (which contains a pointer, typically 8 bytes on a 64-bit system, and a length, usually also 8 bytes). The struct itself occupies 4 + 8 + 8 = 20 bytes, but the garbage collector has to consider the internal pointer of the `string`, making it "16 pointer bytes" that have to be scanned.
-  
-- `struct { string; *uint32 }`: This struct contains a `string` (16 bytes as explained before) and a pointer to a `uint32` (8 bytes on a 64-bit system). Therefore, the garbage collector has to scan both the internal pointer of the `string` and the pointer to `uint32`, totaling "24 pointer bytes."
-
-- `struct { string; uint32 }`: Here, the garbage collector can stop immediately after scanning the internal pointer of the `string` as `uint32` doesn't contain any pointers. Thus, it only has "8 pointer bytes" to scan.
-
-The comment also wisely notes that while rearranging the fields for minimal memory usage might seem beneficial, it can have other side effects like "false sharing," a form of memory contention. In a multi-threaded environment like Go's goroutines, false sharing can lead to performance issues.
-
-# Code review
+# Code review check
 
 ### struct fields largest to smallest
 - Why are you micro-optimizing?

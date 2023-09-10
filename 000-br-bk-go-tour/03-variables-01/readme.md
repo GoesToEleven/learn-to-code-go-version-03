@@ -465,7 +465,7 @@ The Go programming language is used for a wide range of applications including w
 
 In programming, a language is said to be "statically typed" when the type of a variable is known at compile-time instead of at runtime. This means that you have to explicitly declare the type of the variable or it has to be inferred by the compiler before the program runs. Because the type information is available at compile-time, the compiler can catch type errors before the program executes. This is in contrast to dynamically-typed languages, where the type of a variable can be changed at runtime and type errors are generally caught during execution of the program.
 
-# Code Review
+# Code Review check
 
 ### int
 - using anything other than int
