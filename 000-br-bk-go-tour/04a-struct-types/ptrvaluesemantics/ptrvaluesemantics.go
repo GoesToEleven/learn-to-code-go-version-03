@@ -17,6 +17,7 @@ func (p Person) IsAdult() bool {
 	return p.Age >= 18
 }
 
+// Pointer receiver
 func (p *Person) RunsPtr() bool {
 	fmt.Println("Printing from in RunsPtr")
 	p.Age++

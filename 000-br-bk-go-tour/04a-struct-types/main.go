@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"mymodule/000-br-bk-go-tour/04a-struct-types/ptrvaluesemantics"
+	"mymodule/000-br-bk-go-tour/04a-struct-types/classex"
 	"unsafe"
 )
 
@@ -11,14 +12,17 @@ type person struct {
 }
 
 func main() {
+	// LIVE CODING
+	classex.RunMe()
+
 	// struct literal
 	p1 := person{
 		first: "James",
 	}
 
 	// zero value
-	var p3 person  // do this
-	p2 := person{} // mostly don't do this empty literal
+	var p2 person  // do this
+	p3 := person{} // mostly don't do this empty literal
 
 	// anonymous struct
 	a1 := struct {
@@ -120,7 +124,7 @@ func example4() {
 		B float64 // 8 bytes
 		C int32   // 4 bytes
 		A bool    // 1 byte
-		// Padding: None or minimal (assuming 64-bit machine)
+		// Padding: A will have 3 bytes of padding (assuming 64-bit machine)
 	}
 	b := Optimized{}
 	fmt.Println("EXAMPLE 4 - Optimized")
