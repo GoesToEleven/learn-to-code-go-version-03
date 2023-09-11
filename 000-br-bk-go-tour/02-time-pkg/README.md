@@ -1,7 +1,7 @@
 # "Drop by drop, the bucket gets filled."
 
 # Video
-- [SOON TO BE PUBLISHED Here is the free video #1 on YouTube]()
+- [FREE VIDEO #1 on YouTube](https://youtu.be/HBtu9Dsjp80)
 - [SOON TO BE PUBLISHED Here is the free video #2 on YouTube]()
 
 # Takeaways

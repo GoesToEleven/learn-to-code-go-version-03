@@ -8,6 +8,14 @@
 2. utf-8 encodes characters using variable width encoding from 1 - 4 bytes
 3. a character is also known as a rune
 
+# Code review check
+
+### Code review guidelines
+1. Integrity
+2. Readability
+3. Simplicity
+4. Performance
+
 # Coupons for Go courses
 1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce) 
     - coupon: toddmcleod
