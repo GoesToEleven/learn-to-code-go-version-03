@@ -2,9 +2,9 @@ package main
 
 import "fmt"
 
-type user struct {
-	first string
-}
+// type user struct {
+// 	first string
+// }
 
 func main() {
 	// a := 42
@@ -44,39 +44,70 @@ func main() {
 	// ptrS(&d)
 	// fmt.Println(d)
 
-	u1 := ffVS()
-	fmt.Printf("%p \n", &u1)
-	fmt.Println(u1)
+	// u1 := ffVS()
+	// fmt.Printf("%p \n", &u1)
+	// fmt.Println(u1)
 
-	fmt.Println("----------")
+	// fmt.Println("----------")
 
-	u2 := ffPS()
-	fmt.Printf("%p \n", u2)
-	fmt.Println(*u2)
-	fmt.Printf("%T \n", u2)
+	// u2 := ffPS()
+	// fmt.Printf("%p \n", u2)
+	// fmt.Println(*u2)
+	// fmt.Printf("%T \n", u2)
+	
+	// we have DECLARED that there is a variable with the IDENTIFIER of 'e'
+	// that will store a VALUE of TYPE 'pointer to an int'
+	fmt.Println("-------------")
+	var e *int
+	fmt.Println(e)
+	fmt.Printf("%T \n", e)
+	fmt.Printf("%p \n", e)
+	fmt.Println("-------------")
+	
+	// we have DECLARED e to store a VALUE of TYPE pointer to an int
+	// but now we need to ASSIGN a value to that variable in order to
+	// have the compiler create memory for us
+	// declare + assign = initialize
+	e = new(int)
+	fmt.Println(e)
+	fmt.Println(*e)
+	fmt.Printf("%T \n", e)
+	fmt.Printf("%p \n", e)
+	fmt.Println("-------------")
+	
+	// Using the DEREFERENCE operator '*'
+	// DEREFERENCE the address stored at 'e' to get to the VALUE
+	// and then store a new VALUE at that memory location of 1024
+	*e = 1024
+	fmt.Println(e)
+	fmt.Println(*e)
+	fmt.Printf("%T \n", e)
+	fmt.Printf("%p \n", e)
+	fmt.Println("-------------")
+
 }
 
 // POINTER semantics
-//go:noinline
-func ffPS() *user {
-	u := user{
-		first: "James",
-	}
-	fmt.Printf("%p \n", &u)
-	return &u
-}
+// go:noinline
+// func ffPS() *user {
+// 	u := user{
+// 		first: "James",
+// 	}
+// 	fmt.Printf("%p \n", &u)
+// 	return &u
+// }
 
 // TODO: add in code review check - return a pointer
 
 // VALUE semantics
-//go:noinline
-func ffVS() user {
-	u := user{
-		first: "Jenny",
-	}
-	fmt.Printf("%p \n", &u)
-	return u
-}
+// go:noinline
+// func ffVS() user {
+// 	u := user{
+// 		first: "Jenny",
+// 	}
+// 	fmt.Printf("%p \n", &u)
+// 	return u
+// }
 
 // func valS(d1 int) {
 // 	d1++
