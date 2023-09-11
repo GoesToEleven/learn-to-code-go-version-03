@@ -1,6 +1,6 @@
 
 # "I would have written a shorter letter, but I did not have the time."
-##### ~ Blaise Pascal, a French philosopher and mathematician. 
+#### ~ Blaise Pascal, a French philosopher and mathematician. 
 
 # Video
 [SOON TO BE PUBLISHED Here is the video on YouTube]()
@@ -560,3 +560,9 @@ func createUser() *user {
     - coupon: toddmcleod
 2. [Todd McLeod courses](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0)
     - click on my user icon for more courses
+
+# "Kind words do not cost much. Yet they accomplish much"
+#### ~ Blaise Pascal
+
+![Blaise Pascal](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/02-time-pkg/UTC-time-zones.png)
+source: https://en.wikipedia.org/wiki/Time_zone#/media/File:World_Time_Zones_Map.png
