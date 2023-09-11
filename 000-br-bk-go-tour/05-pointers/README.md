@@ -98,6 +98,33 @@ func main() {
 
 These operators are a fundamental part of working with pointers in Go, allowing for more flexible and sometimes more efficient data manipulation.
 
+### Type notation for pointer types like *int
+
+In the context of a type like `*int`, the asterisk `*` is not an operator but rather part of the ***type notation*** to indicate that variables of this type are pointers to integers. When used in a type declaration, the asterisk `*` specifies that the type is a pointer to another type.
+
+In Go, if you have a variable of type `*int`, it means that this variable is a pointer that is meant to point to an integer in memory. You can dereference this pointer to get the integer value it points to, or you can modify the integer value by dereferencing the pointer on the left-hand side of an assignment.
+
+Here's a simple example that demonstrates a variable of type `*int`:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    var x int = 42
+    var p *int = &x  // 'p' is of type '*int', a pointer to an int
+    
+    fmt.Println(p)   // Print the memory address
+    fmt.Println(*p)  // Dereference to get the value of 'x'
+
+    *p = 21          // Modify the value of 'x' through the pointer 'p'
+    fmt.Println(x)   // Print the modified value of 'x'
+}
+```
+
+In this example, `p` is declared as a variable of type `*int`, and it stores the memory address of an `int` variable `x`. You can then dereference `p` to get or set the value of `x`.
+
 # Understanding nil
 
 In Go, `nil` is the zero value for pointers, slices, maps, channels, and interface types. The `nil` value serves as a useful indicator for "no value" or "not initialized."

@@ -10,4 +10,5 @@ func main() {
 	fmt.Println(&a)
 	// show me the value at an address, aka, DEREFERENCE the address
 	fmt.Println(*&a)
+	fmt.Printf("%T \n", &a)
 }
