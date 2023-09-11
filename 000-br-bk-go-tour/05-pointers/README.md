@@ -1,27 +1,34 @@
 
-# "Value semantics is the safest way to work with data in a program."
+# "I would have written a shorter letter, but I did not have the time."
+##### ~ Blaise Pascal, a French philosopher and mathematician. 
 
 # Video
 [SOON TO BE PUBLISHED Here is the video on YouTube]()
 
 # Takeaways
 1. *, &, *
+1. Understanding nil.
 1. Values and pointers.
 1. Value semantics and pointer semantics.
 1. Everything in Go is pass by value.
 1. Every single function gets its own copy of the data
 1. Each goroutine has a stack.
-1. Memory is either allocated on the stack or the heap.
+1. Data is stored either on the stack or allocated on the heap.
 1. The compiler determines if a variable should be on the stack or the heap with "escape analysis."
 1. The stack is self-cleaning.
 1. Heap allocation: a function shares memory up the call stack
 1. Heap allocation: large values may be put on the heap
 1. Heap allocation: a value's size is not known at compile time
 1. Heap allocation: decoupling code with functions or interfaces
+1. "Allocation" = constructed on the heap, not the stack.
+1. The stack is contiguous and dynamic; it grows from 2k.
+1. There are efficiency benefits to contigious data storage.
+1. You can point to data on another stack (that would be too inefficient) - shared data is on the heap.
 1. go build -gcflags= -m=2 main.go
 
 # Table of Contents
 
+1. [Understanding nil](#understanding-nil)
 1. [Goroutine and stack relationship](#goroutine-and-stack-relationship)
 1. [The stack and the heap](#the-stack-and-the-heap)
 1. [Decoupling with functions and interfaces](#decoupling-with-functions-and-interfaces)
@@ -29,8 +36,64 @@
 1. [Value semantics and pointer semantics](#value-semantics-and-pointer-semantics)
 1. [Factory functions not constructors](#factory-functions-not-constructors)
 1. [Up and down the stack](#up-and-down-the-stack)
+1. [Count the passes](#count-the-passes)
 1. [Code review](#code-review)
 1. [Coupons for Go courses](#coupons-for-go-courses)
+
+# Understanding nil
+
+In Go, `nil` is the zero value for pointers, slices, maps, channels, and interface types. The `nil` value serves as a useful indicator for "no value" or "not initialized."
+
+Here's how `nil` is used in different contexts:
+
+1. **Pointer**: When you declare a pointer variable without initializing it, its value will be `nil`. Attempting to dereference a `nil` pointer will result in a runtime panic.
+
+    ```go
+    var p *int
+    if p == nil {
+        fmt.Println("p is nil")
+    }
+    ```
+
+2. **Slice**: A `nil` slice has a length and capacity of 0 and has no underlying array.
+
+    ```go
+    var s []int
+    if s == nil {
+        fmt.Println("s is nil")
+    }
+    ```
+
+3. **Map**: A `nil` map is not initialized and any attempt to add keys to it will result in a runtime panic.
+
+    ```go
+    var m map[string]int
+    if m == nil {
+        fmt.Println("m is nil")
+    }
+    ```
+
+4. **Channel**: A `nil` channel is useful for some channel operations, but you cannot send or receive from it.
+
+    ```go
+    var c chan int
+    if c == nil {
+        fmt.Println("c is nil")
+    }
+    ```
+
+5. **Interface**: An interface value is `nil` if both its type and value are `nil`.
+
+    ```go
+    var i interface{}
+    if i == nil {
+        fmt.Println("i is nil")
+    }
+    ```
+
+It's important to remember that `nil` can have different behaviors depending on the type it is associated with. For example, sending or receiving from a `nil` channel will block forever, while accessing a key in a `nil` map will not cause a panic but will return the zero value for the map's value type.
+
+Knowing when and how to use `nil` in these various contexts is important for writing effective Go code.
 
 # Goroutine and stack relationship
 
@@ -381,6 +444,9 @@ func createUser() *user {
     // up the stack
     return &u
 ``` 
+
+# Count the passes
+Count how many times the basketball is passed in this [VIDEO: Count the passes](https://www.youtube.com/watch?v=IGQmdoK_ZfY)
 
 # Code review check
 
