@@ -564,5 +564,5 @@ func createUser() *user {
 # "Kind words do not cost much. Yet they accomplish much"
 #### ~ Blaise Pascal
 
-![Blaise Pascal](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/02-time-pkg/UTC-time-zones.png)
-source: https://en.wikipedia.org/wiki/Time_zone#/media/File:World_Time_Zones_Map.png
+![Blaise Pascal](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/05-pointers/images/bp.jpeg)
+source: https://upload.wikimedia.org/wikipedia/commons/1/1d/Pascal_Pajou_Louvre_RF2981.jpg
