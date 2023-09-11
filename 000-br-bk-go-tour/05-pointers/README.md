@@ -25,6 +25,7 @@
 1. There are efficiency benefits to contigious data storage.
 1. You can point to data on another stack (that would be too inefficient) - shared data is on the heap.
 1. go build -gcflags -m=2
+1. //go:noinline
 
 # Table of Contents
 

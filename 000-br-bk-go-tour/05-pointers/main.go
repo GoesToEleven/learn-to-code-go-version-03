@@ -44,35 +44,37 @@ func main() {
 	// ptrS(&d)
 	// fmt.Println(d)
 
-	u1 := createUserVS()
+	u1 := ffVS()
+	fmt.Printf("%p \n", &u1)
 	fmt.Println(u1)
-	fmt.Println(&u1)
 
 	fmt.Println("----------")
-	u2 := createUserPS()
-	// fmt.Println(*u2)
-	fmt.Println(u2)
+
+	u2 := ffPS()
+	fmt.Printf("%p \n", u2)
+	fmt.Println(*u2)
+	fmt.Printf("%T \n", u2)
 }
 
+// POINTER semantics
 //go:noinline
-func createUserPS() *user {
+func ffPS() *user {
 	u := user{
 		first: "James",
 	}
-
-	println("V2", &u)
-
+	fmt.Printf("%p \n", &u)
 	return &u
 }
 
+// TODO: add in code review check - return a pointer
+
+// VALUE semantics
 //go:noinline
-func createUserVS() user {
+func ffVS() user {
 	u := user{
-		first: "James",
+		first: "Jenny",
 	}
-
-	println("V1", &u)
-
+	fmt.Printf("%p \n", &u)
 	return u
 }
 
