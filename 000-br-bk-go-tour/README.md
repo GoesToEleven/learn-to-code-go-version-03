@@ -7,6 +7,7 @@ This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list
 2. [readme: Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) & [video #1 FREE on YouTube](https://youtu.be/HBtu9Dsjp80) - [video #2 soon to be published]() 
 3. [readme: Variables, values, & types](/000-br-bk-go-tour/03-variables-01/) & [video soon to be published]()
 4. [readme: Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) & [video soon to be published]()
+4. [readme: Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) & [video soon to be published]()
 5. [Coupons for Go courses](coupons-for-go-courses)
 
 # Coupons for Go courses

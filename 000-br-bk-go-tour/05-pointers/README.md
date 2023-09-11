@@ -28,6 +28,7 @@
 
 # Table of Contents
 
+1. [Reference and dereference operators](#reference-and-dereference-operators)
 1. [Understanding nil](#understanding-nil)
 1. [Goroutine and stack relationship](#goroutine-and-stack-relationship)
 1. [The stack and the heap](#the-stack-and-the-heap)
@@ -39,6 +40,63 @@
 1. [Count the passes](#count-the-passes)
 1. [Code review](#code-review)
 1. [Coupons for Go courses](#coupons-for-go-courses)
+
+# Reference and dereference operators
+
+In Go, the `&` and `*` operators are used to reference and dereference memory addresses, respectively.
+
+### Address-of Operator (`&`)
+
+The `&` operator is used to get the memory address of a variable. This operator generates a pointer that points to the variable.
+
+Here's an example:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 42
+    p := &x // 'p' is a pointer to 'x'
+    fmt.Println(p)  // Prints the memory address
+}
+```
+
+### Dereferencing Operator (`*`)
+
+The `*` operator is used to access the value that is stored at a particular memory address to which a pointer points. This is called dereferencing the pointer.
+
+Here's an example:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 42
+    p := &x
+    fmt.Println(*p)  // Dereferencing 'p' to get the value of 'x', prints 42
+}
+```
+
+You can also modify the value stored at the address to which the pointer points by using the `*` operator on the left-hand side of an assignment:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    x := 42
+    p := &x
+    *p = 21  // Modifies the value of 'x' through 'p'
+    fmt.Println(x)  // Prints 21
+}
+```
+
+These operators are a fundamental part of working with pointers in Go, allowing for more flexible and sometimes more efficient data manipulation.
 
 # Understanding nil
 
