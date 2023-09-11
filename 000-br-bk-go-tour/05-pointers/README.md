@@ -561,8 +561,9 @@ func createUser() *user {
 2. [Todd McLeod courses](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0)
     - click on my user icon for more courses
 
-# "Kind words do not cost much. Yet they accomplish much"
+# "Kind words do not cost much. Yet they accomplish much."
 #### ~ Blaise Pascal
 
 ![Blaise Pascal](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/05-pointers/images/bp.png)
+
 source: https://upload.wikimedia.org/wikipedia/commons/1/1d/Pascal_Pajou_Louvre_RF2981.jpg
