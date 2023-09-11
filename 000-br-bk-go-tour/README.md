@@ -18,22 +18,41 @@ This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list
 
 # Code review check
 
-
-[readme: Strings, unicode, UTF-8](/000-br-bk-go-tour/01-string-unicode-utf8/) & [FREE VIDEO on YouTube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
+[readme: Strings, unicode, UTF-8](/000-br-bk-go-tour/01-string-unicode-utf8/)
 - Code review guidelines
     - Integrity
     - Readability
     - Simplicity
     - Performance
 
-[readme: Variables, values, & types](/000-br-bk-go-tour/03-variables-01/) & [video soon to be published]()
+[readme: Variables, values, & types](/000-br-bk-go-tour/03-variables-01/)
 - int
     - using anything other than int
     - Why are you using an int32 or int64; why not just int?
 
-[readme: Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) & [video soon to be published]()
+[readme: Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/)
 - struct fields largest to smallest
     - Why are you micro-optimizing?
     - Optimize for readability first
 - empty literal struct
     - use var instead: var p person
+
+[readme: Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers)
+- Returning a pointer
+    - If you are returning a pointer, make it readable:
+
+```go
+// like this
+func createUser() *user {
+    u := user{"James", 32}
+}
+    return &u
+``` 
+
+```go
+// NOT like this
+func createUser() *user {
+    u := &user{"James", 32}
+}
+    return u
+``` 

@@ -39,7 +39,7 @@
 1. [Factory functions not constructors](#factory-functions-not-constructors)
 1. [Up and down the stack](#up-and-down-the-stack)
 1. [Count the passes](#count-the-passes)
-1. [Code review](#code-review)
+1. [Code review check](#code-review-check)
 1. [Coupons for Go courses](#coupons-for-go-courses)
 
 # Reference and dereference operators
