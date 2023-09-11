@@ -6,7 +6,7 @@
 [SOON TO BE PUBLISHED Here is the video on YouTube]()
 
 # Takeaways
-1. *, &, *
+1. *, &, *T
 1. Understanding nil.
 1. Values and pointers.
 1. Value semantics and pointer semantics.
