@@ -35,9 +35,9 @@
 
 # Terminology
 
-1. Constant of a kind
-1. Constant of a type
-1. Kind promotion
+1. Constant of a kind 	(untyped constant)
+1. Constant of a type 	(typed constant)
+1. Kind promotion 		(untyped --> typed)
 
 # Mechanics
 
