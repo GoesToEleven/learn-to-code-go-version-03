@@ -74,25 +74,31 @@ func main() {
 	fmt.Println("--------KIND-------")
 	fmt.Println(reflect.ValueOf(aaa).Kind())
 	fmt.Println(reflect.ValueOf(bbb).Kind())
-	fmt.Println(reflect.ValueOf(aaa*bbb).Kind())
+	fmt.Println(reflect.ValueOf(aaa * bbb).Kind())
 	fmt.Println("--------TYPE-------")
 	fmt.Printf("%T \n", aaa)
 	fmt.Printf("%T \n", bbb)
 	fmt.Printf("%T \n", aaa*bbb)
 
+	fmt.Println("-------- FLOAT ME -------")
+	fm := floatMe(30)
+	fmt.Printf("%T \n", fm)
+	
+	fmt.Println("-------- Max Int -------")
 	// Max integer value on 64 bit architecture
 	const maxInt = 9223372036854775807
 	fmt.Println("MAXINT", maxInt)
 	fmt.Printf("MAXINT \t %T \n", maxInt)
-
+	
 	// Much larger value than int64
 	const bigger = 9223372036854775808543522345
 	fmt.Println("BIGGER", bigger*.1)
 	fmt.Printf("BIGGER \t %T \n", bigger*.1)
-
+	
 	// ERROR: typed constant int64 creates overflow
 	// const biggerInt int64 = 9223372036854775808543522345
-
+	
+	fmt.Println("-------- iota -------")
 	const (
 		aa = iota
 		bb = iota
@@ -133,12 +139,17 @@ func main() {
 	fmt.Printf("GB \t %d \t\t %b \n", GB, GB)
 	fmt.Printf("TB \t %d \t\t %b \n", TB, TB)
 
+	fmt.Println("-------- math/big -------")
 	// Using math/big
 	bi := big.NewInt(0)
 	fmt.Println("BI", bi)
 	bi.SetBit(bi, 255, 1) // Equivalent to 1 << 255
 	fmt.Println(bi)
 	fmt.Println(addCommas(bi.String()))
+}
+
+func floatMe(f float64) float64 {
+	return f * 2.0
 }
 
 func addCommas(str string) string {

@@ -426,7 +426,7 @@ const electronCharge := 1.602e-19  // 1.602 × 10^-19
 
 The "e" notation can be used for both float32 and float64 types in Go, and the compiler will infer the type based on the context in which the constant is used, or you can specify the type explicitly.
 
-#
+# Go big with math big
 
 The `math/big` package in Go provides arbitrary-precision arithmetic for integers, rational numbers, and floating-point numbers. This package is particularly useful when you need to perform calculations that exceed the limits of Go's built-in numeric types.
 
