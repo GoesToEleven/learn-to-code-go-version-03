@@ -1,6 +1,6 @@
 
 # "If I miss one day of practice, I notice it. If I miss two days, the critics notice it. If I miss three days, the audience notices it"
-~ Ignacy (Jan) Paderewski, a French philosopher and mathematician. 
+~ Ignacy (Jan) Paderewski, pianist and politician, he signed the Treaty of Versailles, which ended World War I.
 
 ## "An untyped constant has a default type which is the type to which the constant is implicitly converted in contexts where a typed value is required, for instance, in a short variable declaration such as i := 0 where there is no explicit type. The default type of an untyped constant is bool, rune, int, float64, complex128, or string respectively, depending on whether it is a boolean, rune, integer, floating-point, complex, or string constant."
 ~ [Go language specification](https://go.dev/ref/spec#Constants)
