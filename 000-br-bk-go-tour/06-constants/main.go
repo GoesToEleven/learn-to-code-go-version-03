@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/big"
+	"reflect"
 )
 
 const a = 42
@@ -67,6 +68,17 @@ func main() {
 	const y int8 = 1
 	const z = 2 * y // int8(2) * int8(1)
 	fmt.Println(z)
+
+	const aaa = 42
+	const bbb = 43.01
+	fmt.Println("--------KIND-------")
+	fmt.Println(reflect.ValueOf(aaa).Kind())
+	fmt.Println(reflect.ValueOf(bbb).Kind())
+	fmt.Println(reflect.ValueOf(aaa*bbb).Kind())
+	fmt.Println("--------TYPE-------")
+	fmt.Printf("%T \n", aaa)
+	fmt.Printf("%T \n", bbb)
+	fmt.Printf("%T \n", aaa*bbb)
 
 	// Max integer value on 64 bit architecture
 	const maxInt = 9223372036854775807

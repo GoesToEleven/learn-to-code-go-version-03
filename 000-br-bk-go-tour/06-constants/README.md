@@ -235,7 +235,7 @@ So, when talking about "constants of a kind," you're generally referring to unty
 
 # Numeric literals are untyped constants
 
-Numbers like `3` or `8` are called numeric literals. 
+Numbers like `3` or `8` are called NUMERIC LITERALS - they are also UNTYPED CONSTANTS. 
 
 Numeric literals are untyped constants ("constants of a kind"). This means that they do not have a fixed type until they are assigned to a variable or used in an expression that requires them to take on a specific type.
 
