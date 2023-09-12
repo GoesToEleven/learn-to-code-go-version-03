@@ -2,7 +2,7 @@
 
 # Video
 - [FREE VIDEO #1 on YouTube](https://youtu.be/HBtu9Dsjp80)
-- [SOON TO BE PUBLISHED Here is the free video #2 on YouTube]()
+- [FREE VIDEO #2 on YouTube](https://youtu.be/ut_REn0xFPM)
 
 # Takeaways
 1. Monotonic time
