@@ -54,7 +54,7 @@ func main() {
 	// fmt.Printf("%p \n", u2)
 	// fmt.Println(*u2)
 	// fmt.Printf("%T \n", u2)
-	
+
 	// we have DECLARED that there is a variable with the IDENTIFIER of 'e'
 	// that will store a VALUE of TYPE 'pointer to an int'
 	fmt.Println("-------------")
@@ -63,7 +63,7 @@ func main() {
 	fmt.Printf("%T \n", e)
 	fmt.Printf("%p \n", e)
 	fmt.Println("-------------")
-	
+
 	// we have DECLARED e to store a VALUE of TYPE pointer to an int
 	// but now we need to ASSIGN a value to that variable in order to
 	// have the compiler create memory for us
@@ -74,7 +74,7 @@ func main() {
 	fmt.Printf("%T \n", e)
 	fmt.Printf("%p \n", e)
 	fmt.Println("-------------")
-	
+
 	// Using the DEREFERENCE operator '*'
 	// DEREFERENCE the address stored at 'e' to get to the VALUE
 	// and then store a new VALUE at that memory location of 1024
