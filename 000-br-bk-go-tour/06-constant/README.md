@@ -375,7 +375,7 @@ By limiting the precision of a constant through typing, you could inadvertently 
 
 ### Mantissa
 
-The mantissa is a component of a number in scientific notation or a floating-point number, used along with the exponent to represent the number. Scientific notation represents numbers as a base number and an exponent. In the case of decimal scientific notation, for example, the number \(3.45 \times 10^2\) has a mantissa of \(3.45\) and an exponent of \(2\).
+The mantissa is a component of a number in scientific notation or a floating-point number, used along with the exponent to represent the number. Scientific notation represents numbers as a base number and an exponent. In the case of decimal scientific notation, for example, the number (3.45 times 10^2) has a mantissa of \(3.45\) and an exponent of \(2\).
 
 In the context of floating-point representation in computers, a number \(x\) is typically represented as:
 
