@@ -657,9 +657,8 @@ With arbitrary precision, you can continue to get more and more accurate results
 
 # Code review check
 
-### R
-- If 
-
+### None
+- none this time
 
 # Coupons for Go courses
 1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce)  
