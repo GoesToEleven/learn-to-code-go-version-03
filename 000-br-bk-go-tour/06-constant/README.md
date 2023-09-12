@@ -16,6 +16,7 @@
 1. Untyped constants can be implicitly converted at compile time
 1. Numeric literals are untyped constants
 1. Typed constants limit precision
+1. Scientific notation, mantissa, and e
 
 # Table of Contents
 
@@ -25,6 +26,7 @@
 1. [Numeric literals are untyped constants](#numeric-literals-are-untyped-constants)
 1. [Constants have high precision](#constants-have-high-precision)
 1. [Typed constants limit precision](#typed-constants-limit-precision)
+1. [Scientific notation mantissa and e](#scientific-notation-mantissa-and-e)
 1. [Code review check](#code-review-check)
 
 # Terminology
@@ -373,17 +375,17 @@ var b int64 = typedConst  // No error, fits within int64
 
 By limiting the precision of a constant through typing, you could inadvertently introduce errors or limitations into your calculations, especially if those constants are used in mathematical expressions where high precision is required. Therefore, you generally only want to give a constant a type if you're sure that the limited precision is acceptable for your use case.
 
+# Scientific notation mantissa and e
+
+Scientific notation writes numbers like this:
+
+- 3.45 * 10^2
+- 3.45e2
+
 ### Mantissa
 
-The mantissa is a component of a number in scientific notation or a floating-point number, used along with the exponent to represent the number. Scientific notation represents numbers as a base number and an exponent. In the case of decimal scientific notation, for example, the number (3.45 times 10^2) has a mantissa of \(3.45\) and an exponent of \(2\).
+The mantissa is a component of a number in scientific notation or a floating-point number, used along with the exponent to represent the number. Scientific notation represents numbers as a base number and an exponent. In the case of decimal scientific notation, for example, the number (3.45 * 10^2) has a mantissa of 3.45 and an exponent of 2.
 
-In the context of floating-point representation in computers, a number \(x\) is typically represented as:
-
-\[
-x = (-1)^{\text{sign}} \times 1.\text{mantissa} \times 2^{\text{exponent}}
-\]
-
-- The **sign** determines whether the number is positive or negative.
 - The **mantissa** holds the significant digits of the number. Note that the term "mantissa" in the context of floating-point numbers is sometimes also called "significand."
 - The **exponent** scales the number by a power of 2.
 
@@ -394,7 +396,31 @@ For example, in IEEE 754 floating-point standard for base-2 (binary) numbers:
 
 The mantissa determines the precision of the number: the more bits in the mantissa, the more precise the number can be. However, the number of bits in the mantissa is fixed for each floating-point type (float32, float64, etc.), which puts a limitation on how precisely numbers can be represented.
 
-In the context of the Go programming language, when the specification mentions that floating-point constants should be represented with a mantissa of "at least 256 bits," it means that the constants can hold a very high degree of precision, much higher than the typical float32 or float64 types, until they are assigned to a variable or used in an expression that requires a specific type.
+In the context of the Go programming language, when the specification mentions that ***floating-point constants*** should be represented with a mantissa of "at least 256 bits," it means that the constants can hold a very high degree of precision, much higher than the float32 or float64 types, until they are assigned to a variable or used in an expression that requires a specific type.
+
+### e notation
+
+The "e" notation is a shorthand for expressing numbers in scientific notation. It is often used for representing very large or very small numbers more concisely. In this notation, the letter "e" signifies "times ten raised to the power of."
+
+Here's how it works:
+
+- (a * 10^b) is represented as (aeb)
+  
+For example:
+
+- ( 3 * 10^4) would be written as ( 3e4 )
+- ( 2.5 * 10^{-3} ) would be written as ( 2.5e-3 )
+
+The number before the "e" is the mantissa, and the number after the "e" is the exponent. The exponent indicates the power of 10 by which the mantissa should be multiplied.
+
+Here are some examples in Go code:
+
+```go
+const avogadro := 6.022e23  // 6.022 × 10^23
+const electronCharge := 1.602e-19  // 1.602 × 10^-19
+```
+
+The "e" notation can be used for both float32 and float64 types in Go, and the compiler will infer the type based on the context in which the constant is used, or you can specify the type explicitly.
 
 # Code review check
 
