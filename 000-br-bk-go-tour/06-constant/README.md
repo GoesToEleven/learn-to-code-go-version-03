@@ -1,11 +1,11 @@
 
 # "If I miss one day of practice, I notice it. If I miss two days, the critics notice it. If I miss three days, the audience notices it"
-#### ~ Ignacy (Jan) Paderewski, a French philosopher and mathematician. 
+~ Ignacy (Jan) Paderewski, a French philosopher and mathematician. 
 
 ## "An untyped constant has a default type which is the type to which the constant is implicitly converted in contexts where a typed value is required, for instance, in a short variable declaration such as i := 0 where there is no explicit type. The default type of an untyped constant is bool, rune, int, float64, complex128, or string respectively, depending on whether it is a boolean, rune, integer, floating-point, complex, or string constant."
-#### ~ [Go language specification](https://go.dev/ref/spec#Constants)
+~ [Go language specification](https://go.dev/ref/spec#Constants)
 
-## "Implicit conversion is one of the features that make Go both strongly typed and yet convenient to use"
+## "Implicit conversion is one of the features that make Go both strongly typed and yet convenient to use."
 
 # Video
 [SOON TO BE PUBLISHED Here is the video on YouTube]()
