@@ -27,6 +27,9 @@
 1. [Constants have high precision](#constants-have-high-precision)
 1. [Typed constants limit precision](#typed-constants-limit-precision)
 1. [Scientific notation mantissa and e](#scientific-notation-mantissa-and-e)
+1. [Go big with math big](#go-big-with-math-big)
+1. [Width and precision](#width-and-precision)
+1. [Arbitrary precision and math big](#arbitrary-precision-and-math-big)
 1. [Code review check](#code-review-check)
 
 # Terminology
@@ -409,7 +412,7 @@ Here's how it works:
 For example:
 
 - ( 3 * 10^4) would be written as ( 3e4 )
-- ( 2.5 * 10^{-3} ) would be written as ( 2.5e-3 )
+- ( 2.5 * 10^-3) would be written as ( 2.5e-3 )
 
 The number before the "e" is the mantissa, and the number after the "e" is the exponent. The exponent indicates the power of 10 by which the mantissa should be multiplied.
 
@@ -421,6 +424,235 @@ const electronCharge := 1.602e-19  // 1.602 × 10^-19
 ```
 
 The "e" notation can be used for both float32 and float64 types in Go, and the compiler will infer the type based on the context in which the constant is used, or you can specify the type explicitly.
+
+#
+
+The `math/big` package in Go provides arbitrary-precision arithmetic for integers, rational numbers, and floating-point numbers. This package is particularly useful when you need to perform calculations that exceed the limits of Go's built-in numeric types.
+
+Here's a quick rundown of how to use the `math/big` package:
+
+### Integer (`big.Int`)
+
+#### Initialization
+
+You can initialize a `big.Int` variable in several ways:
+
+- Using the `NewInt` function
+- Using `SetInt64` or `SetUint64`
+- Using `SetString`
+
+```go
+x := big.NewInt(42)
+y := new(big.Int).SetInt64(42)
+z := new(big.Int).SetString("42", 10) // Base 10
+```
+
+#### Arithmetic Operations
+
+The `big.Int` type provides methods for various arithmetic operations:
+
+```go
+// Addition
+result := new(big.Int).Add(x, y)
+
+// Subtraction
+result = new(big.Int).Sub(x, y)
+
+// Multiplication
+result = new(big.Int).Mul(x, y)
+
+// Division
+result = new(big.Int).Div(x, y)
+```
+
+### Floating-Point (`big.Float`)
+
+#### Initialization
+
+Initialize `big.Float` similar to `big.Int`:
+
+```go
+f1 := big.NewFloat(3.14)
+f2 := new(big.Float).SetFloat64(3.14)
+```
+
+#### Arithmetic Operations
+
+```go
+// Addition
+resultFloat := new(big.Float).Add(f1, f2)
+
+// Subtraction
+resultFloat = new(big.Float).Sub(f1, f2)
+
+// Multiplication
+resultFloat = new(big.Float).Mul(f1, f2)
+
+// Division
+resultFloat = new(big.Float).Quo(f1, f2)
+```
+
+### Rational (`big.Rat`)
+
+`big.Rat` can be used for rational numbers (fractions).
+
+#### Initialization
+
+```go
+r := big.NewRat(22, 7)
+```
+
+#### Arithmetic Operations
+
+```go
+// Addition, Subtraction, Multiplication, and Division
+resultRat := new(big.Rat).Add(r, r)
+resultRat = new(big.Rat).Sub(r, r)
+resultRat = new(big.Rat).Mul(r, r)
+resultRat = new(big.Rat).Quo(r, r)
+```
+
+### Comparison
+
+The `Cmp` method can be used to compare two big numbers:
+
+```go
+if x.Cmp(y) == 0 {
+    fmt.Println("x and y are equal")
+}
+```
+
+### Conversion
+
+You can convert `big.Int`, `big.Float`, and `big.Rat` to standard Go types, but be careful of overflow and loss of precision:
+
+```go
+intValue := x.Int64()
+floatValue, _ := f1.Float64()
+```
+
+This is a very basic overview, and the package provides a rich set of methods to work with big numbers. You can read the [official package documentation](https://golang.org/pkg/math/big/) for more details.
+
+### Rational numbers, aka, fractions
+
+Rational numbers are numbers that can be expressed as the quotient or fraction a/b  of two integers a and b, where b neq 0. In other words, a rational number is one that can be written as a simple fraction. Both the numerator a and the denominator b must be integers, and the denominator b cannot be zero.
+
+### Examples of Rational Numbers:
+
+1. frac{1}{2} — One-half is a rational number because it can be expressed as a fraction of two integers.
+2. frac{5}{1} — Five is a rational number because 5 = frac{5}{1} .
+3. frac{-3}{4} — Negative numbers can be rational too. Here, -frac{3}{4} is a rational number.
+4. frac{0}{1} — Zero is a rational number because it can be expressed as frac{0}{1} .
+5. 7 — Whole numbers are also rational numbers because they can be written as frac{7}{1} , frac{6}{1} , frac{5}{1} , etc.
+6. frac{22}{7} — This is an approximation of pi and is rational, although pi itself is not rational.
+
+### Examples of Numbers that are NOT Rational:
+
+1. pi — Pi cannot be exactly expressed as a simple fraction, so it's not a rational number.
+2. sqrt{2} — The square root of 2 is an irrational number because it cannot be exactly expressed as a fraction.
+3. e — Euler's number is also irrational.
+
+### In Go with `math/big`
+
+If you want to represent rational numbers in Go, you can use the `big.Rat` type from the `math/big` package. Here is an example:
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+)
+
+func main() {
+	// Create new rational numbers
+	r1 := big.NewRat(22, 7)
+	r2 := big.NewRat(-3, 4)
+
+	// Add r1 and r2
+	sum := new(big.Rat).Add(r1, r2)
+
+	// Print the rational numbers
+	fmt.Println("r1:", r1.FloatString(5))  // 5 digits after the decimal point
+	fmt.Println("r2:", r2.FloatString(5))
+	fmt.Println("sum:", sum.FloatString(5))
+}
+```
+
+In this example, we created two rational numbers frac{22}{7}  and -frac{3}{4}  and then added them together. The `FloatString` method is used to convert the rational number to a string with a specified number of digits after the decimal point.
+
+# Width and precision
+
+With floats, you can specify the precision you want using the `%f` format specifier with a number indicating the number of digits after the decimal point.
+
+For example, you could use `%.15f` to print up to 15 significant digits:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	x := 1.0 / 3.0
+	fmt.Printf("%.15f\n", x)
+}
+```
+
+You might also consider using the `strconv.FormatFloat` function from the standard library, which allows more control over the format:
+
+```go
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main() {
+	x := 1.0 / 3.0
+	s := strconv.FormatFloat(x, 'f', 15, 64)
+	fmt.Println(s)
+}
+```
+
+Both of these methods are limited by the inherent precision of `float64`. If you need more precision, you could use arbitrary-precision arithmetic like the `math/big` package's `big.Float` type, but keep in mind that this comes with a performance cost.
+
+# Arbitrary precision and math big
+
+The term "arbitrary precision" refers to the capability of handling numbers with an arbitrary number of digits, limited only by the available system memory, rather than a fixed number of digits that would be determined by the data type size. This is in contrast to standard fixed-precision numeric types like integers (`int`, `int64`, etc.) or floating-point numbers (`float32`, `float64`) in most programming languages, which have a fixed range and level of precision.
+
+In the context of programming, arbitrary-precision arithmetic is often implemented using specialized software libraries that can handle very large integers or very accurate floating-point numbers. These are useful for applications requiring very high precision or the ability to handle very large numbers, such as cryptography, scientific computing, financial applications, and more.
+
+For example, in Go, the `math/big` package provides arbitrary-precision arithmetic for integers (`big.Int`), floating-point numbers (`big.Float`), and rational numbers (`big.Rat`).
+
+Here is a simple Go example using `big.Int` to calculate factorial of 100:
+
+```go
+package main
+
+import (
+	"fmt"
+	"math/big"
+)
+
+func factorial(n int64) *big.Int {
+	result := big.NewInt(1)
+	for i := int64(1); i <= n; i++ {
+		result.Mul(result, big.NewInt(i))
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(factorial(100))
+}
+```
+
+The output will be a very large integer that couldn't be handled by Go's built-in integer types. Similarly, `big.Float` can be used to perform high-precision floating-point calculations.
+
+With arbitrary precision, you can continue to get more and more accurate results (or handle larger and larger numbers) as long as you have the memory to store the calculations. However, arbitrary-precision arithmetic is typically much slower than fixed-precision arithmetic, due to the added complexity of handling numbers with a dynamic number of digits.
 
 # Code review check
 
