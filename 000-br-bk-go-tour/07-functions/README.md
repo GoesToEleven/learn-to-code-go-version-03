@@ -18,6 +18,7 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. Multiple returns and the blank identifier
 1. Anonymous functions (closures)
 1. Functions are a type: you can use functions as parameters, arguments, & returns
+1. Type error and error checking
 1. Defer
 1. Panic
 
@@ -38,6 +39,7 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. [Multiple returns with error](#multiple-returns-with-error)
 1. [Type error error checking and returning errors](#type-error-error-checking-and-returning-errors)
 1. [Code review check](#code-review-check)
+1. [Hachikō waited ❤️ ♥️ ⽝](#hachikō-waited)
 
 # Function overview
 
@@ -322,7 +324,7 @@ func CountWords() {
 2. [Todd McLeod courses](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0)
     - click on my user icon for more courses
 
-# Hachikō
+# Hachikō waited
 
 ![Hachikō](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/07-functions/image/hachiko.png)
 

@@ -86,13 +86,21 @@ func main() {
 	p1.sayHello()
 
 	// #11
+	// sequential exucution - wysiwyg
+	n := 42
+	f11 := func() {fmt.Println("f11", n)}
+	f11()
+	n = 43
+	f11()
+
+	// #12
 	// multiple returns - error
 	sofun.CountWords()
 }
 
 // #0 
 func Hachikō() {
-	fmt.Println("I waited.")
+	fmt.Println("I waited. Woof, woof!! ❤️ ♥️ ⽝")
 }
 
 // #1
