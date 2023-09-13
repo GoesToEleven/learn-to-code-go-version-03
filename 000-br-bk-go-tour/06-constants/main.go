@@ -63,9 +63,9 @@ func main() {
 	const n = 1 / 3.0 // KindFloat(1) / KindFloat(3.0)
 	fmt.Println(n)
 
-	const o = 1 / 3 // KindInt(1) / KindInt(3)
-	fmt.Println("--------WE ARE HERE 1 -------")
-	fmt.Println(o)
+	// const o = 1 / 3 // KindInt(1) / KindInt(3)
+	// fmt.Println("--------WE ARE HERE 1 -------")
+	// fmt.Println(o)
 
 	// typed and untyped constants must have like types to perform math.
 	const y int8 = 1

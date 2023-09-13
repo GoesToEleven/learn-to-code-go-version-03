@@ -1,5 +1,5 @@
 
-# "If I miss one day of practice, I notice it. If I miss two days, the critics notice it. If I miss three days, the audience notices it"
+# "If I miss one day of practice, I notice it. If I miss two days, the critics notice it. If I miss three days, the audience notices it."
 ~ Ignacy (Jan) Paderewski, pianist and politician, he signed the Treaty of Versailles, which ended World War I.
 
 ### "Implicit conversion is one of the features that make Go both strongly typed and convenient to use."
