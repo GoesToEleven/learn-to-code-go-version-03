@@ -38,7 +38,6 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. [Function as a Type](#function-as-a-type)
 1. [Defer and Panic](#defer-and-panic)
 1. [Closures](#closures)
-1. [Multiple returns with error](#multiple-returns-with-error)
 1. [Type error error checking and returning errors](#type-error-error-checking-and-returning-errors)
 1. [Syntactic sugar](#syntactic-sugar)
 1. [Code review check](#code-review-check)
