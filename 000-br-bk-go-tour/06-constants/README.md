@@ -669,6 +669,6 @@ With arbitrary precision, you can continue to get more and more accurate results
 # "The very essence of success is practice."
 #### ~ Ignacy (Jan) Paderewski
 
-![Ignacy (Jan) Paderewski](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/06-garbage-collector/images/Ignacy_Jan_Paderewski_-_Project_Gutenberg_eText_15604.png)
+![Ignacy (Jan) Paderewski](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/06-constants/image/ip.png)
 
-source: https://upload.wikimedia.org/wikipedia/commons/d/d4/Ignacy_Jan_Paderewski_-_Project_Gutenberg_eText_15604.png
+source: https://en.wikipedia.org/wiki/Ignacy_Jan_Paderewski
