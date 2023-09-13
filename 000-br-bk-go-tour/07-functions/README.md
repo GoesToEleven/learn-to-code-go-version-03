@@ -16,11 +16,12 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. No named returns
 1. Variadic parameters, variadic arguments, and unfurling a slice
 1. Multiple returns and the blank identifier
-1. Anonymous functions (closures)
+1. Anonymous functions
 1. Functions are a type: you can use functions as parameters, arguments, & returns
-1. Type error and error checking
 1. Defer
 1. Panic
+1. Closures
+1. Type error and error checking
 1. Syntactic sugar
 
 # Table of Contents
