@@ -10,6 +10,7 @@ This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list
 1. [readme: Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) & [video soon to be published]()
 1. [readme: Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) & [video soon to be published]()
 1. [readme: Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants) & [video soon to be published]()
+1. [readme: functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions) & [video soon to be published]()
 1. [Coupons for Go courses](coupons-for-go-courses)
 
 # Coupons for Go courses
@@ -58,6 +59,9 @@ func createUser() *user {
 }
     return u
 ``` 
+
+- named returns decrease readability
+    - an empty `return` is not idiomatic
 
 [readme: Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants)
 - typed constants decrease precision and flexibility
