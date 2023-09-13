@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"mymodule/000-br-bk-go-tour/07-functions/sofun"
+	"mymodule/000-br-bk-go-tour/07-functions/syntaticsugar"
 )
 
 func main() {
@@ -95,7 +96,13 @@ func main() {
 
 	// #12
 	// multiple returns - error
+	fmt.Println("----------- MULT RETURNS -----------")
 	sofun.CountWords()
+
+	// #13
+	// syntatic sugar
+	fmt.Println("----------- SUGAR -----------")
+	syntaticsugar.RunSugar()
 }
 
 // #0 

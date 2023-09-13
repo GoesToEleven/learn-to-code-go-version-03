@@ -21,6 +21,7 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. Type error and error checking
 1. Defer
 1. Panic
+1. Syntactic sugar
 
 # Table of Contents
 
@@ -38,6 +39,7 @@ Go addressed these issues by attempting to combine the ease of programming of an
 1. [Closures](#closures)
 1. [Multiple returns with error](#multiple-returns-with-error)
 1. [Type error error checking and returning errors](#type-error-error-checking-and-returning-errors)
+1. [Syntactic sugar](#syntactic-sugar)
 1. [Code review check](#code-review-check)
 1. [Hachikō waited ❤️ ♥️ ⽝](#hachikō-waited)
 
@@ -310,7 +312,46 @@ func CountWords() {
 	fmt.Printf("Total words: %d\n", count)
 }
 ```
+# Syntactic sugar
 
+In computer science, "syntactic sugar" refers to syntax in a programming language that is designed to make things easier to read or express. It doesn't introduce a new feature in the language but provides a more convenient way of utilizing one that already exists.
+
+In the context of Go, one of the syntactic sugar features is automatically dereferencing pointers to structs when accessing fields or calling methods.
+
+Let's look at a simple example:
+
+```go
+type user struct {
+	first string
+}
+
+func ffUser(s string) (*user, error) {
+	u := user{s}
+	return &u, nil
+}
+
+func RunSugar() {
+
+	u, err := ffUser("Jenny")
+	if err != nil {
+		log.Fatalf("error creating user %s \n", err)
+	}
+
+	// address of a struct
+	fmt.Println(u)
+	fmt.Printf("%T \n", u)
+	fmt.Println((*u).first)
+
+	// syntatic sugar
+	fmt.Println(u.first)
+}
+```
+
+Here, we have a `User` struct with a `First` field. We create a pointer `p` to a value `u` of type `User`. Normally, to access fields in a struct through a pointer, you would have to dereference the pointer using the `*` operator, like so: `(*p).First`.
+
+However, Go allows you to use syntactic sugar to skip this step, directly using `p.First` instead. The Go runtime automatically understands that you want to dereference the pointer and access the `First` field of the underlying struct. This makes the code easier to read and write.
+
+In summary, in Go, you can access fields from a pointer to a struct as if you were directly working with the struct, thanks to this syntactic sugar.
 
 # Code review check
 

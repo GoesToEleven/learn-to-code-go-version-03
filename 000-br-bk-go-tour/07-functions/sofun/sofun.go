@@ -9,7 +9,7 @@ import (
 
 func CountWords() {
 	// Open the file
-	file, err := os.Open("gatsby.txt")
+	file, err := os.Open("./sofun/gatsby.txt")
 	if err != nil {
 		log.Fatalf("error opening file: %s \n", err)
 	}
