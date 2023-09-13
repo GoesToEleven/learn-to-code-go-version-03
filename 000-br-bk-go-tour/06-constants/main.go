@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/big"
 	"reflect"
+	"strconv"
 )
 
 const a = 42
@@ -26,6 +27,7 @@ func main() {
 	fmt.Println(d)
 	fmt.Println(e)
 	fmt.Println(f)
+	fmt.Printf("%b \n", f)
 	fmt.Println(g)
 	fmt.Println(h)
 	fmt.Printf("%T \n", h)
@@ -67,7 +69,8 @@ func main() {
 	// typed and untyped constants must have like types to perform math.
 	const y int8 = 1
 	const z = 2 * y // int8(2) * int8(1)
-	fmt.Println(z)
+	fmt.Println("--------WE ARE HERE-------")
+	fmt.Printf("%T \t %v \n", z, z)
 
 	const aaa = 42
 	const bbb = 43.01
@@ -83,21 +86,22 @@ func main() {
 	fmt.Println("-------- FLOAT ME -------")
 	fm := floatMe(30)
 	fmt.Printf("%T \n", fm)
-	
+
 	fmt.Println("-------- Max Int -------")
 	// Max integer value on 64 bit architecture
 	const maxInt = 9223372036854775807
 	fmt.Println("MAXINT", maxInt)
+	fmt.Println("MAXINT", addCommas(strconv.Itoa(maxInt)))
 	fmt.Printf("MAXINT \t %T \n", maxInt)
-	
+
 	// Much larger value than int64
 	const bigger = 9223372036854775808543522345
 	fmt.Println("BIGGER", bigger*.1)
 	fmt.Printf("BIGGER \t %T \n", bigger*.1)
-	
+
 	// ERROR: typed constant int64 creates overflow
 	// const biggerInt int64 = 9223372036854775808543522345
-	
+
 	fmt.Println("-------- iota -------")
 	const (
 		aa = iota
