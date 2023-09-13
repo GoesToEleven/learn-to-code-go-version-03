@@ -10,6 +10,9 @@ func main() {
 	// syntax
 	// func (r receiver) identifier(parameter(s)) returns { code block }
 
+	// #0
+	defer Hachikō()
+
 	// #1
 	// basic
 	hello()
@@ -45,13 +48,25 @@ func main() {
 	x := param6(xi...)
 	fmt.Println(x)
 
-	// #8
+	// #8.1
 	// anonymous func
 	add := func(x, y int) int {
 		return x + y
 	}
 	af := add(3, 5)
 	fmt.Println(af)
+
+	// #8.2
+	// anonymous func
+	func() {
+		fmt.Println("Hey, I'm ANONYMOUS!")
+	}()
+
+	// #8.3
+	// anonymous func
+	fmt.Println(func(x, y int) int {
+		return x + y
+	}(3, 5))
 
 	// #9
 	// closure
@@ -73,6 +88,11 @@ func main() {
 	// #11
 	// multiple returns - error
 	sofun.CountWords()
+}
+
+// #0 
+func Hachikō() {
+	fmt.Println("I waited.")
 }
 
 // #1

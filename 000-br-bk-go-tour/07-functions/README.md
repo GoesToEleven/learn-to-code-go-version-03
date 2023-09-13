@@ -322,9 +322,14 @@ func CountWords() {
 2. [Todd McLeod courses](https://www.udemy.com/course/learn-how-to-code/?referralCode=BE659D12A78B2C0DFFB0)
     - click on my user icon for more courses
 
-# "The very essence of success is practice."
-#### ~ Ignacy (Jan) Paderewski
+# Hachikō
 
-![Ignacy (Jan) Paderewski](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/06-constants/image/ip.png)
+![Hachikō](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/06-constants/image/ip.png)
 
-source: https://en.wikipedia.org/wiki/Ignacy_Jan_Paderewski
+The Hachikō statue in Shibuya, Tokyo, is one of the city's most famous landmarks. It commemorates Hachikō, an Akita dog who is remembered for his remarkable loyalty to his owner. The story goes that Hachikō would wait for his owner, Hidesaburo Ueno, every day at Shibuya Station to return from work. Unfortunately, Ueno passed away suddenly in 1925, but Hachikō continued to wait at the station for his owner every day until his own death nearly 10 years later in 1935. This act of devotion touched many people, and Hachikō became a national symbol of loyalty and fidelity.
+
+The bronze statue was erected in 1934, a year before Hachikō's death, near the Shibuya Station where he waited. 
+
+![Hachikō](https://github.com/GoesToEleven/learn-to-code-go-version-03/blob/main/000-br-bk-go-tour/06-constants/image/ip.png)
+
+photo source: https://en.wikipedia.org/wiki/File:Faithful_Dog_Hachiko_Photo.png
