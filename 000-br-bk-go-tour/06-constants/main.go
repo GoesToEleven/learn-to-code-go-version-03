@@ -64,6 +64,7 @@ func main() {
 	fmt.Println(n)
 
 	const o = 1 / 3 // KindInt(1) / KindInt(3)
+	fmt.Println("--------WE ARE HERE 1 -------")
 	fmt.Println(o)
 
 	// typed and untyped constants must have like types to perform math.
@@ -122,7 +123,7 @@ func main() {
 	fmt.Println("iota ", ee)
 	fmt.Println("iota ", ff)
 
-	fmt.Printf("%b \n", 1<<10)
+	fmt.Printf("%b \t %d \n", 1<<3, 1<<3)
 	/*
 		1 << 10
 		This is a bitwise left shift operation.
