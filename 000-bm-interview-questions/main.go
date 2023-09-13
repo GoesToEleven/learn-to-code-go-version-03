@@ -87,6 +87,7 @@ func main() {
 	xs := []string{}
 	
 	`)
+	questions = append(questions, "What are typed and untyped constants, which do you prefer and why, and how do they relate to numeric literals?")
 	questions = append(questions, "How does Go handle error handling compared to other languages?")
 	questions = append(questions, "Conversion or casting, and why?")
 	questions = append(questions, "What is nil?")
