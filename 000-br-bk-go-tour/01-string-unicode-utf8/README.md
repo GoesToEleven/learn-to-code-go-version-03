@@ -1,7 +1,7 @@
 # "Persisently, patiently, you are bound to succeed."
 
 # Video
-[Here is the free video on YouTube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
+[Here is the video on youtube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
 
 # Takeaways
 1. ascii and unicode are coding schemes

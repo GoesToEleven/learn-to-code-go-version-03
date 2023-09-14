@@ -1,17 +1,17 @@
 # Welcome
 
-This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list=PLSak_q1UXfPqSyH2r5DnCXUJKIlbrLVGn) are here to help you learn the Go programming language!
+This repo and [the videoS on youtube](https://www.youtube.com/playlist?list=PLSak_q1UXfPqSyH2r5DnCXUJKIlbrLVGn) are here to help you learn the Go programming language!
 
 # Table of Contents
 1. [Strings, unicode, UTF-8](/000-br-bk-go-tour/01-string-unicode-utf8/) 
-    - [FREE VIDEO on YouTube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
+    - [video on youtube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
 1. [Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) 
-    - [video #1 FREE on YouTube](https://youtu.be/HBtu9Dsjp80)
-    - [video #2 FREE on YouTube](https://youtu.be/ut_REn0xFPM) 
+    - [video #1 on youtube](https://youtu.be/HBtu9Dsjp80)
+    - [video #2 on youtube](https://youtu.be/ut_REn0xFPM) 
 1. [Git & GitHub: Creating Your First Pull Request](000-br-bk-go-tour/02b-git-github/Todd-McLeod-Course-Learn-Git-GitHub-Beginner-Intermediate-Concepts.pdf)
-    - [FREE VIDEO on YouTube](https://youtu.be/VZeOcX2DPwo) 
+    - [video on youtube](https://youtu.be/VZeOcX2DPwo) 
 1. [Design Guidelines & Code Reviews](000-br-bk-go-tour/02c-design-guides)
-    - [FREE VIDEO on YouTube](https://youtu.be/WkQFrctSDsc) 
+    - [video on youtube](https://youtu.be/WkQFrctSDsc) 
 1. [Variables, values, & types](/000-br-bk-go-tour/03-variables/) 
     - [video soon to be published]
 1. [Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) 
