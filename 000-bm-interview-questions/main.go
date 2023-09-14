@@ -30,7 +30,7 @@ func main() {
 	questions = append(questions, `What is embedding a struct and inner-type promotion?`)
 
 	questions = append(questions, `Fix this code so that type HUMAN is embedded in type SECRETAGENT
-	
+
 	type human struct {
 		name  string
 		email string
@@ -42,7 +42,6 @@ func main() {
 	}
 
 	`)
-	// not fixed:
 	// fixed: https://go.dev/play/p/zO0ZBicZM7u
 
 	questions = append(questions, `Fix this code working with a map:
@@ -73,6 +72,58 @@ func main() {
 	// not fixed: https://go.dev/play/p/04NLYE1I7W4
 	// fixed: https://go.dev/play/p/guYNTv-lfFi
 
+	questions = append(questions, `What will this code print:
+	
+	func main() {
+		sports := make([]string, 5)
+		sports[0] = "ski"
+		sports[1] = "surf"
+		sports[2] = "swim"
+		sports[3] = "sail"
+		sports[4] = "sumo wrestling"
+	
+		xs := sports[1:3]
+		xs[0] = "CHANGED"
+
+		inspectSlice(sports)
+		inspectSlice(xs)
+	}
+	
+	func inspectSlice(xs []string) {
+		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
+		for i := range xs {
+			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
+		}
+	}
+	`)
+	// https://go.dev/play/p/Rw5cmIrXlwT
+
+	questions = append(questions, `Fix this code so that when xs[0] is changed this doesn't change 'sports':
+	
+	func main() {
+		sports := make([]string, 5)
+		sports[0] = "ski"
+		sports[1] = "surf"
+		sports[2] = "swim"
+		sports[3] = "sail"
+		sports[4] = "sumo wrestling"
+	
+		xs := sports[1:3]
+		xs[0] = "CHANGED"
+		inspectSlice(sports)
+		inspectSlice(xs)
+	}
+	
+	func inspectSlice(xs []string) {
+		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
+		for i := range xs {
+			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
+		}
+	}
+	`)
+	// not fixed: https://go.dev/play/p/Rw5cmIrXlwT
+	// fixed: https://go.dev/play/p/N-32AbjJJZw
+
 	// ------------------------------------------------
 	// INTERMEDIATE QUESTIONS
 	// ------------------------------------------------
@@ -82,9 +133,27 @@ func main() {
 	questions = append(questions, `Somebody says that 'a slice is a three word data structure' - what does this mean?`)
 	questions = append(questions, `Tell me the difference between a nil slice and an empty slice:
 	
-	var xs []string
-	// vs
-	xs := []string{}
+
+	package main
+
+	import (
+		"fmt"
+	)
+
+	func main() {
+		var a []string
+		b := []string{}
+
+		fmt.Println(a, len(a), cap(a), a == nil)  // Output: [] 0 0 true
+		fmt.Println(b, len(b), cap(b), b == nil)  // Output: [] 0 0 false
+
+		a = append(a, "item")
+		b = append(b, "item")
+
+		fmt.Println(a, len(a), cap(a), a == nil)  // Output: [item] 1 1 false
+		fmt.Println(b, len(b), cap(b), b == nil)  // Output: [item] 1 1 false
+	}
+
 	
 	`)
 	questions = append(questions, "What are typed and untyped constants, which do you prefer and why, and how do they relate to numeric literals?")
@@ -117,12 +186,17 @@ func main() {
 
 	questions = append(questions, `Will this print the same for both print statements:
 	
+	type person struct {
+		age int
+	}
+
 	people := make([]person, 2)
 
 	p1 := people[1]
 	p1.age++
-	fmt.Println(p1.age)
-	fmt.Println(people[1].age)
+	
+	fmt.Println(p1.age)			// ???
+	fmt.Println(people[1].age)	// ???
 	
 	`)
 	// initial code: https://go.dev/play/p/CgbIkKrWS0s
@@ -182,6 +256,26 @@ func main() {
 
 	`)
 
+	questions = append(questions, `Explain what this code will print:
+	
+	// var sports [5]string
+	sports := make([]string, 5)
+	sports[0] = "ski"
+	sports[1] = "surf"
+	sports[2] = "swim"
+	sports[3] = "sail"
+	sports[4] = "sumo wrestling"
+
+	for i, v := range sports {
+		sports[i] = "biking"
+		fmt.Println(v)			// ???
+	}
+
+	fmt.Println(sports)			// ???
+	
+	`)
+	// https://go.dev/play/p/ifhWmIY5I-H
+
 	// ------------------------------------------------
 	// ADVANCED QUESTIONS
 	// ------------------------------------------------
@@ -207,154 +301,19 @@ func main() {
 		people := make([]person, 2)
 	
 		p1 := &people[1]
-		fmt.Printf("%p \n", p1)
-		fmt.Printf("%p \n", &people[1])
 		p1.age++
-		fmt.Println(p1.age)
-		fmt.Println(people[1].age)
-		fmt.Println("len, cap", len(people), cap(people))
 	
 		// Add a new person
 		people = append(people, person{})
-		fmt.Println("len, cap", len(people), cap(people))
 	
 		// Add another year for p1
 		p1.age++
-		fmt.Printf("%p \n", p1)
-		fmt.Printf("%p \n", &people[1])
 		
+		fmt.Println(people[1].age) 	// ???
+		fmt.Println(p1.age)			// ???
 
 	`)
-	// https://go.dev/play/p/bSxwLO0mRNH
-
-	questions = append(questions, `Fix this code so that it increments age correctly:
-	
-	type person struct {
-		age int
-	}
-	
-	func main() {
-		people := make([]person, 2)
-	
-		p1 := &people[1]
-		fmt.Printf("%p \n", p1)
-		fmt.Printf("%p \n", &people[1])
-		p1.age++
-		fmt.Println(p1.age)
-		fmt.Println(people[1].age)
-		fmt.Println("len, cap", len(people), cap(people))
-	
-		// Add a new person
-		people = append(people, person{})
-		fmt.Println("len, cap", len(people), cap(people))
-	
-		// Add another year for p1
-		p1.age++
-		fmt.Printf("%p \n", p1)
-		fmt.Printf("%p \n", &people[1])
-		fmt.Println(people[1].age)
-	}
-
-	`)
-	// not fixed: https://go.dev/play/p/bSxwLO0mRNH
-	// fixed: https://go.dev/play/p/Tpsl2S4CtPf
-
-	questions = append(questions, `Explain what this code will print:
-	
-	// var sports [5]string
-	sports := make([]string, 5)
-	sports[0] = "ski"
-	sports[1] = "surf"
-	sports[2] = "swim"
-	sports[3] = "sail"
-	sports[4] = "sumo wrestling"
-
-	for i, v := range sports {
-		sports[i] = "biking"
-		fmt.Println(v)
-	}
-
-	fmt.Println(sports)
-	
-	`)
-	// https://go.dev/play/p/ifhWmIY5I-H
-
-	questions = append(questions, `What will this code print:
-	
-	func main() {
-		sports := make([]string, 5)
-		sports[0] = "ski"
-		sports[1] = "surf"
-		sports[2] = "swim"
-		sports[3] = "sail"
-		sports[4] = "sumo wrestling"
-	
-		xs := sports[1:3:3]
-		xs[0] = "CHANGED"
-
-		inspectSlice(sports)
-		inspectSlice(xs)
-	}
-	
-	func inspectSlice(xs []string) {
-		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
-		for i := range xs {
-			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
-		}
-	}
-	`)
-	// https://go.dev/play/p/-ozMYP1qL4l
-
-	questions = append(questions, `Fix this code so that when xs[0] is changed this doesn't change 'sports':
-	
-	func main() {
-		sports := make([]string, 5)
-		sports[0] = "ski"
-		sports[1] = "surf"
-		sports[2] = "swim"
-		sports[3] = "sail"
-		sports[4] = "sumo wrestling"
-	
-		xs := sports[1:3:3]
-		xs[0] = "CHANGED"
-		inspectSlice(sports)
-		inspectSlice(xs)
-	}
-	
-	func inspectSlice(xs []string) {
-		fmt.Printf("len: %v \ncap: %v \n", len(xs), cap(xs))
-		for i := range xs {
-			fmt.Printf("%p \t %v \n", &xs[i], xs[i])
-		}
-	}
-	`)
-	// not fixed: https://go.dev/play/p/-ozMYP1qL4l
-	// fixed: https://go.dev/play/p/GG3GGfD7ux2
-
-	questions = append(questions, `Fix this code with a pool of goroutine workers:
-	
-	g := runtime.GOMAXPROCS(0)
-	ch := make(chan string, g)
-	for c := 0; c < g; c++ {
-		go func() {
-			for d := range ch {
-				fmt.Printf("child %d : recv'd signal : %s\n", child, d)
-			}
-			fmt.Printf("child %d : recv'd shutdown signal\n", child)
-		}()
-	}
-
-	const work = 10
-	for w := 0; w < work; w++ {
-		ch <- "data"
-		fmt.Println("parent : sent signal :", w)
-	}
-
-	close(ch)
-	
-	`)
-	// not fixed: https://go.dev/play/p/a0Uwq9CtTeF
-	// fixed: https://go.dev/play/p/73d_-GdYDBt
+	// https://go.dev/play/p/PZlMtBwXQhK
 
 	// ------------------------------------------------
 	// TOOLING  QUESTIONS

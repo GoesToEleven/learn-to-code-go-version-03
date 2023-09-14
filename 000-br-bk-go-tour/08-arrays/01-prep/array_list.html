@@ -1,0 +1,38 @@
+<ul>
+<li>CPU caches works by caching main memory on cache lines.</li>
+<li>Cache lines today are either 32 or 64 bytes wide depending on the hardware.</li>
+<li>Cores do not access main memory directly. They tend to only have access their local caches.</li>
+<li>Both data and instructions are stored in the caches.</li>
+<li>Cache lines are shuffled down L1-&gt;L2-&gt;L3 as new cache lines need to be stored in the caches.</li>
+<li>Hardware likes to traverse data and instructions linearly along cache lines.</li>
+<li><p>Main memory is built on relatively fast cheap memory. Caches are built on very fast expensive memory.</p>
+</li>
+<li><p>Access to main memory is incredibly slow, we need the cache.</p>
+<ul>
+<li>Accessing one byte from main memory will cause an
+entire cache line to be read and cached.</li>
+<li>Writes to one byte in a cache line requires the 
+entire cache line to be written.</li>
+</ul>
+</li>
+<li><p>Small = Fast</p>
+<ul>
+<li>Compact, well localized code that fits in cache is fastest.</li>
+<li>Compact data structures that fit in cache are fastest.</li>
+<li>Traversals touching only cached data is the fastest.</li>
+</ul>
+</li>
+<li><p>Predictable access patterns matter.</p>
+<ul>
+<li>Whenever it is practical, you want to employ a linear array traversal.</li>
+<li>Provide regular patterns of memory access.</li>
+<li>Hardware can make better predictions about required memory.</li>
+</ul>
+</li>
+<li><p>Cache misses can result in TLB cache misses as well.</p>
+<ul>
+<li>Cache of translations of a virtual address to a physical address.</li>
+<li>Waiting on the OS to tell us where the memory is.</li>
+</ul>
+</li>
+</ul>
