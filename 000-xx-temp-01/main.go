@@ -26,6 +26,12 @@ func main() {
 	fmt.Println(p2.Age)
 	fmt.Println(p2.RunsPtr())
 	fmt.Println(p2.Age)
+
+	p3 := &Person{Age: 55}
+    p4 := p3        // Both point to the same data
+	fmt.Println(p3, p4)
+    p4.Age = 57     // Affects both p1 and p2
+	fmt.Println(p3, p4)
 }
 
 type Person struct {
