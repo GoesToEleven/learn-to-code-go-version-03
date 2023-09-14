@@ -16,8 +16,9 @@ F
 
 # Code review check
 
-### N
-- n
+### No named returns
+- named returns decrease readability
+    - an empty `return` is not idiomatic
 
 # Coupons for Go courses
 1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce)  
