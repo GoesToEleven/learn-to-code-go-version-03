@@ -1,4 +1,5 @@
 # "A coach is someone who will tell you what you don't want to hear, and show you what you don't want to see, so that you can be who you want to be."
+~ [Bill Campbell - The Trillion Dollar Coach](https://amzn.to/48clXDp)
 
 # Video
 [video on youtube](https://youtu.be/WkQFrctSDsc)
