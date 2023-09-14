@@ -8,15 +8,20 @@ This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list
 1. [Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) 
     - [video #1 FREE on YouTube](https://youtu.be/HBtu9Dsjp80)
     - [video #2 FREE on YouTube](https://youtu.be/ut_REn0xFPM) 
-1. [video: Ultimate Go Tour #3 ❤️ Creating Your First Pull Request](https://youtu.be/VZeOcX2DPwo) 
-    - there is no readme for this one.
-1. [video: Ultimate Go Tour #4 ❤️ Design Guidelines & Code Reviews](https://youtu.be/WkQFrctSDsc) 
-    - there is no readme for this one.
-1. [Variables, values, & types](/000-br-bk-go-tour/03-variables-01/) & [video soon to be published]
-1. [Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) & [video soon to be published]
-1. [Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) & [video soon to be published]
-1. [Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants) & [video soon to be published]
-1. [functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions) & [video soon to be published]
+1. [Git & GitHub: Creating Your First Pull Request](000-br-bk-go-tour/02b-git-github/Todd-McLeod-Course-Learn-Git-GitHub-Beginner-Intermediate-Concepts.pdf)
+    - [FREE VIDEO on YouTube](https://youtu.be/VZeOcX2DPwo) 
+1. [Design Guidelines & Code Reviews](000-br-bk-go-tour/02c-design-guides)
+    - [FREE VIDEO on YouTube](https://youtu.be/WkQFrctSDsc) 
+1. [Variables, values, & types](/000-br-bk-go-tour/03-variables/) 
+    - [video soon to be published]
+1. [Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) 
+    - [video soon to be published]
+1. [Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) 
+    - [video soon to be published]
+1. [Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants) 
+    - [video soon to be published]
+1. [functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions) 
+    - [video soon to be published]
 1. [Coupons for Go courses](coupons-for-go-courses)
 
 # Coupons for Go courses

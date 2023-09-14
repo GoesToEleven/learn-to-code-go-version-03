@@ -9,9 +9,12 @@
 # Table of Contents
 
 1. [Mechanics](#mechanics)
-1. [Looping considerations](#looping-considerations)
-1. [Pointer and value semantics](#pointer-and-value-semantics)
+1. [The for range clause](#the-for-range-clause)
 1. []()
+1. []()
+1. []()
+1. []()
+1. [Pointer and value semantics](#pointer-and-value-semantics)
 1. []()
 1. []()
 1. []()
@@ -116,7 +119,65 @@ var matrix [3][3]int // 3x3 array
 
 Arrays in Go are straightforward but rigid in their structure, which often leads Go developers to use slices for more flexible operations. However, arrays are still useful for performance-sensitive tasks or when you know the size won't change.
 
-# Looping considerations
+# The for range clause
+
+The `for range` clause is a convenient way to iterate over arrays (as well as other iterable data structures like slices, maps, and channels). It offers a simplified syntax for looping and provides easy access to both the index and the value of each element in the array.
+
+Here's a quick overview of how you can use `for range` with arrays.
+
+### Getting Both Index and Value
+
+You can obtain both the index and the value of each element in the array like this:
+
+```go
+arr := [5]int{1, 2, 3, 4, 5}
+for i, v := range arr {
+    fmt.Println(i, v)
+}
+```
+
+In this example, the variables `i` and `v` get the index and value of each element in the array `arr`, respectively.
+
+### Getting Only the Index
+
+If you're only interested in the index, you can omit the second variable:
+
+```go
+arr := [5]int{1, 2, 3, 4, 5}
+for i := range arr {
+    fmt.Println(i)
+}
+```
+
+### Getting Only the Value
+
+If you're only interested in the value, you can use an "blank identifier" underscore `_` to ignore the index:
+
+```go
+arr := [5]int{1, 2, 3, 4, 5}
+for _, v := range arr {
+    fmt.Println(v)
+}
+```
+
+### Modifying Array Elements
+
+It's worth remembering that everyting in Go is PASS BY VALUE. When you use the `for range` loop, a copy of the element in the array is assigned to `v`. Modifying `v` will not affect the array. If you need to modify the array elements, you must use the index to access the array directly.
+
+Here's an example:
+
+```go
+arr := [5]int{1, 2, 3, 4, 5}
+for i := range arr {
+    arr[i] = 777
+}
+```
+
+This will set each element in the array `arr` to 777.
+
+### Summary
+
+The `for range` clause offers an idiomatic and readable way to iterate over arrays. It allows you to access both the index and value, or either one, depending on what you need for your specific task. It makes the code cleaner and more straightforward, but remember that everyting in Go is PASS BY VALUE. This means that the range clause gives you a new variable, `v` in our example, with an array element VALUE assigned to it. To modify an element in an array, reference that element by index position in the array.
 
 # Pointer and value semantics
 

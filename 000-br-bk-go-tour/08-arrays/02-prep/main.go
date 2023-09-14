@@ -37,6 +37,12 @@ func main() {
 		animals[i] = "animals changed"
 	}
 	fmt.Println("ANIMALS", animals)
+
+	arr := [5]int{1, 2, 3, 4, 5}
+	for i := range arr {
+		arr[i] = 777
+	}
+	fmt.Println(arr)
 }
 
 /*
