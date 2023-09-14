@@ -8,9 +8,9 @@ This repo and [the videoS on youtube](https://www.youtube.com/playlist?list=PLSa
 1. [Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) 
     - [video #1 on youtube](https://youtu.be/HBtu9Dsjp80)
     - [video #2 on youtube](https://youtu.be/ut_REn0xFPM) 
-1. [Git & GitHub: Creating Your First Pull Request](000-br-bk-go-tour/02b-git-github/Todd-McLeod-Course-Learn-Git-GitHub-Beginner-Intermediate-Concepts.pdf)
+1. [Git & GitHub: Creating Your First Pull Request](/000-br-bk-go-tour/02b-git-github/Todd-McLeod-Course-Learn-Git-GitHub-Beginner-Intermediate-Concepts.pdf)
     - [video on youtube](https://youtu.be/VZeOcX2DPwo) 
-1. [Design Guidelines & Code Reviews](000-br-bk-go-tour/02c-design-guides)
+1. [Design Guidelines & Code Reviews](/000-br-bk-go-tour/02c-design-guides)
     - [video on youtube](https://youtu.be/WkQFrctSDsc) 
 1. [Variables, values, & types](/000-br-bk-go-tour/03-variables/) 
     - [video soon to be published]
