@@ -20,7 +20,7 @@
 1. [Size is part of the type](#size-is-part-of-the-type)
 1. [Data semantics](#data-semantics)
 1. [Value semantics and pointer semantics](#value-semantics-and-pointer-semantics)
-1. [#Code review check](#code-review-check)
+1. [Code review check](#code-review-check)
 
 # Mechanics
 

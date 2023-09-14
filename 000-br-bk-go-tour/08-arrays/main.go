@@ -10,13 +10,13 @@ func main() {
 	animals[3] = "Tarsier"
 	animals[4] = "Kakapo"
 
-	fmt.Println("------- FOR YOUR CONSIDERATION #1")
+	fmt.Println("------- CONTIGUOUS MEMORY")
 	// an array creates a contiguous block of memory
 	for i, v := range animals {
 		fmt.Printf("%d \t %v \t %p \n", i, v, &animals[i])
 	}
 
-	fmt.Println("------- FOR YOUR CONSIDERATION #2")
+	fmt.Println("------- CONTIGUOUS MEMORY")
 	for i, v := range animals {
 		fmt.Printf("%d \t %v \t %p \t %p \n", i, v, &v, &animals[i])
 	}
@@ -54,13 +54,7 @@ func main() {
 	}
 	fmt.Println("birds", birds)
 
-	arr := [5]int{1, 2, 3, 4, 5}
-	for i := range arr {
-		arr[i] = 777
-	}
-	fmt.Println(arr)
 
-	// range over pointers carefully
 	psychologists := [5]string{"Alpert", "C.Jung", "Piaget", "Rogers", "Skinner"}
 
 	for i, v := range psychologists {
@@ -69,7 +63,6 @@ func main() {
 	}
 	fmt.Println(psychologists)
 
-	// range over a POINTER
 	psychologists = [5]string{"Alpert", "C.Jung", "Piaget", "Rogers", "Skinner"}
 	for i, v := range &psychologists {
 		psychologists[1] = "MASLOW"
