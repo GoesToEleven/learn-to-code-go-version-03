@@ -5,6 +5,7 @@
 [SOON TO BE PUBLISHED Here is the video on youtube]()
 
 # Takeaways
+1. Arrays, order, type
 1. Arrays are fixed in size
 1. Size is part of an array's type
 1. Arrays use contiguous blocks of memory
