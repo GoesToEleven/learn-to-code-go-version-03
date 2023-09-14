@@ -4,8 +4,10 @@ This repo and [the FREE VIDEOS on YouTube](https://www.youtube.com/playlist?list
 
 # Table of Contents
 1. [readme: Strings, unicode, UTF-8](/000-br-bk-go-tour/01-string-unicode-utf8/) & [FREE VIDEO on YouTube](https://www.youtube.com/watch?v=S3BHZv6OrJg)
-1. [readme: Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) & [video #1 FREE on YouTube](https://youtu.be/HBtu9Dsjp80) - [video #2 FREE on YouTube](https://youtu.be/ut_REn0xFPM) 
-1. [FREE VIDEO on YouTube: Ultimate Go Tour #3 ❤️ Creating Your First Pull Request 🚀 Step by Step Guide](https://youtu.be/VZeOcX2DPwo) - there is no readme for this one.
+1. [readme: Time package & time formatting](/000-br-bk-go-tour/02-time-pkg/) 
+    - [video #1 FREE on YouTube](https://youtu.be/HBtu9Dsjp80) - [video #2 FREE on YouTube](https://youtu.be/ut_REn0xFPM) 
+1. [FREE VIDEO on YouTube: Ultimate Go Tour #3 ❤️ Creating Your First Pull Request](https://youtu.be/VZeOcX2DPwo) - there is no readme for this one.
+1. [FREE VIDEO on YouTube: Ultimate Go Tour #4 ❤️ Design Guidelines & Code Reviews](https://youtu.be/WkQFrctSDsc) - there is no readme for this one.
 1. [readme: Variables, values, & types](/000-br-bk-go-tour/03-variables-01/) & [video soon to be published]()
 1. [readme: Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) & [video soon to be published]()
 1. [readme: Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) & [video soon to be published]()
@@ -60,9 +62,10 @@ func createUser() *user {
     return u
 ``` 
 
-- named returns decrease readability
-    - an empty `return` is not idiomatic
-
 [readme: Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants)
 - typed constants decrease precision and flexibility
     - only use typed constants if you have a specific reason
+
+[readme: functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions)
+- named returns decrease readability
+    - an empty `return` is not idiomatic
