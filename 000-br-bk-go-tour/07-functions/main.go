@@ -49,6 +49,9 @@ func main() {
 	x := param6(xi...)
 	fmt.Println(x)
 
+	fmt.Println("------------- ANONYMOUS STUFF")
+	// func (r receiver) identifier(parameter(s)) returns { code block }
+
 	// #8.1
 	// anonymous func
 	add := func(x, y int) int {
@@ -119,19 +122,19 @@ func hello() {
 // #2
 // return
 func hello2() string {
-	return "Hello gophers!"
+	return "Hello gophers 2!"
 }
 
 // #3
 // returns
 func hello3() (string, int) {
-	return "Hello gophers!", 42
+	return "Hello gophers 3!", 42
 }
 
 // #4
 // parameters
 func param4(fn string) string {
-	s := "Hello" + fn
+	s := "Hello " + fn
 	return s
 }
 

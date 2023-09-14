@@ -233,7 +233,7 @@ if err != nil {
 
 ### Type Error
 
-Go is a statically-typed language, so type errors often occur at compile-time. However, you can also encounter them at runtime, for instance, when you're using interfaces and type assertions:
+Go is a statically-typed language, so type errors sometimes occur at compile-time. However, you can also encounter them at runtime, for instance, when you're using interfaces and type assertions:
 
 ```go
 var i interface{} = "a string"
