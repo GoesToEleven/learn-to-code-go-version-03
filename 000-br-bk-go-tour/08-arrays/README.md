@@ -373,7 +373,7 @@ In practice, Go's standard library and idiomatic code often combine both value a
     - strings
 - Exception: 
     - use pointers to represent "null", eg, no value, eg, a database not even returning a field
-    - you can have a pointer to an int which is nil, because nil is the zero value of a pointer; whereas if you just had an int, you would have the zero value of zero.
+    - you can have a `*int` "pointer to an int" which is nil, because nil is the zero value of a pointer; whereas if you just had an int, you would have the zero value of zero.
 
 # Coupons for Go courses
 1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce)  
