@@ -13,7 +13,7 @@ This repo and [the videos on youtube](https://www.youtube.com/playlist?list=PLSa
 1. [Design Guidelines & Code Reviews](/000-br-bk-go-tour/02c-design-guides)
     - [video on youtube](https://youtu.be/WkQFrctSDsc) 
 1. [Variables, values, & types](/000-br-bk-go-tour/03-variables/) 
-    - [video soon to be published]
+    - [video on youtube](https://www.youtube.com/watch?v=AmiomWHD6F8) 
 1. [Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) 
     - [video soon to be published]
 1. [Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) 

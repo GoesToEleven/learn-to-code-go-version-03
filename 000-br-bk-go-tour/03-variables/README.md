@@ -1,7 +1,7 @@
 # "Go is easy to learn and hard to master." ~ Andrew Brudnak
 
 # Video
-[Here is the video on youtube]()
+[Here is the video on youtube](https://www.youtube.com/watch?v=AmiomWHD6F8)
 
 # Takeaways
 1. Type tells us (1) size and (2) representation
