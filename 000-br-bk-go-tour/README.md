@@ -13,13 +13,19 @@ This repo and [the videos on youtube](https://www.youtube.com/playlist?list=PLSa
 1. [Design Guidelines & Code Reviews](/000-br-bk-go-tour/02c-design-guides)
     - [video on youtube](https://youtu.be/WkQFrctSDsc) 
 1. [Variables, values, & types](/000-br-bk-go-tour/03-variables/) 
-    - [video on youtube](https://www.youtube.com/watch?v=AmiomWHD6F8) 
+    - [video #5 on youtube](https://www.youtube.com/watch?v=AmiomWHD6F8) 
+    - [video #6 on youtube](https://youtu.be/wpS3T83IRfc) 
 1. [Struct, padding bytes, methods sets](/000-br-bk-go-tour/04a-struct-types/) 
-    - [video soon to be published]
+    - [video #7 on youtube](https://youtu.be/sKLhcphr40E) 
+    - [video #8 on youtube](https://youtu.be/yJeQ6OyU8dc) 
 1. [Pointers, nil, stack, heap, escape analysis](/000-br-bk-go-tour/05-pointers) 
+    - [video #9 on youtube](https://youtu.be/QKHLjA6e7w8) 
+    - [video #10 on youtube](https://youtu.be/3Z9jEtDYa8I) 
+    - [video #11 on youtube](https://youtu.be/SXFfUGN8Maw) 
     - [video soon to be published]
 1. [Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants) 
     - [video soon to be published]
+    - [video # on youtube]() 
 1. [functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions) 
     - [video soon to be published]
 1. [Arrays, for range clause, semantics](/000-br-bk-go-tour/08-arrays) 

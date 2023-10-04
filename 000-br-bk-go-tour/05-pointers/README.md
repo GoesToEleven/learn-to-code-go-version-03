@@ -3,7 +3,9 @@
 #### ~ Blaise Pascal, a French philosopher and mathematician. 
 
 # Video
-[SOON TO BE PUBLISHED Here is the video on youtube]()
+    - [video #9 on youtube](https://youtu.be/QKHLjA6e7w8) 
+    - [video #10 on youtube](https://youtu.be/3Z9jEtDYa8I) 
+    - [video #11 on youtube](https://youtu.be/SXFfUGN8Maw) 
 
 # Takeaways
 1. &, *, *T
