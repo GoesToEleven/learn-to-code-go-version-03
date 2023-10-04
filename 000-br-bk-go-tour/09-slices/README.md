@@ -36,6 +36,8 @@ Here's a breakdown of slices in Go:
    ```go
    var numbers []int
    ```
+   - That declares a slice and sets it to its zero value which is `nil`
+   - numbers is a `nil` slice
 
 2. **Initialization**:
    - Using a literal:
@@ -46,14 +48,14 @@ Here's a breakdown of slices in Go:
      ```go
      numbers := make([]int, 5)      // Initializes a slice of length 5 and capacity 5, with all values set to 0
      numbers := make([]int, 3, 5)  // Initializes a slice of length 3 and capacity 5, with the first three values set to 0
-     ```
+     ```   
+   - Length sets the total number of initialized elements that we can read and write to in a slice. 
+   - Capacity sets the size of the underlying array. This provides us with capacity for future growth. If we exceed capacity, a new underlying array will be created. However, if we initially create a large enough underlying array, we can avoid this small performance cost of a new underlying array having to be created.
+   - Don't preallocate `cap` unless you know the size needed.
 
 3. **Length and Capacity**:
    - `len(slice)`: Returns the number of items in the slice.
    - `cap(slice)`: Returns the capacity of the slice, i.e., the number of elements in the underlying array starting from the first element of the slice.
-
-Length sets the total number of initialized elements that we can read and write to in a slice.
-Capacity sets the size of the underlying array. This provides us with capacity for future growth. If we exceed capacity, a new underlying array will be created. However, if we initially create a large enough underlying array, we can avoid this small performance cost of a new underlying array having to be created.
 
 4. **Sub-slicing**:
    ```go
@@ -110,14 +112,49 @@ Rule of thumb: use value semantics to move around:
 - builtin types
 - reference types
 
+# Fun fact 
+- An empty slice points to an empty struct, not an underlying array.
+- The struct{} with no fields is called an ***empty struct***. It has a size of zero bytes and is often used in scenarios where you need a placeholder data type or a signal type without carrying any information. A zero value slice
+
+# Append is a value semantic mutation API
+- Append is a beautiful example of a value semantic mutation API. [Append is a builtin function.](https://go.dev/ref/spec#Appending_and_copying_slices) When you use `append` to append to a slice, `append` gets its own copy of the value (the slice) that is passed into append. This is value semantics. The value is passed into `append.` As a strong rule of thumb, we use value semantics for builtin types and reference types (like slices). The `append` function then looks to see if `len` is equal to `cap`. If this is the case, `append` creates a new underlying array. Then `append` returns a slice and this slice is assigned to a new variable. Again, this is value semantics. The value is assigned to a new variable. The stack associated with `append` then self-cleans. The underlying array still exists. The slice assigned when `append` returned points to this underlying array.
+
+# Memory leak scenarios
+Memory leaks in Go can occur when there's a value on the heap and there's still some reference to it, thus not allowing the garbage collector to free up that memory. Causes of memory leaks in Go:
+1. goroutines
+Goroutine leaking or blocking; the goroutine didn't terminate.
+1. maps
+You have to delete keys when entries are no longer needed.
+1. append
+The data going in is not being replaced on the way going out.
+1. close
+Forgetting to close a resource.
+
 # Code review check
-Rule of thumb: use value semantics to move around:
+
+### Rule of thumb: use value semantics to move around:
 - builtin types
 - reference types
 
-### No named returns
-- named returns decrease readability
-    - an empty `return` is not idiomatic
+### Use var for zero value
+- don't user empty literal construction for zero value - don't do this:
+```go
+u := User{}         // zero value for user
+xs := []string{}    // not a zero value; it's an empty slice 
+```
+- do this for zero value:
+```go
+var u User         // zero value for user
+var xs []string    // zero value for slice of string 
+```
+
+### Preallocating cap
+- As a rule of thumb, don't preallocate `cap` unless you know the size needed.
+- Priorities: integrity first, resource usage second
+
+### Append assigns to new variable
+- Code smell: append to an array, then assign to a new variable
+- This could result in holding references to old backing arrays the are no longer needed - memory leak.
 
 # Coupons for Go courses
 1. [Bill Kennedy courses](https://courses.ardanlabs.com/order?ct=670e0200-1823-4916-8ff5-b2438450e2ce)  
