@@ -22,13 +22,14 @@ This repo and [the videos on youtube](https://www.youtube.com/playlist?list=PLSa
     - [video #9 on youtube](https://youtu.be/QKHLjA6e7w8) 
     - [video #10 on youtube](https://youtu.be/3Z9jEtDYa8I) 
     - [video #11 on youtube](https://youtu.be/SXFfUGN8Maw) 
-    - [video soon to be published]
 1. [Typed and untyped constants, iota, and math big](/000-br-bk-go-tour/06-constants) 
     - [video soon to be published]
     - [video # on youtube]() 
 1. [functions, types, anonymous funcs, closure](/000-br-bk-go-tour/07-functions) 
     - [video soon to be published]
 1. [Arrays, for range clause, semantics](/000-br-bk-go-tour/08-arrays) 
+    - [video soon to be published]
+1. [Slices](/000-br-bk-go-tour/09-slices) 
     - [video soon to be published]
 1. [Coupons for Go courses](coupons-for-go-courses)
 

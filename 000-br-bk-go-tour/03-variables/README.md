@@ -35,8 +35,8 @@
 - type tells us two things
     - the amount of memory we’re going to be reading and writing; amount of memory used
     - what that memory represents; what is stored there
-- three classes of types
-    - builtin: numeric, string, bool
+- three categories of types in Go
+    - builtin: numeric, string, bool, array
     - reference: slices, maps, channels, pointers
     - struct
 - initialize = declaring and assigning
