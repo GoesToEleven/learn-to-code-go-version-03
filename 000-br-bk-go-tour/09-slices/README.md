@@ -1,6 +1,9 @@
 # "If you want to build a ship, don’t drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea."
 ― Antoine de Saint-Exupéry
 
+### "A function cannot dictate how it works with data. The data tells the API how it's supposed to work."
+- Bill Kennedy
+
 # Video
 [SOON TO BE PUBLISHED Here is the video on youtube]()
 
@@ -12,7 +15,9 @@
 1. [Slice fundamentals](slice-fundamentals)
 1. [Three categories of types in Go](three-categories-of-types-in-go)
 1. [Remember value semantics](remember-value-semantics)
-1. []()
+1. [Fun fact about empty slice](fun-fact-about-empty-slice)
+1. [Append is a value semantic mutation API](append-is-a-value-semantic-mutation-api)
+1. [Memory leak scenarios](memory-leak-scenarios)
 1. []()
 1. []()
 
@@ -112,7 +117,7 @@ Rule of thumb: use value semantics to move around:
 - builtin types
 - reference types
 
-# Fun fact 
+# Fun fact about empty slice
 - An empty slice points to an empty struct, not an underlying array.
 - The struct{} with no fields is called an ***empty struct***. It has a size of zero bytes and is often used in scenarios where you need a placeholder data type or a signal type without carrying any information. A zero value slice
 
@@ -129,6 +134,9 @@ You have to delete keys when entries are no longer needed.
 The data going in is not being replaced on the way going out.
 1. close
 Forgetting to close a resource.
+
+# Slicing a slice
+- syntax [inclusive:exclusive:cap]
 
 # Code review check
 
