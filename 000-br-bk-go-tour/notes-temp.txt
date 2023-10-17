@@ -1,0 +1,4 @@
+1. wabi sabi philosophy - getting started with slices
+2. internal implementation of slices - three word data structure, word size
+3. intro to slices - go tour
+4. making a slice

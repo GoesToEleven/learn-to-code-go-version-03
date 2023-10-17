@@ -123,21 +123,17 @@ Rule of thumb: use value semantics to move around:
 
 # Fun fact about empty slice
 - An empty slice points to an empty struct, not an underlying array.
-- The struct{} with no fields is called an ***empty struct***. It has a size of zero bytes and is often used in scenarios where you need a placeholder data type or a signal type without carrying any information. A zero value slice
+- The struct{} with no fields is called an ***empty struct***. It has a size of zero bytes and is often used in scenarios where you need a placeholder data type or a signal type without carrying any information.
 
 # Append is a value semantic mutation API
 - Append is a beautiful example of a value semantic mutation API. [Append is a builtin function.](https://go.dev/ref/spec#Appending_and_copying_slices) When you use `append` to append to a slice, `append` gets its own copy of the value (the slice) that is passed into append. This is value semantics. The value is passed into `append.` As a strong rule of thumb, we use value semantics for builtin types and reference types (like slices). The `append` function then looks to see if `len` is equal to `cap`. If this is the case, `append` creates a new underlying array. Then `append` returns a slice and this slice is assigned to a new variable. Again, this is value semantics. The value is assigned to a new variable. The stack associated with `append` then self-cleans. The underlying array still exists. The slice assigned when `append` returned points to this underlying array.
 
 # Memory leak scenarios
-Memory leaks in Go can occur when there's a value on the heap and there's still some reference to it, thus not allowing the garbage collector to free up that memory. Causes of memory leaks in Go:
-1. goroutines
-Goroutine leaking or blocking; the goroutine didn't terminate.
-1. maps
-You have to delete keys when entries are no longer needed.
-1. append
-The data going in is not being replaced on the way going out.
-1. close
-Forgetting to close a resource.
+Memory leaks in Go can occur when there's a value on the heap and there's still some reference to it, thus not allowing the garbage collector to free up that memory. Causes of memory leaks in Go include:
+1. goroutines - Goroutine leaking or blocking; the goroutine didn't terminate.
+1. maps - You have to delete keys when entries are no longer needed.
+1. append - The data going in is not being replaced on the way going out.
+1. close - Forgetting to close a resource.
 
 # Slicing a slice
 - syntax [inclusive:exclusive:cap]
@@ -162,7 +158,7 @@ Let's break down the usage and characteristics of the `range` clause with slices
    ```
 
 2. **Ignoring the Index or Value**:
-   If you only need the index or the value, you can use the blank identifier `_` to ignore the unwanted value:
+
    - To get only the index:
      ```go
      for i := range nums {
@@ -171,6 +167,7 @@ Let's break down the usage and characteristics of the `range` clause with slices
      ```
    - To get only the value:
      ```go
+     // use the blank identifier `_` to ignore the unwanted value:
      for _, v := range nums {
          fmt.Println(v)
      }
