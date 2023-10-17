@@ -1,6 +1,10 @@
 # "If you want to build a ship, don’t drum up the men to gather wood, divide the work, and give orders. Instead, teach them to yearn for the vast and endless sea."
 ― Antoine de Saint-Exupéry
 
+### "Every array in Go is just a slice waiting to happen."
+- Bill Kennedy
+(you use slicing on an array to get a slice)
+
 ### "A function cannot dictate how it works with data. The data tells the API how it's supposed to work."
 - Bill Kennedy
 
@@ -18,7 +22,7 @@
 1. [Fun fact about empty slice](fun-fact-about-empty-slice)
 1. [Append is a value semantic mutation API](append-is-a-value-semantic-mutation-api)
 1. [Memory leak scenarios](memory-leak-scenarios)
-1. []()
+1. [Range clause](range-clause)
 1. []()
 
 # Slice fundamentals
@@ -137,6 +141,71 @@ Forgetting to close a resource.
 
 # Slicing a slice
 - syntax [inclusive:exclusive:cap]
+
+# Range clause
+
+The `range` clause provides a convenient way to iterate over slices, arrays, maps, strings, and channels. When it comes to slices, the `range` clause allows you to easily loop over each element in the slice.
+
+Let's break down the usage and characteristics of the `range` clause with slices:
+
+1. **Basic Usage**:
+   When you use `range` with a slice, it returns two values for each iteration:
+   - The index of the current element.
+   - A copy of the element at that index.
+
+   Here's a simple example:
+   ```go
+   nums := []int{2, 3, 5, 7, 11, 13}
+   for i, v := range nums {
+       fmt.Printf("index %d: value %d\n", i, v)
+   }
+   ```
+
+2. **Ignoring the Index or Value**:
+   If you only need the index or the value, you can use the blank identifier `_` to ignore the unwanted value:
+   - To get only the index:
+     ```go
+     for i := range nums {
+         fmt.Println(i)
+     }
+     ```
+   - To get only the value:
+     ```go
+     for _, v := range nums {
+         fmt.Println(v)
+     }
+     ```
+
+3. **Working with a Copy**:
+   It's crucial to understand that `range` provides a copy of the slice's element on each iteration. Therefore, modifying the value (`v` in the examples) does not modify the original slice. If you want to modify the original slice, you'd use the index to access and update the slice.
+
+   ```go
+   for i := range nums {
+       nums[i] = nums[i] * 2
+   }
+   ```
+
+4. **Range and Slice Headers**:
+   When you're iterating over a slice using `range`, you're actually working with the slice's underlying array. This means that if you're also modifying the slice (e.g., appending elements) within the loop, you need to be careful because the behavior could be unexpected.
+
+5. **Usage with Multi-dimensional Slices**:
+   If you're working with a multi-dimensional slice (like a slice of slices), you can use nested loops to iterate through all the elements:
+
+   ```go
+   matrix := [][]int{
+       {1, 2, 3},
+       {4, 5, 6},
+       {7, 8, 9},
+   }
+   
+   for i, row := range matrix {
+       for j, val := range row {
+           fmt.Printf("element [%d][%d]: %d\n", i, j, val)
+       }
+   }
+   ```
+
+In summary, the `range` clause in Go provides a concise and readable way to iterate over slices. It gives you both the index and the value, but remember, the value is a copy, so you'll need to use the index if you wish to modify the original slice's elements.
 
 # Code review check
 

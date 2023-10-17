@@ -3,7 +3,7 @@ package furtherexplored
 import "fmt"
 
 // this is also "package block" scope
-// this is exported because the identified "Fasincating" is capitalized
+// this is exported because the identifier "Fasincating" is capitalized
 func Fascinating() {
 	fmt.Println("Planet speed:", planetSpeed)
 
