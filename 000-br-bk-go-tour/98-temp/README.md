@@ -1,7 +1,7 @@
 # ""
 
 # Video
-[SOON TO BE PUBLISHED Here is the video on YouTube]()
+[SOON TO BE PUBLISHED Here is the video on youtube]()
 
 # Takeaways
 1. Functions and modularity

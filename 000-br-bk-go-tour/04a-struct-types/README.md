@@ -4,7 +4,8 @@
 ### "Here's the reality - I don't care about any of this stuff." ~ A friend who is a Go genius
 
 # Video
-[SOON TO BE PUBLISHED Here is the video on YouTube]()
+    - [video #7 on youtube](https://youtu.be/sKLhcphr40E) 
+    - [video #8 on youtube](https://youtu.be/yJeQ6OyU8dc) 
 
 # Takeaways
 1. Language mechanics

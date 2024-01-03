@@ -1,8 +1,8 @@
 # "Drop by drop, the bucket gets filled."
 
 # Video
-- [FREE VIDEO #1 on YouTube](https://youtu.be/HBtu9Dsjp80)
-- [FREE VIDEO #2 on YouTube](https://youtu.be/ut_REn0xFPM)
+- [video #1 on youtube](https://youtu.be/HBtu9Dsjp80)
+- [video #2 on youtube](https://youtu.be/ut_REn0xFPM)
 
 # Takeaways
 1. Monotonic time

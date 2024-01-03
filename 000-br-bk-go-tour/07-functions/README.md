@@ -7,7 +7,7 @@ Go addressed these issues by attempting to combine the ease of programming of an
 [Golang FAQ](https://go.dev/doc/faq#creating_a_new_language)
 
 # Video
-[SOON TO BE PUBLISHED Here is the video on YouTube]()
+[SOON TO BE PUBLISHED Here is the video on youtube]()
 
 # Takeaways
 1. Functions and modularity

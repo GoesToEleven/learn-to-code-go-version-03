@@ -16,14 +16,16 @@ func main() {
 		fmt.Printf("%#v is a nil slice\n\n", s)
 	}
 
-	s2 := []int{1, 2, 3, 4, 5, 6, 7}
+	s2 := []int{0, 1, 2, 3, 4, 5, 6, 7}
 	fmt.Printf("s2 = %#v\n\n", s2)
 
 	// slicing a slice
 	// [inclusive:exclusive]
+	fmt.Println("************")
 	fmt.Printf("s2[1:4] = %#v\n", s2[1:4])
 	fmt.Printf("s2[1:] = %#v\n", s2[1:])
 	fmt.Printf("s2[:4] = %#v\n", s2[:4])
+	fmt.Printf("s2[0:4] = %#v\n", s2[0:4])
 	fmt.Printf("s2[:] = %#v\n\n", s2[:])
 
 	// doesn't work - panic
@@ -129,7 +131,7 @@ https://pkg.go.dev/builtin#make
 	// var s7 []int
 	s7 := make([]int, 0, 1_000)
 	fmt.Printf("%s\t%s\n", "len", "cap")
-	for i := 0; i < 1_000; i++ {
+	for i := 0; i < 10; i++ {
 		s7 = appendInt(s7, i)
 	}
 	fmt.Printf("len: %d \ncap: %d \n\n", len(s7), cap(s7))
