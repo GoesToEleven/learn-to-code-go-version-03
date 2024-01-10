@@ -4,9 +4,9 @@
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
-tasks:
-  - init: go get && go build ./... && go test ./...
-    # command: go run .
+# tasks:
+#   - init: go get && go build ./... && go test ./...
+#     command: go run .
 
 vscode:
   extensions:
