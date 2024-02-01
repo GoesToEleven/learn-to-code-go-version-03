@@ -1,3 +1,7 @@
+package main
+
+import "testing"
+
 func TestParseInput(t *testing.T) {
 	tests := []struct {
 		input                                               string
@@ -20,4 +24,9 @@ func TestParseInput(t *testing.T) {
 			t.Errorf("parseInput(%q) = %v, %v, %v, want %v, %v, %v", test.input, numDice, numSides, modifier, test.expectedNumDice, test.expectedNumSides, test.expectedModifier)
 		}
 	}
+}
+
+func parseInput(s string) (numDice, numSides, modifier int, err error) {
+	// Your code here. Don't forget to return the appropriate values at the end.
+	return 0, 0, 0, nil // Placeholder return statement. Replace with your actual implementation.
 }
