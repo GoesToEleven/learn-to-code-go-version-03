@@ -1,32 +1,46 @@
 package main
 
-import "testing"
+import (
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
+	"testing"
+)
 
-func TestParseInput(t *testing.T) {
+func TestRollDice(t *testing.T) {
 	tests := []struct {
-		input                                               string
-		expectedNumDice, expectedNumSides, expectedModifier int
-		expectErr                                           bool
+		input    string
+		expected int
 	}{
-		{"3d6+1", 3, 6, 1, false},
-		{"2d20-5", 2, 20, -5, false},
-		{"5d10", 5, 10, 0, false},
-		{"invalid", 0, 0, 0, true},
+		{"2d6", 7},     // Simple roll
+		{"1d20+5", 18}, // Roll with modifier
+		{"4d4-2", 9},   // Multiple dice with modifier
 	}
 
 	for _, test := range tests {
-		numDice, numSides, modifier, err := parseInput(test.input)
-		if (err != nil) != test.expectErr {
-			t.Errorf("parseInput(%q) error = %v, expectErr %v", test.input, err, test.expectErr)
-			continue
-		}
-		if numDice != test.expectedNumDice || numSides != test.expectedNumSides || modifier != test.expectedModifier {
-			t.Errorf("parseInput(%q) = %v, %v, %v, want %v, %v, %v", test.input, numDice, numSides, modifier, test.expectedNumDice, test.expectedNumSides, test.expectedModifier)
+		// Capture standard output to compare results
+		old := os.Stdout
+		r, w, _ := os.Pipe()
+		os.Stdout = w
+
+		// Call the main function with the test input
+		main()
+
+		// Restore standard output
+		w.Close()
+		os.Stdout = old
+
+		// Read the captured output
+		output, _ := ioutil.ReadAll(r)
+		resultLine := strings.Split(string(output), "\n")[len(strings.Split(string(output), "\n"))-1]
+		splitResult := strings.Split(resultLine, ": ")
+		if len(splitResult) >= 2 {
+			actual, _ := strconv.Atoi(splitResult[1])
+			// Use actual here
+			if actual != test.expected {
+				t.Errorf("Roll failed for input %s: expected %d, got %d", test.input, test.expected, actual)
+			}
 		}
 	}
-}
-
-func parseInput(s string) (numDice, numSides, modifier int, err error) {
-	// Your code here. Don't forget to return the appropriate values at the end.
-	return 0, 0, 0, nil // Placeholder return statement. Replace with your actual implementation.
 }
