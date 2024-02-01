@@ -1,48 +1,27 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"math/rand"
-	"regexp"
-	"strconv"
-	"time"
+	"os"
 )
 
 func main() {
-	// Regular expression to validate input format (XdY[+-]N)
-	diceExpr := regexp.MustCompile(`^(\d+)d(\d+)([+-]\d+)?$`)
+	// Define flags
+	adv := flag.Bool("adv", false, "Roll twice and take the higher")
+	dis := flag.Bool("dis", false, "Roll twice and take the lower")
 
-	fmt.Println("Enter dice expression (XdY[+-]N): ")
-	var input string
-	fmt.Scanln(&input)
+	// Parse command line arguments
+	flag.Parse()
 
-	// Validate input format
-	if !diceExpr.MatchString(input) {
-		fmt.Println("Invalid input format. Please enter XdY[+-]N where X is the number of dice, Y is the number of sides, and N is the optional modifier.")
+	// Check if a dice expression was provided
+	if len(os.Args) <= 1 {
+		fmt.Println("No dice expression provided. Please provide a dice expression in the format XdY[+-]N.")
 		return
 	}
 
-	// Extract number of dice, sides, and modifier (if present) from input
-	matches := diceExpr.FindStringSubmatch(input)
-	numDice, _ := strconv.Atoi(matches[1])
-	numSides, _ := strconv.Atoi(matches[2])
-	modifier := 0
-	if len(matches) > 3 {
-		modifier, _ = strconv.Atoi(matches[3])
-	}
+	// Get the dice expression from the command line arguments
+	input := os.Args[1]
 
-	// Seed random number generator
-	rand.Seed(int64(time.Now().UnixNano()))
-
-	// Roll dice and sum results
-	var total int
-	for i := 0; i < numDice; i++ {
-		roll := rand.Intn(numSides) + 1
-		fmt.Printf("Die %d: %d\n", i+1, roll)
-		total += roll
-	}
-
-	// Apply modifier and print total
-	total += modifier
-	fmt.Printf("Total: %d (including modifier of %d)\n", total, modifier)
+	// Rest of your code...
 }
