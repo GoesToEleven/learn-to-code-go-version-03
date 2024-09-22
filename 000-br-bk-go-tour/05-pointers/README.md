@@ -545,16 +545,16 @@ Count how many times the basketball is passed in this [VIDEO: Count the passes](
 // like this
 func createUser() *user {
     u := user{"James", 32}
-}
     return &u
+}
 ``` 
 
 ```go
 // NOT like this
 func createUser() *user {
     u := &user{"James", 32}
-}
     return u
+}
 ``` 
 
 # Coupons for Go courses
